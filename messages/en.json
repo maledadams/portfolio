@@ -155,6 +155,16 @@
     "ctaButton": "Say hi",
     "note": "Designed and built by hand."
   },
+  "pack": {
+    "packName": "lucia-adams.com",
+    "packSub": "3 projects inside",
+    "open": "Open it",
+    "skip": "Skip",
+    "next": "Next",
+    "done": "See the projects",
+    "legendary": "Legendary",
+    "rare": "Rare"
+  },
   "guestbook": {
     "title": "Guestbook",
     "emptyNote": "No signatures yet.\n\nIf we worked together or\nsomething here helped, leave\nme a few lines.",

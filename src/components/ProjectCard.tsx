@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
+import TiltCard from "./TiltCard";
 
 type Props = {
   name: string;
@@ -25,21 +26,23 @@ export default function ProjectCard({
   return (
     <li className={featured ? "sm:col-span-2" : undefined}>
       <Link href="/work" className="group block">
-        {/* Cropped to a banner so a featured card cannot tower over the grid. */}
-        <div className="aspect-[1.9] overflow-hidden border border-line bg-surface">
-          <Image
-            src={image}
-            alt={alt}
-            width={1440}
-            height={900}
-            className="block h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.015]"
-            sizes={
-              featured
-                ? "(min-width: 640px) 788px, 100vw"
-                : "(min-width: 640px) 382px, 100vw"
-            }
-          />
-        </div>
+        <TiltCard maxTilt={6}>
+          {/* Cropped to a banner so a featured card cannot tower over the grid. */}
+          <div className="aspect-[1.9] overflow-hidden border border-line bg-surface">
+            <Image
+              src={image}
+              alt={alt}
+              width={1440}
+              height={900}
+              className="block h-full w-full object-cover object-top"
+              sizes={
+                featured
+                  ? "(min-width: 640px) 788px, 100vw"
+                  : "(min-width: 640px) 382px, 100vw"
+              }
+            />
+          </div>
+        </TiltCard>
         <div className="mt-3 flex items-baseline justify-between gap-4">
           <h3 className="group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4">
             {name}

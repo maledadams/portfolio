@@ -1,12 +1,38 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import TiltCard from "@/components/TiltCard";
+import PackReveal, { type PackCard } from "@/components/PackReveal";
 import { projects } from "@/data/projects";
 
 export default function WorkPage() {
   const t = useTranslations("work");
+  const p = useTranslations("pack");
+
+  const packCards: PackCard[] = projects.map((project) => ({
+    slug: project.slug,
+    name: t(`projects.${project.slug}.name`),
+    category: t(`projects.${project.slug}.category`),
+    year: t(`projects.${project.slug}.year`),
+    image: project.image,
+    alt: t(`projects.${project.slug}.alt`),
+    summary: t(`projects.${project.slug}.summary`),
+    rarity: project.rarity,
+    rarityLabel: p(project.rarity),
+  }));
+
+  const packLabels = {
+    packName: p("packName"),
+    packSub: p("packSub"),
+    open: p("open"),
+    skip: p("skip"),
+    next: p("next"),
+    done: p("done"),
+  };
 
   return (
     <>
+      <PackReveal cards={packCards} labels={packLabels} />
+
       <section className="center pb-14">
         <h1 className="text-[1.9rem] leading-[1.2] font-normal tracking-[-0.02em] sm:text-[2.4rem]">
           {t("title")}
@@ -38,14 +64,16 @@ export default function WorkPage() {
                 </p>
               </div>
 
-              <Image
-                src={project.image}
-                alt={t(`projects.${project.slug}.alt`)}
-                width={1440}
-                height={900}
-                className="block h-auto w-full border border-line"
-                sizes="(min-width: 900px) 788px, 100vw"
-              />
+              <TiltCard maxTilt={4} holo={project.rarity}>
+                <Image
+                  src={project.image}
+                  alt={t(`projects.${project.slug}.alt`)}
+                  width={1440}
+                  height={900}
+                  className="block h-auto w-full border border-line"
+                  sizes="(min-width: 900px) 788px, 100vw"
+                />
+              </TiltCard>
 
               <p className="mt-6 max-w-[52ch]">
                 {t(`projects.${project.slug}.summary`)}
@@ -75,7 +103,7 @@ export default function WorkPage() {
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-block font-mono text-[0.8em] underline decoration-1 underline-offset-4 transition-colors hover:text-muted"
+                className="link mt-8 inline-block font-mono text-[0.8em]"
               >
                 {t("visit")} &rarr;
               </a>

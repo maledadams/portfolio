@@ -155,6 +155,16 @@
     "ctaButton": "Escríbeme",
     "note": "Diseñado y construido a mano."
   },
+  "pack": {
+    "packName": "lucia-adams.com",
+    "packSub": "3 proyectos dentro",
+    "open": "Ábrelo",
+    "skip": "Saltar",
+    "next": "Siguiente",
+    "done": "Ver los proyectos",
+    "legendary": "Legendaria",
+    "rare": "Rara"
+  },
   "guestbook": {
     "title": "Libro de visitas",
     "emptyNote": "Todavía no hay firmas.\n\nSi trabajamos juntos o algo\nde aquí te sirvió, déjame\nunas líneas.",

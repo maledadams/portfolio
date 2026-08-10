@@ -244,6 +244,344 @@ a {
   }
 }
 
+/* ------------------------------------------------------------------ */
+/* Collectible-card tilt                                              */
+/* ------------------------------------------------------------------ */
+
+.tilt {
+  perspective: 900px;
+  /* Vertical pans must keep scrolling the page on trackpads. */
+  touch-action: pan-y;
+}
+
+.tilt-inner {
+  position: relative;
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.tilt.tilting .tilt-inner {
+  transition: transform 60ms linear;
+}
+
+.tilt-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 250ms ease;
+  background: radial-gradient(
+    circle at var(--mx, 50%) var(--my, 50%),
+    rgb(255 255 255 / 0.32),
+    transparent 55%
+  );
+  mix-blend-mode: soft-light;
+}
+
+.tilt.tilting .tilt-glare {
+  opacity: 1;
+}
+
+/* Foil sheen that slides across the card as the pointer moves. */
+.tilt-holo {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 250ms ease;
+  background: linear-gradient(
+    115deg,
+    transparent 18%,
+    var(--holo-a) 34%,
+    var(--holo-b) 44%,
+    var(--holo-c) 50%,
+    var(--holo-b) 56%,
+    var(--holo-a) 66%,
+    transparent 82%
+  );
+  background-size: 240% 240%;
+  background-position: var(--mx, 50%) var(--my, 50%);
+  mix-blend-mode: color-dodge;
+  filter: saturate(1.35);
+}
+
+.tilt.tilting .tilt-holo {
+  opacity: 1;
+}
+
+.tilt[data-holo="legendary"] {
+  --holo-a: rgb(255 209 112 / 0.45);
+  --holo-b: rgb(255 122 196 / 0.5);
+  --holo-c: rgb(146 164 255 / 0.55);
+}
+
+.tilt[data-holo="rare"] {
+  --holo-a: rgb(158 198 255 / 0.4);
+  --holo-b: rgb(226 238 255 / 0.45);
+  --holo-c: rgb(140 220 232 / 0.42);
+}
+
+/* ------------------------------------------------------------------ */
+/* Pack opening overlay                                               */
+/* ------------------------------------------------------------------ */
+
+body[data-pack-open] {
+  overflow: hidden;
+}
+
+.pack-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  background: rgb(8 9 12 / 0.78);
+  backdrop-filter: blur(3px);
+  animation: overlay-in 300ms ease both;
+}
+
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Rotating light rays behind the revealed card, tinted by rarity. */
+.rays {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.rays::before {
+  content: "";
+  width: 160vmax;
+  height: 160vmax;
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    var(--ray) 0deg 9deg,
+    transparent 9deg 24deg
+  );
+  opacity: 0;
+  transition: opacity 500ms ease;
+  mask-image: radial-gradient(circle, black 0%, transparent 62%);
+}
+
+.rays[data-rarity]::before {
+  opacity: 0.5;
+  animation: rays-spin 36s linear infinite;
+}
+
+.rays[data-rarity="legendary"] {
+  --ray: rgb(255 196 86 / 0.16);
+}
+
+.rays[data-rarity="rare"] {
+  --ray: rgb(150 190 255 / 0.13);
+}
+
+/* A slow breathing glow directly behind the card. */
+.rays::after {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--ray, transparent), transparent 70%);
+  animation: rays-pulse 3.2s ease-in-out infinite;
+}
+
+@keyframes rays-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rays-pulse {
+  50% {
+    transform: scale(1.25);
+    opacity: 0.75;
+  }
+}
+
+/* The sealed pack. Foil pouch with crimped ends, drawn entirely in CSS. */
+.pack {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(270px, 70vw);
+  cursor: pointer;
+  filter: drop-shadow(0 24px 50px rgb(0 0 0 / 0.55));
+  transition: transform 250ms ease;
+  animation: pack-drop 550ms cubic-bezier(0.22, 1.4, 0.36, 1) both;
+}
+
+.pack:hover {
+  transform: translateY(-4px) rotate(-1deg);
+}
+
+@keyframes pack-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-40px) rotate(4deg) scale(0.9);
+  }
+}
+
+.pack-crimp {
+  height: 16px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #3a4054 0 6px,
+      #262b3b 6px 12px
+    );
+  border-radius: 4px;
+}
+
+.pack-body {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  aspect-ratio: 3 / 4;
+  padding: 1.5rem;
+  color: #e8ecf6;
+  text-align: center;
+  background:
+    radial-gradient(circle at 30% 20%, rgb(122 140 255 / 0.25), transparent 55%),
+    radial-gradient(circle at 75% 80%, rgb(255 122 196 / 0.18), transparent 50%),
+    linear-gradient(160deg, #23283a, #171b28 60%, #23283a);
+}
+
+/* A sheen sweeping across the foil so the pack looks alive while sealed. */
+.pack-body::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    115deg,
+    transparent 42%,
+    rgb(255 255 255 / 0.14) 50%,
+    transparent 58%
+  );
+  animation: pack-sheen 2.8s ease-in-out infinite;
+}
+
+@keyframes pack-sheen {
+  from {
+    transform: translateX(-45%);
+  }
+  60%,
+  to {
+    transform: translateX(45%);
+  }
+}
+
+.pack.tearing {
+  animation: pack-tear 600ms ease-in both;
+  pointer-events: none;
+}
+
+.pack.tearing .pack-crimp:first-child {
+  animation: crimp-off 450ms ease-in both;
+}
+
+@keyframes crimp-off {
+  30% {
+    transform: translateY(-6px) rotate(-3deg);
+  }
+  to {
+    transform: translateY(-70px) rotate(-14deg);
+    opacity: 0;
+  }
+}
+
+@keyframes pack-tear {
+  20% {
+    transform: rotate(-2deg) scale(1.03);
+  }
+  45% {
+    transform: rotate(2deg) scale(1.04);
+  }
+  to {
+    transform: scale(0.82);
+    opacity: 0;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* The trading card                                                   */
+/* ------------------------------------------------------------------ */
+
+.pcard {
+  width: min(330px, 78vw);
+  aspect-ratio: 63 / 88;
+  padding: 11px;
+  border-radius: 16px;
+  display: flex;
+  background: linear-gradient(160deg, var(--f1), var(--f2) 45%, var(--f3));
+  box-shadow: 0 24px 60px rgb(0 0 0 / 0.55);
+  color: #191713;
+}
+
+.pcard[data-rarity="legendary"] {
+  --f1: #f8dc8d;
+  --f2: #e8b64b;
+  --f3: #a97a25;
+}
+
+.pcard[data-rarity="rare"] {
+  --f1: #e3eaf4;
+  --f2: #aebfd6;
+  --f3: #75899f;
+}
+
+.pcard-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  border-radius: 8px;
+  padding: 0.8rem;
+  background: linear-gradient(170deg, #faf6ec, #efe8d8);
+}
+
+.card-enter {
+  animation: card-in 650ms cubic-bezier(0.22, 1.2, 0.36, 1) both;
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(70px) rotateY(65deg) scale(0.86);
+  }
+  60% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pack,
+  .pack-body::after,
+  .rays::before,
+  .rays::after,
+  .card-enter {
+    animation: none;
+  }
+}
+
 /* Guestbook note: a slightly rotated card of tinted paper. */
 .notecard {
   aspect-ratio: 4 / 3;
