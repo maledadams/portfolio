@@ -157,31 +157,33 @@ export default function PackReveal({
       </button>
 
       {phase !== "reveal" ? (
-        <button
-          type="button"
-          onClick={tear}
-          disabled={phase === "tearing"}
-          className={`pack ${phase === "tearing" ? "tearing" : ""}`}
-          aria-label={labels.open}
-        >
-          <span className="pack-crimp" aria-hidden />
-          <span className="pack-body">
-            <span className="relative font-mono text-[0.7em] tracking-wide text-white/60">
-              {labels.packName}
+        <TiltCard maxTilt={14}>
+          <button
+            type="button"
+            onClick={tear}
+            disabled={phase === "tearing"}
+            className={`pack ${phase === "tearing" ? "tearing" : ""}`}
+            aria-label={labels.open}
+          >
+            <span className="pack-crimp" aria-hidden />
+            <span className="pack-body">
+              <span className="relative font-mono text-[0.7em] tracking-wide text-white/60">
+                {labels.packName}
+              </span>
+              <span className="relative font-semibold text-[1.3em] leading-tight">
+                {labels.packSub}
+              </span>
+              <span className="relative font-mono text-[0.7em] text-white/60">
+                {labels.open}
+              </span>
             </span>
-            <span className="relative font-semibold text-[1.3em] leading-tight">
-              {labels.packSub}
-            </span>
-            <span className="relative font-mono text-[0.7em] text-white/60">
-              {labels.open}
-            </span>
-          </span>
-          <span className="pack-crimp" aria-hidden />
-        </button>
+            <span className="pack-crimp" aria-hidden />
+          </button>
+        </TiltCard>
       ) : (
         <>
           <div key={card.slug} className="card-enter relative">
-            <TiltCard maxTilt={12} holo={card.rarity} className="rounded-[16px]">
+            <TiltCard maxTilt={12} className="rounded-[16px]">
               <div className="pcard" data-rarity={card.rarity}>
                 <div className="pcard-inner">
                   <div className="flex items-baseline justify-between gap-3">

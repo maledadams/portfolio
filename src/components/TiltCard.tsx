@@ -5,7 +5,6 @@ import { useEffect, useRef } from "react";
 type Props = {
   /** Maximum rotation in degrees at the card's edges. */
   maxTilt?: number;
-  holo?: "none" | "rare" | "legendary";
   className?: string;
   children: React.ReactNode;
 };
@@ -21,7 +20,6 @@ type Props = {
  */
 export default function TiltCard({
   maxTilt = 8,
-  holo = "none",
   className = "",
   children,
 }: Props) {
@@ -81,15 +79,10 @@ export default function TiltCard({
   }, [maxTilt]);
 
   return (
-    <div
-      ref={ref}
-      className={`tilt ${className}`}
-      data-holo={holo === "none" ? undefined : holo}
-    >
+    <div ref={ref} className={`tilt ${className}`}>
       <div className="tilt-inner">
         {children}
         <span className="tilt-glare" aria-hidden />
-        {holo !== "none" && <span className="tilt-holo" aria-hidden />}
       </div>
     </div>
   );

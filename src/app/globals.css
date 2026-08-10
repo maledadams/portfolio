@@ -284,46 +284,6 @@ a {
   opacity: 1;
 }
 
-/* Foil sheen that slides across the card as the pointer moves. */
-.tilt-holo {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 250ms ease;
-  background: linear-gradient(
-    115deg,
-    transparent 18%,
-    var(--holo-a) 34%,
-    var(--holo-b) 44%,
-    var(--holo-c) 50%,
-    var(--holo-b) 56%,
-    var(--holo-a) 66%,
-    transparent 82%
-  );
-  background-size: 240% 240%;
-  background-position: var(--mx, 50%) var(--my, 50%);
-  mix-blend-mode: color-dodge;
-  filter: saturate(1.35);
-}
-
-.tilt.tilting .tilt-holo {
-  opacity: 1;
-}
-
-.tilt[data-holo="legendary"] {
-  --holo-a: rgb(255 209 112 / 0.45);
-  --holo-b: rgb(255 122 196 / 0.5);
-  --holo-c: rgb(146 164 255 / 0.55);
-}
-
-.tilt[data-holo="rare"] {
-  --holo-a: rgb(158 198 255 / 0.4);
-  --holo-b: rgb(226 238 255 / 0.45);
-  --holo-c: rgb(140 220 232 / 0.42);
-}
-
 /* ------------------------------------------------------------------ */
 /* Pack opening overlay                                               */
 /* ------------------------------------------------------------------ */
@@ -413,7 +373,11 @@ body[data-pack-open] {
   }
 }
 
-/* The sealed pack. Foil pouch with crimped ends, drawn entirely in CSS. */
+/*
+ * The sealed pack. Foil pouch with crimped ends, drawn entirely in CSS.
+ * Sits inside a .tilt wrapper for the same cursor-tracking tilt as the
+ * cards, so it has no hover transform of its own.
+ */
 .pack {
   position: relative;
   display: flex;
@@ -421,12 +385,7 @@ body[data-pack-open] {
   width: min(270px, 70vw);
   cursor: pointer;
   filter: drop-shadow(0 24px 50px rgb(0 0 0 / 0.55));
-  transition: transform 250ms ease;
   animation: pack-drop 550ms cubic-bezier(0.22, 1.4, 0.36, 1) both;
-}
-
-.pack:hover {
-  transform: translateY(-4px) rotate(-1deg);
 }
 
 @keyframes pack-drop {

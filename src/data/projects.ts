@@ -4,7 +4,7 @@ export type Project = {
   slug: "pulpina" | "stemise" | "togethersport";
   url: string;
   image: string;
-  /** Drives the card frame, holo colors and reveal backdrop in the pack. */
+  /** Drives the card frame and the rays behind it in the pack reveal. */
   rarity: Rarity;
 };
 

@@ -64,7 +64,7 @@ export default function WorkPage() {
                 </p>
               </div>
 
-              <TiltCard maxTilt={4} holo={project.rarity}>
+              <TiltCard maxTilt={4}>
                 <Image
                   src={project.image}
                   alt={t(`projects.${project.slug}.alt`)}
