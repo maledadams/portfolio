@@ -156,10 +156,17 @@
     "note": "Diseñado y construido a mano."
   },
   "guestbook": {
-    "title": "Del <link>libro de visitas</link>",
-    "sign": "Firmar el libro de visitas",
-    "mailSubject": "Firma para el libro de visitas",
-    "emptyNote": "Todavía no hay firmas.\n\nSi trabajamos juntos o algo\nde aquí te sirvió, escríbeme\ny lo pongo en esta pared.",
-    "emptyCredit": "la primera puede ser tuya"
+    "title": "Libro de visitas",
+    "emptyNote": "Todavía no hay firmas.\n\nSi trabajamos juntos o algo\nde aquí te sirvió, déjame\nunas líneas.",
+    "emptyCredit": "la primera puede ser tuya",
+    "formName": "Tu nombre",
+    "formMessage": "Tu mensaje",
+    "formSubmit": "Firmar",
+    "formSending": "Enviando...",
+    "formDone": "Listo, gracias por firmar. Tu nota ya está en la pared.",
+    "errorInvalid": "Revisa el nombre y el mensaje.",
+    "errorRate": "Ya firmaste hace poco. Intenta de nuevo mañana.",
+    "errorOffline": "El libro de visitas no está disponible ahora mismo.",
+    "errorGeneric": "Algo falló. Intenta de nuevo."
   }
 }

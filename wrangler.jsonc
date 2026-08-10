@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "lucia-adams-portfolio",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-08-10",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "lucia-adams-portfolio"
+    }
+  ],
+  // Guestbook storage.
+  // `database_id` is filled in by: wrangler d1 create lucia-adams-guestbook
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "lucia-adams-guestbook",
+      "database_id": "REPLACE_WITH_ID_FROM_WRANGLER_D1_CREATE",
+      "migrations_dir": "migrations"
+    }
+  ]
+}

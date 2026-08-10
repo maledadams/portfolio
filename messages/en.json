@@ -156,10 +156,17 @@
     "note": "Designed and built by hand."
   },
   "guestbook": {
-    "title": "From the <link>guestbook</link>",
-    "sign": "Sign the guestbook",
-    "mailSubject": "A note for your guestbook",
-    "emptyNote": "No signatures yet.\n\nIf we worked together or\nsomething here helped, write\nin and I will pin it up.",
-    "emptyCredit": "the first one could be yours"
+    "title": "Guestbook",
+    "emptyNote": "No signatures yet.\n\nIf we worked together or\nsomething here helped, leave\nme a few lines.",
+    "emptyCredit": "the first one could be yours",
+    "formName": "Your name",
+    "formMessage": "Your message",
+    "formSubmit": "Sign",
+    "formSending": "Sending...",
+    "formDone": "Done, thanks for signing. Your note is on the wall.",
+    "errorInvalid": "Check the name and the message.",
+    "errorRate": "You signed recently. Try again tomorrow.",
+    "errorOffline": "The guestbook is not available right now.",
+    "errorGeneric": "Something went wrong. Try again."
   }
 }

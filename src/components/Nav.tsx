@@ -1,48 +1,39 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
 import { useLocale, useTranslations } from "next-intl";
+import {
+  ArrowRightIcon,
+  MoonIcon,
+  SunIcon,
+  TranslateIcon,
+} from "@phosphor-icons/react";
 import { Link, usePathname } from "@/i18n/navigation";
 
 const items = [
   { href: "/", key: "home" as const },
   { href: "/work", key: "work" as const },
   { href: "/contact", key: "contact" as const },
-] satisfies { href: "/" | "/work" | "/contact"; key: "home" | "work" | "contact" }[];
+] satisfies {
+  href: "/" | "/work" | "/contact";
+  key: "home" | "work" | "contact";
+}[];
 
-/*
- * The theme lives in the DOM and localStorage, not in React, so it is read
- * as an external store. That keeps the inline pre-paint script as the single
- * source of truth and avoids a flash on load.
+/**
+ * Stateless on purpose: which icon shows is decided entirely by CSS from the
+ * `data-theme` attribute, so there is nothing to hydrate and no mismatch
+ * between what the server rendered and what the boot script already applied.
  */
-const listeners = new Set<() => void>();
-
-function subscribe(onChange: () => void) {
-  listeners.add(onChange);
-  const mq = window.matchMedia("(prefers-color-scheme: dark)");
-  mq.addEventListener("change", onChange);
-  return () => {
-    listeners.delete(onChange);
-    mq.removeEventListener("change", onChange);
-  };
-}
-
-function getSnapshot(): "light" | "dark" {
-  const explicit = document.documentElement.getAttribute("data-theme");
-  if (explicit === "light" || explicit === "dark") return explicit;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
-}
-
 function ThemeToggle({ label }: { label: string }) {
-  const theme = useSyncExternalStore(subscribe, getSnapshot, () => "light");
-
   const toggle = () => {
-    const next = theme === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", next);
+    const root = document.documentElement;
+    const current =
+      root.getAttribute("data-theme") ??
+      (window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light");
+    const next = current === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
     localStorage.setItem("theme", next);
-    listeners.forEach((l) => l());
   };
 
   return (
@@ -50,9 +41,10 @@ function ThemeToggle({ label }: { label: string }) {
       type="button"
       onClick={toggle}
       aria-label={label}
-      className="font-mono text-[0.8em] text-muted transition-colors hover:text-fg"
+      className="theme-toggle text-muted transition-colors hover:text-fg"
     >
-      <span suppressHydrationWarning>[{theme}]</span>
+      <SunIcon className="sun" size="1.15em" weight="regular" aria-hidden />
+      <MoonIcon className="moon" size="1.15em" weight="regular" aria-hidden />
     </button>
   );
 }
@@ -78,8 +70,8 @@ export default function Nav() {
               aria-current={pathname === href ? "page" : undefined}
               className="navlink text-muted transition-colors hover:text-fg aria-[current=page]:text-fg"
             >
-              <span className="arrow" aria-hidden="true">
-                -&gt;
+              <span className="arrow" aria-hidden>
+                <ArrowRightIcon size="1em" weight="bold" />
               </span>
               <span className="slash">/</span>
               {t(key)}
@@ -92,8 +84,9 @@ export default function Nav() {
             href={pathname}
             locale={other}
             aria-label={t("lang")}
-            className="transition-colors hover:text-fg"
+            className="flex items-center gap-1.5 transition-colors hover:text-fg"
           >
+            <TranslateIcon size="1.15em" weight="regular" aria-hidden />
             {other.toUpperCase()}
           </Link>
           <ThemeToggle label={t("theme")} />
