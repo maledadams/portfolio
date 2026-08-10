@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@theme {
+  /* Cyanotype palette */
+  --color-deep: #081c33;
+  --color-sheet: #0b2542;
+  --color-panel: #0e2b4c;
+  --color-ink: #ddebf9;
+  --color-dim: #8fb0ce;
+  --color-cyan: #7ccff4;
+  --color-line: #24466b;
+  --color-amber: #f5a83c;
+
+  --font-sans: var(--font-grotesk), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+}
+
+body {
+  background: var(--color-deep);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--color-cyan);
+  color: var(--color-deep);
+}
+
+/*
+ * Ambient drafting-table grid. Fixed behind everything; the drift is
+ * deliberately near-imperceptible and stops entirely under reduced motion.
+ */
+.ambient-grid {
+  position: fixed;
+  inset: -128px;
+  z-index: -10;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgb(124 207 244 / 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(124 207 244 / 0.045) 1px, transparent 1px),
+    linear-gradient(to right, rgb(124 207 244 / 0.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(124 207 244 / 0.09) 1px, transparent 1px);
+  background-size:
+    24px 24px,
+    24px 24px,
+    120px 120px,
+    120px 120px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ambient-grid {
+    animation: grid-drift 160s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes grid-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(72px, 48px, 0);
+  }
+}
+
+/* Focus visibility on a dark ground */
+:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 2px;
+}

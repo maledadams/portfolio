@@ -1,0 +1,207 @@
+{
+  "meta": {
+    "title": "Lucia Adams · Custom webs and systems",
+    "description": "Custom web development for businesses: catalogs, automation and internal systems that make your website run itself."
+  },
+  "nav": {
+    "name": "LUCIA ADAMS",
+    "home": "HOME",
+    "work": "WORK",
+    "contact": "CONTACT"
+  },
+  "titleblock": {
+    "sheet": "SHEET",
+    "drawnBy": "DRAWN BY",
+    "scale": "SCALE",
+    "date": "DATE"
+  },
+  "home": {
+    "sheetTitle": "PORTFOLIO",
+    "headline1": "I design websites.",
+    "headline2": "I build the systems that make them work.",
+    "sub": "Custom builds for businesses that need more than a good-looking page: catalogs, sales flows, automation.",
+    "cta": "Request a blueprint",
+    "index": {
+      "title": "SHEET INDEX",
+      "current": "you are here",
+      "a1": "Home",
+      "a2": "Work",
+      "a3": "Contact"
+    },
+    "positioning": {
+      "sheetTitle": "GENERAL NOTES",
+      "notes": [
+        {
+          "label": "No templates",
+          "body": "Every project is drawn from scratch around how your business works, not the other way around."
+        },
+        {
+          "label": "Systems first",
+          "body": "Before designing screens, I map processes: what you sell, how you manage it, what can be automated."
+        },
+        {
+          "label": "Marketing built in",
+          "body": "I come from digital marketing. I know how people behave and design for that, not just for looks."
+        }
+      ]
+    },
+    "legend": {
+      "sheetTitle": "LEGEND · CAPABILITIES",
+      "items": [
+        { "term": "Web development", "detail": "Next.js, React, TypeScript, Node" },
+        { "term": "E-commerce and catalogs", "detail": "Stores, inventory, WhatsApp ordering" },
+        { "term": "Automation and data", "detail": "Python, pandas, APIs, reporting" },
+        { "term": "UI design and branding", "detail": "Design systems, identity, typography" },
+        { "term": "SEO and analytics", "detail": "Search Console, Analytics, performance" },
+        { "term": "Infrastructure", "detail": "Vercel, Cloudflare, Supabase, PostgreSQL" }
+      ]
+    }
+  },
+  "work": {
+    "sheetTitle": "SELECTED WORK",
+    "intro": "Three projects in production. Each drawing has two layers: the surface you see and the system driving it.",
+    "surface": "SURFACE",
+    "systems": "SYSTEMS",
+    "visit": "View live site",
+    "sheetLabel": "DRAWING",
+    "projects": {
+      "pulpina": {
+        "name": "PULPIÑA RD",
+        "type": "E-commerce · alternative fashion",
+        "alt": "Pulpiña RD home page with its three stores: Moon, Sunshine and Men",
+        "surface": [
+          {
+            "label": "Three universes, one brand",
+            "body": "Moon, Sunshine and Men: each line with its own palette, mascot and storefront."
+          },
+          {
+            "label": "Custom illustration and branding",
+            "body": "A full identity drawn for the store, from the logo to each universe's badges."
+          },
+          {
+            "label": "Own UI, zero template",
+            "body": "Typography, color and components built around the brand's personality."
+          }
+        ],
+        "systems": [
+          {
+            "label": "Catalog by universe",
+            "body": "One inventory, three storefronts: each product is tagged once and shows up where it belongs."
+          },
+          {
+            "label": "WhatsApp ordering",
+            "body": "The cart builds the order and hands it off where people already buy: WhatsApp, with an order number."
+          },
+          {
+            "label": "Automated offers",
+            "body": "New and Sale badges plus birthday discounts driven by rules, not by hand."
+          }
+        ]
+      },
+      "stemise": {
+        "name": "STEMISE",
+        "type": "Nonprofit · STEM education",
+        "alt": "STEMise home page with its headline, navigation and calls to action",
+        "surface": [
+          {
+            "label": "Clear, friendly brand",
+            "body": "A simple visual system that works the same for students across 30+ countries."
+          },
+          {
+            "label": "Goal-based navigation",
+            "body": "Kits, curriculum, volunteering and donations: every visitor finds their path in one click."
+          },
+          {
+            "label": "Actions with hierarchy",
+            "body": "Two clear calls on the home page: get kits or see the curriculum. Nothing competes with that."
+          }
+        ],
+        "systems": [
+          {
+            "label": "501(c)(3) donations",
+            "body": "A donation channel fiscally sponsored by Hack Club, ready to receive funds from day one."
+          },
+          {
+            "label": "Kit distribution",
+            "body": "The request and delivery flow behind 150+ STEM kits donated to students."
+          },
+          {
+            "label": "Open curriculum by age",
+            "body": "Content organized by primary, middle and high school, maintained as an open resource."
+          }
+        ]
+      },
+      "togethersport": {
+        "name": "TOGETHER SPORTS",
+        "type": "Sports nonprofit · multi-program",
+        "alt": "Together Sports home page with its motto Play Loud. Build Strong. and program photos",
+        "surface": [
+          {
+            "label": "An identity that shouts the motto",
+            "body": "Play Loud. Build Strong. carried into giant type, color and rhythm."
+          },
+          {
+            "label": "Real photography",
+            "body": "Photos from the programs, not stock: the site feels like the practices do."
+          },
+          {
+            "label": "Color per sport",
+            "body": "Each program with its own color and graphics, held together under one brand."
+          }
+        ],
+        "systems": [
+          {
+            "label": "Multi-program architecture",
+            "body": "Tennis, basketball, football and golf: each sport gets its own section without duplicating the site."
+          },
+          {
+            "label": "Participation paths",
+            "body": "Donate, volunteer or sign up: every visitor leaves the home page with a next step."
+          },
+          {
+            "label": "Second Serve",
+            "body": "A used-equipment donation flow with partner Rally Forward NYC, back into the community."
+          }
+        ]
+      }
+    }
+  },
+  "contact": {
+    "sheetTitle": "CONTACT",
+    "process": {
+      "sheetTitle": "HOW I WORK",
+      "steps": [
+        {
+          "verb": "Understand",
+          "body": "The business first: what you sell, how you work and what eats your time."
+        },
+        {
+          "verb": "Design",
+          "body": "An interface that feels like yours, not pulled from a template catalog."
+        },
+        {
+          "verb": "Build",
+          "body": "Custom code, made to grow without breaking."
+        },
+        {
+          "verb": "Refine",
+          "body": "We iterate until what you see convinces you and what you don't see runs on its own."
+        }
+      ]
+    },
+    "panel": {
+      "title": "Start a project",
+      "body": "Tell me what your business does and what it needs: I'll draft the blueprint.",
+      "cta": "Request a blueprint",
+      "email": "EMAIL",
+      "linkedin": "LINKEDIN",
+      "github": "GITHUB",
+      "location": "BASE",
+      "locationValue": "Santo Domingo, DR · remote"
+    }
+  },
+  "footer": {
+    "rights": "© 2026 Lucia Adams",
+    "builtBy": "Designed and built by hand"
+  }
+}
