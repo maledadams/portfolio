@@ -13,11 +13,25 @@
   },
   "home": {
     "hero": [
-      { "t": "Lucia Adams", "strong": true, "href": "/contact" },
-      { "t": " diseña webs y construye los " },
-      { "t": "sistemas", "squiggle": true },
-      { "t": " que las hacen funcionar, desde " },
-      { "t": "Santo Domingo", "squiggle": true }
+      {
+        "t": "Lucia Adams",
+        "strong": true,
+        "href": "/contact"
+      },
+      {
+        "t": " diseña webs y construye los "
+      },
+      {
+        "t": "sistemas",
+        "squiggle": true
+      },
+      {
+        "t": " que las hacen funcionar, desde "
+      },
+      {
+        "t": "Santo Domingo",
+        "squiggle": true
+      }
     ],
     "projectsTitle": "Proyectos",
     "servicesTitle": "Lo que hago",
@@ -136,6 +150,16 @@
     "baseValue": "Santo Domingo, RD · remoto"
   },
   "footer": {
+    "ctaTitle": "Disponible para proyectos",
+    "ctaBody": "Cuéntame qué hace tu negocio y qué necesita. Te respondo con una propuesta.",
+    "ctaButton": "Escríbeme",
     "note": "Diseñado y construido a mano."
+  },
+  "guestbook": {
+    "title": "Del <link>libro de visitas</link>",
+    "sign": "Firmar el libro de visitas",
+    "mailSubject": "Firma para el libro de visitas",
+    "emptyNote": "Todavía no hay firmas.\n\nSi trabajamos juntos o algo\nde aquí te sirvió, escríbeme\ny lo pongo en esta pared.",
+    "emptyCredit": "la primera puede ser tuya"
   }
 }

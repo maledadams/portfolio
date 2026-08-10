@@ -13,11 +13,25 @@
   },
   "home": {
     "hero": [
-      { "t": "Lucia Adams", "strong": true, "href": "/contact" },
-      { "t": " designs websites and builds the " },
-      { "t": "systems", "squiggle": true },
-      { "t": " that make them work, from " },
-      { "t": "Santo Domingo", "squiggle": true }
+      {
+        "t": "Lucia Adams",
+        "strong": true,
+        "href": "/contact"
+      },
+      {
+        "t": " designs websites and builds the "
+      },
+      {
+        "t": "systems",
+        "squiggle": true
+      },
+      {
+        "t": " that make them work, from "
+      },
+      {
+        "t": "Santo Domingo",
+        "squiggle": true
+      }
     ],
     "projectsTitle": "Projects",
     "servicesTitle": "What I do",
@@ -136,6 +150,16 @@
     "baseValue": "Santo Domingo, DR · remote"
   },
   "footer": {
+    "ctaTitle": "Available for projects",
+    "ctaBody": "Tell me what your business does and what it needs. You get a proposal back.",
+    "ctaButton": "Say hi",
     "note": "Designed and built by hand."
+  },
+  "guestbook": {
+    "title": "From the <link>guestbook</link>",
+    "sign": "Sign the guestbook",
+    "mailSubject": "A note for your guestbook",
+    "emptyNote": "No signatures yet.\n\nIf we worked together or\nsomething here helped, write\nin and I will pin it up.",
+    "emptyCredit": "the first one could be yours"
   }
 }

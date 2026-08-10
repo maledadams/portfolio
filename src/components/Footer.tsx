@@ -1,7 +1,10 @@
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
+
+export const EMAIL = "maledadams@gmail.com";
 
 export const links = [
-  { label: "Email", href: "mailto:maledadams@gmail.com", text: "maledadams@gmail.com" },
+  { label: "Email", href: `mailto:${EMAIL}`, text: EMAIL },
   {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/lucia-m-adams/",
@@ -10,27 +13,64 @@ export const links = [
   { label: "GitHub", href: "https://github.com/maledadams", text: "maledadams" },
 ];
 
+const external = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/lucia-m-adams/" },
+  { label: "GitHub", href: "https://github.com/maledadams" },
+  { label: "Email", href: `mailto:${EMAIL}` },
+];
+
 export default function Footer() {
   const t = useTranslations("footer");
+  const nav = useTranslations("nav");
+
+  const internal = [
+    { label: nav("home"), href: "/" },
+    { label: nav("work"), href: "/work" },
+    { label: nav("contact"), href: "/contact" },
+  ] as const;
 
   return (
-    <footer className="mt-6 border-t border-line py-10">
-      <div className="center flex flex-wrap items-center justify-between gap-x-8 gap-y-3 font-mono text-[0.8em] text-muted">
-        <div className="flex flex-wrap gap-x-6 gap-y-2">
-          {links.map((link) => (
+    <footer className="mt-10 border-t border-line py-14">
+      <div className="center grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-[auto_auto_1fr]">
+        <div className="flex flex-col items-start gap-2 text-[0.8em]">
+          {internal.map((item) => (
+            <Link key={item.href} href={item.href} className="link capitalize">
+              {item.label}
+            </Link>
+          ))}
+        </div>
+
+        <div className="flex flex-col items-start gap-2 text-[0.8em]">
+          {external.map((item) => (
             <a
-              key={link.label}
-              href={link.href}
-              target={link.href.startsWith("http") ? "_blank" : undefined}
-              rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="underline decoration-1 underline-offset-4 transition-colors hover:text-fg"
+              key={item.label}
+              href={item.href}
+              target={item.href.startsWith("http") ? "_blank" : undefined}
+              rel={
+                item.href.startsWith("http") ? "noopener noreferrer" : undefined
+              }
+              className="link"
             >
-              {link.label}
+              {item.label}
             </a>
           ))}
         </div>
-        <p>{t("note")}</p>
+
+        <div className="col-span-2 sm:col-span-1 sm:max-w-[320px] sm:justify-self-end">
+          <h2 className="font-semibold">{t("ctaTitle")}</h2>
+          <p className="mt-1 text-[0.8em] text-muted">{t("ctaBody")}</p>
+          <a
+            href={`mailto:${EMAIL}`}
+            className="mt-4 inline-block border border-line bg-surface px-5 py-2.5 text-[0.8em] transition-colors hover:border-fg"
+          >
+            {t("ctaButton")}
+          </a>
+        </div>
       </div>
+
+      <p className="center mt-10 font-mono text-[0.7em] text-muted">
+        {t("note")}
+      </p>
     </footer>
   );
 }

@@ -6,6 +6,8 @@ import { Libre_Franklin, Space_Mono } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import PageTransition from "@/components/PageTransition";
+import RevealObserver from "@/components/RevealObserver";
 import "../globals.css";
 
 const franklin = Libre_Franklin({
@@ -19,8 +21,12 @@ const spaceMono = Space_Mono({
   weight: ["400", "700"],
 });
 
-/** Applies the stored theme before first paint so there is no flash. */
-const themeScript = `try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}`;
+/**
+ * Applies the stored theme before first paint so there is no flash, and marks
+ * the document as scripted so the reveal animation may hide content. Without
+ * this script running, every section stays visible.
+ */
+const bootScript = `document.documentElement.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}`;
 
 export async function generateMetadata({
   params,
@@ -51,13 +57,16 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: bootScript }} />
       </head>
       <body className="flex min-h-[100dvh] flex-col">
         <NextIntlClientProvider>
           <Nav />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1">
+            <PageTransition>{children}</PageTransition>
+          </main>
           <Footer />
+          <RevealObserver />
         </NextIntlClientProvider>
       </body>
     </html>

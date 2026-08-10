@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import ProjectCard from "@/components/ProjectCard";
+import Guestbook from "@/components/Guestbook";
 import { projects } from "@/data/projects";
 
 type Segment = { t: string; strong?: boolean; squiggle?: boolean; href?: string };
@@ -40,7 +41,7 @@ export default function HomePage() {
         </h1>
       </section>
 
-      <section className="center pb-18">
+      <section className="reveal center pb-18">
         <h2 className="mb-6 text-[1.25em] font-semibold">
           {t("projectsTitle")}
         </h2>
@@ -59,15 +60,12 @@ export default function HomePage() {
           ))}
         </ul>
 
-        <Link
-          href="/work"
-          className="mt-6 inline-block font-mono text-[0.8em] text-muted underline decoration-1 underline-offset-4 transition-colors hover:text-fg"
-        >
+        <Link href="/work" className="link mt-6 inline-block font-mono text-[0.8em]">
           {t("moreWork")}
         </Link>
       </section>
 
-      <section className="center pb-20">
+      <section className="reveal center pb-20">
         <h2 className="mb-6 text-[1.25em] font-semibold">
           {t("servicesTitle")}
         </h2>
@@ -89,6 +87,8 @@ export default function HomePage() {
           ))}
         </ul>
       </section>
+
+      <Guestbook />
     </>
   );
 }
