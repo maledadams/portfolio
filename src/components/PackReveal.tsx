@@ -7,6 +7,7 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import TiltCard from "./TiltCard";
 import type { Rarity } from "@/data/projects";
@@ -130,7 +131,10 @@ export default function PackReveal({
     else setIndex((i) => i + 1);
   };
 
-  return (
+  // Portaled to <body>: the page-transition wrapper carries a transform while
+  // animating, and a transformed ancestor turns position:fixed into
+  // position-relative-to-the-wrapper, shifting the overlay.
+  return createPortal(
     <div
       ref={overlayRef}
       className="pack-overlay"
@@ -230,6 +234,7 @@ export default function PackReveal({
           </div>
         </>
       )}
-    </div>
+    </div>,
+    document.body,
   );
 }
