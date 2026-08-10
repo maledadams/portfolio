@@ -2,6 +2,7 @@
 
 @theme {
   /* Ground and ink */
+  --color-desk: #3a5a78;
   --color-paper: #fff6e9;
   --color-shade: #f3e6d2;
   --color-ink: #141210;
@@ -25,13 +26,14 @@ body {
 
 /*
  * Tiled wallpaper. Two offset dot grids read as a repeating tile without
- * needing an image asset. Kept near-invisible so content always wins.
+ * needing an image asset. Light dots on blueprint blue, the way a real
+ * drawing reads, kept faint so the windows on top always win.
  */
 .desk {
-  background-color: var(--color-paper);
+  background-color: var(--color-desk);
   background-image:
-    radial-gradient(circle, rgb(20 18 16 / 0.07) 1.2px, transparent 1.3px),
-    radial-gradient(circle, rgb(255 216 77 / 0.55) 1.2px, transparent 1.3px);
+    radial-gradient(circle, rgb(255 255 255 / 0.1) 1.2px, transparent 1.3px),
+    radial-gradient(circle, rgb(255 255 255 / 0.2) 1.2px, transparent 1.3px);
   background-position:
     0 0,
     12px 12px;

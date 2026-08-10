@@ -16,7 +16,7 @@ export default function Footer() {
 
       <div className="flex flex-col items-start gap-5 pb-10 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="mr-1 font-chrome text-[10px] text-ink/60">
+          <span className="mr-1 font-chrome text-[10px] text-paper/70">
             {t("builtWith")}
           </span>
           {badges.map((badge) => (
@@ -34,12 +34,12 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="flex items-center gap-4 font-chrome text-[10px]">
+        <div className="flex items-center gap-4 font-chrome text-[10px] text-paper">
           <a
             href="https://www.linkedin.com/in/lucia-m-adams/"
             target="_blank"
             rel="noopener noreferrer"
-            className="underline decoration-2 underline-offset-4 hover:bg-butter"
+            className="underline decoration-2 underline-offset-4 hover:bg-butter hover:text-ink"
           >
             LINKEDIN
           </a>
@@ -47,11 +47,11 @@ export default function Footer() {
             href="https://github.com/maledadams"
             target="_blank"
             rel="noopener noreferrer"
-            className="underline decoration-2 underline-offset-4 hover:bg-butter"
+            className="underline decoration-2 underline-offset-4 hover:bg-butter hover:text-ink"
           >
             GITHUB
           </a>
-          <span className="text-ink/60">{t("rights")}</span>
+          <span className="text-paper/60">{t("rights")}</span>
         </div>
       </div>
     </footer>

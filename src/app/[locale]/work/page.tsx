@@ -18,10 +18,10 @@ export default function WorkPage() {
   return (
     <div className="flex flex-col gap-7 sm:gap-9">
       <header className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between md:gap-10">
-        <h1 className="font-display text-4xl leading-[1.05] font-extrabold sm:text-5xl lg:text-6xl">
+        <h1 className="font-display text-4xl leading-[1.05] font-extrabold text-paper sm:text-5xl lg:text-6xl">
           {t("heading")}
         </h1>
-        <p className="max-w-[60ch] text-base text-ink/75 md:pb-2 md:text-right">
+        <p className="max-w-[60ch] text-base text-paper/80 md:pb-2 md:text-right">
           {t("intro")}
         </p>
       </header>
