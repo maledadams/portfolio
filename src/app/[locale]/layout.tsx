@@ -4,7 +4,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { Bricolage_Grotesque, Outfit, Silkscreen } from "next/font/google";
 import { routing } from "@/i18n/routing";
-import Sidebar from "@/components/Sidebar";
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "../globals.css";
 
@@ -53,14 +53,10 @@ export default async function LocaleLayout({
     >
       <body className="desk min-h-[100dvh]">
         <NextIntlClientProvider>
-          <div className="mx-auto max-w-[1200px] px-4 py-5 sm:px-6 sm:py-8">
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-[220px_1fr] lg:gap-8">
-              <Sidebar />
-              <div className="min-w-0">
-                <main>{children}</main>
-                <Footer />
-              </div>
-            </div>
+          <div className="mx-auto max-w-[1560px] px-4 py-5 sm:px-8 sm:py-8">
+            <Header />
+            <main className="mt-7 sm:mt-9">{children}</main>
+            <Footer />
           </div>
         </NextIntlClientProvider>
       </body>

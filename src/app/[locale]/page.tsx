@@ -6,14 +6,14 @@ type Segment = { t: string; mark?: "lime" | "butter" };
 type Note = { label: string; body: string };
 type Skill = { term: string; detail: string };
 
-/** Sticker pills get varied tilts and fills so the group reads as scattered. */
-const pillStyle = [
-  { bg: "bg-pink", tilt: "-rotate-2" },
-  { bg: "bg-butter", tilt: "rotate-1" },
-  { bg: "bg-blue", tilt: "rotate-2" },
-  { bg: "bg-lime", tilt: "-rotate-1" },
-  { bg: "bg-tangerine", tilt: "rotate-1" },
-  { bg: "bg-butter", tilt: "-rotate-2" },
+/** Fills rotate so the grid has colour rhythm while staying aligned. */
+const pillBg = [
+  "bg-pink",
+  "bg-butter",
+  "bg-blue",
+  "bg-lime",
+  "bg-tangerine",
+  "bg-butter",
 ];
 
 export default function HomePage() {
@@ -24,38 +24,32 @@ export default function HomePage() {
   const skills = t.raw("skills.items") as Skill[];
 
   return (
-    <div className="flex flex-col gap-8 sm:gap-10">
-      <Window
-        title={t("windowTitle")}
-        accent="butter"
-        status={t("status")}
-        className="lg:mr-4"
-      >
-        <div className="p-6 sm:p-9">
-          <h1 className="font-display text-4xl leading-[1.05] font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+    <div className="flex flex-col gap-7 sm:gap-9">
+      <Window title={t("windowTitle")} accent="butter" status={t("status")}>
+        <div className="p-6 sm:p-10">
+          <h1 className="font-display text-4xl leading-[1.02] font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
             {t("headline1")}
             <br />
             {t("headline2")}
           </h1>
-          <p className="mt-5 max-w-[46ch] text-base leading-relaxed text-ink/75 sm:text-lg">
-            {t("sub")}
-          </p>
-          <Link
-            href="/contact"
-            className="press mt-7 inline-block rounded-full border-[3px] border-ink bg-tangerine px-7 py-3 text-base font-bold"
-          >
-            {nav("cta")}
-          </Link>
+
+          <div className="mt-8 flex flex-col gap-5 border-t-[3px] border-ink pt-6 md:flex-row md:items-center md:justify-between md:gap-10">
+            <p className="max-w-[70ch] text-base leading-relaxed text-ink/75 sm:text-lg">
+              {t("sub")}
+            </p>
+            <Link
+              href="/contact"
+              className="press shrink-0 self-start border-[3px] border-ink bg-tangerine px-8 py-3.5 text-base font-bold md:self-auto"
+            >
+              {nav("cta")}
+            </Link>
+          </div>
         </div>
       </Window>
 
-      <Window
-        title={t("about.windowTitle")}
-        accent="lime"
-        className="lg:ml-8"
-      >
-        <div className="p-6 sm:p-9">
-          <p className="font-display text-2xl leading-[1.35] font-bold sm:text-3xl sm:leading-[1.35]">
+      <Window title={t("about.windowTitle")} accent="lime">
+        <div className="p-6 sm:p-10">
+          <p className="font-display text-2xl leading-[1.35] font-bold sm:text-3xl sm:leading-[1.35] lg:text-4xl lg:leading-[1.3]">
             {statement.map((seg, i) =>
               seg.mark ? (
                 <span
@@ -71,18 +65,13 @@ export default function HomePage() {
             )}
           </p>
 
-          <div className="rule my-7" />
+          <div className="rule my-8" />
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-12">
-            {notes.map((note, i) => (
-              <div
-                key={note.label}
-                className={
-                  ["md:col-span-5", "md:col-span-4 md:mt-8", "md:col-span-3"][i]
-                }
-              >
-                <h2 className="font-display text-lg font-bold">{note.label}</h2>
-                <p className="mt-1.5 text-sm leading-relaxed text-ink/75">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-10">
+            {notes.map((note) => (
+              <div key={note.label}>
+                <h2 className="font-display text-xl font-bold">{note.label}</h2>
+                <p className="mt-2 text-sm leading-relaxed text-ink/75">
                   {note.body}
                 </p>
               </div>
@@ -95,17 +84,18 @@ export default function HomePage() {
         title={t("skills.windowTitle")}
         accent="blue"
         status={t("skills.status")}
-        className="lg:mr-10"
       >
-        <div className="flex flex-wrap items-start gap-3 p-6 sm:p-8">
+        <div className="grid grid-cols-1 gap-4 p-6 sm:grid-cols-2 sm:p-8 lg:grid-cols-3">
           {skills.map((skill, i) => (
-            <span
+            <div
               key={skill.term}
-              className={`shell !shadow-[4px_4px_0_var(--color-ink)] px-4 py-2.5 ${pillStyle[i].bg} ${pillStyle[i].tilt}`}
+              className={`border-[3px] border-ink px-5 py-4 ${pillBg[i]}`}
             >
-              <span className="block text-sm font-bold">{skill.term}</span>
-              <span className="block text-xs text-ink/70">{skill.detail}</span>
-            </span>
+              <span className="block text-base font-bold">{skill.term}</span>
+              <span className="mt-0.5 block text-sm text-ink/70">
+                {skill.detail}
+              </span>
+            </div>
           ))}
         </div>
       </Window>

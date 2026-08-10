@@ -46,7 +46,6 @@ body {
  */
 .shell {
   border: 3px solid var(--color-ink);
-  border-radius: 20px;
   box-shadow: 6px 6px 0 var(--color-ink);
 }
 
@@ -96,13 +95,12 @@ body {
 }
 
 /*
- * Highlighter swipe behind a phrase. `clone` keeps the ends rounded when the
- * phrase wraps across lines, which inline-block would break.
+ * Highlighter swipe behind a phrase. `clone` re-draws the fill on every line
+ * the phrase wraps onto, which inline-block would break.
  */
 .mark {
   background-color: var(--mark, var(--color-butter));
   padding: 0 0.15em;
-  border-radius: 5px;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }

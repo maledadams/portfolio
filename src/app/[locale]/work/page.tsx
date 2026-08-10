@@ -16,12 +16,14 @@ export default function WorkPage() {
   };
 
   return (
-    <div className="flex flex-col gap-10 sm:gap-14">
-      <header>
-        <h1 className="font-display text-3xl leading-tight font-extrabold sm:text-4xl">
+    <div className="flex flex-col gap-7 sm:gap-9">
+      <header className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between md:gap-10">
+        <h1 className="font-display text-4xl leading-[1.05] font-extrabold sm:text-5xl lg:text-6xl">
           {t("heading")}
         </h1>
-        <p className="mt-2 max-w-[52ch] text-base text-ink/75">{t("intro")}</p>
+        <p className="max-w-[60ch] text-base text-ink/75 md:pb-2 md:text-right">
+          {t("intro")}
+        </p>
       </header>
 
       {projects.map((project) => (
@@ -38,7 +40,6 @@ export default function WorkPage() {
           surface={t.raw(`projects.${project.slug}.surface`) as Point[]}
           systems={t.raw(`projects.${project.slug}.systems`) as Point[]}
           labels={labels}
-          className={project.offset}
         />
       ))}
     </div>

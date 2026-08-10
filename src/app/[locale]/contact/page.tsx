@@ -24,24 +24,18 @@ export default function ContactPage() {
   ];
 
   return (
-    <div className="flex flex-col gap-8 sm:gap-10">
-      <Window
-        title={t("process.windowTitle")}
-        accent="lime"
-        className="lg:mr-6"
-      >
-        <div className="p-6 sm:p-9">
-          <h1 className="font-display text-3xl leading-tight font-extrabold sm:text-4xl">
+    <div className="flex flex-col gap-7 sm:gap-9">
+      <Window title={t("process.windowTitle")} accent="lime">
+        <div className="p-6 sm:p-10">
+          <h1 className="font-display text-4xl leading-[1.05] font-extrabold sm:text-5xl lg:text-6xl">
             {t("process.heading")}
           </h1>
 
-          <ol className="mt-7 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <ol className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((step, i) => (
               <li
                 key={step.verb}
-                className={`rounded-[16px] border-[3px] border-ink p-5 ${stepTint[i]} ${
-                  i % 2 === 1 ? "sm:mt-6" : ""
-                }`}
+                className={`border-[3px] border-ink p-5 ${stepTint[i]}`}
               >
                 <span className="font-chrome text-[11px] text-ink/70">
                   0{i + 1}
@@ -58,35 +52,34 @@ export default function ContactPage() {
         </div>
       </Window>
 
-      <Window
-        title={t("panel.windowTitle")}
-        accent="tangerine"
-        status={EMAIL}
-        className="lg:ml-10"
-      >
-        <div className="p-6 sm:p-9">
-          <h2 className="font-display text-2xl leading-tight font-extrabold sm:text-3xl">
-            {t("panel.title")}
-          </h2>
-          <p className="mt-3 max-w-[48ch] text-base leading-relaxed text-ink/75">
-            {t("panel.body")}
-          </p>
+      <Window title={t("panel.windowTitle")} accent="tangerine" status={EMAIL}>
+        <div className="p-6 sm:p-10">
+          <div className="flex flex-col gap-6 border-b-[3px] border-ink pb-8 md:flex-row md:items-center md:justify-between md:gap-10">
+            <div>
+              <h2 className="font-display text-3xl leading-tight font-extrabold sm:text-4xl">
+                {t("panel.title")}
+              </h2>
+              <p className="mt-3 max-w-[62ch] text-base leading-relaxed text-ink/75">
+                {t("panel.body")}
+              </p>
+            </div>
 
-          <a
-            href={`mailto:${EMAIL}`}
-            className="press mt-6 inline-block rounded-full border-[3px] border-ink bg-tangerine px-7 py-3 text-base font-bold"
-          >
-            {nav("cta")}
-          </a>
+            <a
+              href={`mailto:${EMAIL}`}
+              className="press shrink-0 self-start border-[3px] border-ink bg-tangerine px-8 py-3.5 text-base font-bold md:self-auto"
+            >
+              {nav("cta")}
+            </a>
+          </div>
 
-          <dl className="mt-8 grid grid-cols-1 gap-2 sm:grid-cols-2">
+          <dl className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {rows.map(([key, value, href]) => (
               <div
                 key={key}
-                className="bevel-down rounded-[12px] border-[3px] border-ink bg-shade px-4 py-3"
+                className="bevel-down border-[3px] border-ink bg-shade px-4 py-3"
               >
                 <dt className="font-chrome text-[10px] text-ink/60">{key}</dt>
-                <dd className="mt-1 text-sm font-semibold break-all">
+                <dd className="mt-1.5 text-sm font-semibold break-all">
                   {href ? (
                     <a
                       href={href}
