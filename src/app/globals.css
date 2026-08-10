@@ -1,69 +1,125 @@
 @import "tailwindcss";
 
 @theme {
-  /* Cyanotype palette */
-  --color-deep: #081c33;
-  --color-sheet: #0b2542;
-  --color-panel: #0e2b4c;
-  --color-ink: #ddebf9;
-  --color-dim: #8fb0ce;
-  --color-cyan: #7ccff4;
-  --color-line: #24466b;
-  --color-amber: #f5a83c;
+  /* Ground and ink */
+  --color-paper: #fff6e9;
+  --color-shade: #f3e6d2;
+  --color-ink: #141210;
 
-  --font-sans: var(--font-grotesk), system-ui, sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  /* Candy set. Each project owns one permanently. */
+  --color-pink: #ff5fa2;
+  --color-blue: #7f9bff;
+  --color-tangerine: #ff8a3d;
+  --color-lime: #9be564;
+  --color-butter: #ffd84d;
+
+  --font-chrome: var(--font-silkscreen), ui-monospace, monospace;
+  --font-display: var(--font-bricolage), system-ui, sans-serif;
+  --font-body: var(--font-outfit), system-ui, sans-serif;
 }
 
 body {
-  background: var(--color-deep);
   color: var(--color-ink);
-  font-family: var(--font-sans);
-}
-
-::selection {
-  background: var(--color-cyan);
-  color: var(--color-deep);
+  font-family: var(--font-body);
 }
 
 /*
- * Ambient drafting-table grid. Fixed behind everything; the drift is
- * deliberately near-imperceptible and stops entirely under reduced motion.
+ * Tiled wallpaper. Two offset dot grids read as a repeating tile without
+ * needing an image asset. Kept near-invisible so content always wins.
  */
-.ambient-grid {
-  position: fixed;
-  inset: -128px;
-  z-index: -10;
-  pointer-events: none;
+.desk {
+  background-color: var(--color-paper);
   background-image:
-    linear-gradient(to right, rgb(124 207 244 / 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(124 207 244 / 0.045) 1px, transparent 1px),
-    linear-gradient(to right, rgb(124 207 244 / 0.09) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(124 207 244 / 0.09) 1px, transparent 1px);
+    radial-gradient(circle, rgb(20 18 16 / 0.07) 1.2px, transparent 1.3px),
+    radial-gradient(circle, rgb(255 216 77 / 0.55) 1.2px, transparent 1.3px);
+  background-position:
+    0 0,
+    12px 12px;
   background-size:
     24px 24px,
-    24px 24px,
-    120px 120px,
-    120px 120px;
+    24px 24px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .ambient-grid {
-    animation: grid-drift 160s ease-in-out infinite alternate;
+/*
+ * The unifying primitive: reads as a Win98 window and as a sticker at once.
+ * Hard offset shadow, zero blur.
+ */
+.shell {
+  border: 3px solid var(--color-ink);
+  border-radius: 20px;
+  box-shadow: 6px 6px 0 var(--color-ink);
+}
+
+/* Period-correct raised and sunken edges, drawn with hard inset shadows. */
+.bevel-up {
+  box-shadow:
+    inset 2px 2px 0 rgb(255 255 255 / 0.9),
+    inset -2px -2px 0 rgb(20 18 16 / 0.22);
+}
+
+.bevel-down {
+  box-shadow:
+    inset -2px -2px 0 rgb(255 255 255 / 0.75),
+    inset 2px 2px 0 rgb(20 18 16 / 0.28);
+}
+
+/* Raised control that sinks while held, the way old chrome behaved. */
+.bevel-btn {
+  box-shadow:
+    inset 2px 2px 0 rgb(255 255 255 / 0.9),
+    inset -2px -2px 0 rgb(20 18 16 / 0.22);
+}
+
+.bevel-btn:active {
+  box-shadow:
+    inset -2px -2px 0 rgb(255 255 255 / 0.75),
+    inset 2px 2px 0 rgb(20 18 16 / 0.28);
+}
+
+/* Chunky controls that physically press into their own shadow. */
+.press {
+  box-shadow: 3px 3px 0 var(--color-ink);
+  transition:
+    transform 80ms steps(2),
+    box-shadow 80ms steps(2);
+}
+
+.press:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--color-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .press {
+    transition: none;
   }
 }
 
-@keyframes grid-drift {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(72px, 48px, 0);
-  }
+/*
+ * Highlighter swipe behind a phrase. `clone` keeps the ends rounded when the
+ * phrase wraps across lines, which inline-block would break.
+ */
+.mark {
+  background-color: var(--mark, var(--color-butter));
+  padding: 0 0.15em;
+  border-radius: 5px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
-/* Focus visibility on a dark ground */
+/* Beveled horizontal rule, the old <hr> look. */
+.rule {
+  height: 6px;
+  border-top: 3px solid rgb(20 18 16 / 0.28);
+  border-bottom: 3px solid rgb(255 255 255 / 0.9);
+}
+
 :focus-visible {
-  outline: 2px solid var(--color-cyan);
+  outline: 3px solid var(--color-ink);
   outline-offset: 2px;
+}
+
+::selection {
+  background: var(--color-butter);
+  color: var(--color-ink);
 }

@@ -2,22 +2,26 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
-import { IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
+import { Bricolage_Grotesque, Outfit, Silkscreen } from "next/font/google";
 import { routing } from "@/i18n/routing";
-import SheetNav from "@/components/SheetNav";
-import SpineTrace from "@/components/SpineTrace";
+import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
 import "../globals.css";
 
-const grotesk = Space_Grotesk({
-  variable: "--font-grotesk",
+const silkscreen = Silkscreen({
+  variable: "--font-silkscreen",
   subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
-const plexMono = IBM_Plex_Mono({
-  variable: "--font-plex-mono",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
+  subsets: ["latin", "latin-ext"],
+});
+
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin", "latin-ext"],
 });
 
 export async function generateMetadata({
@@ -27,10 +31,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
-  return {
-    title: t("title"),
-    description: t("description"),
-  };
+  return { title: t("title"), description: t("description") };
 }
 
 export default async function LocaleLayout({
@@ -48,19 +49,19 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${grotesk.variable} ${plexMono.variable} antialiased`}
+      className={`${silkscreen.variable} ${bricolage.variable} ${outfit.variable} antialiased`}
     >
-      <body className="min-h-[100dvh]">
+      <body className="desk min-h-[100dvh]">
         <NextIntlClientProvider>
-          <div className="ambient-grid" aria-hidden="true" />
-          <SheetNav />
-          <div className="relative">
-            <SpineTrace />
-            <main className="mx-auto max-w-[1240px] px-6 pt-16 md:pl-24 md:pr-10">
-              {children}
-            </main>
+          <div className="mx-auto max-w-[1200px] px-4 py-5 sm:px-6 sm:py-8">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-[220px_1fr] lg:gap-8">
+              <Sidebar />
+              <div className="min-w-0">
+                <main>{children}</main>
+                <Footer />
+              </div>
+            </div>
           </div>
-          <Footer />
         </NextIntlClientProvider>
       </body>
     </html>

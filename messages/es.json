@@ -5,31 +5,27 @@
   },
   "nav": {
     "name": "LUCIA ADAMS",
+    "role": "web + sistemas",
     "home": "INICIO",
     "work": "TRABAJO",
-    "contact": "CONTACTO"
-  },
-  "titleblock": {
-    "sheet": "HOJA",
-    "drawnBy": "DIBUJADO POR",
-    "scale": "ESCALA",
-    "date": "FECHA"
+    "contact": "CONTACTO",
+    "cta": "Escríbeme"
   },
   "home": {
-    "sheetTitle": "PORTAFOLIO",
-    "headline1": "Diseño webs.",
-    "headline2": "Construyo los sistemas que las hacen funcionar.",
+    "windowTitle": "index.html",
+    "headline1": "Diseño la web.",
+    "headline2": "Construyo el sistema.",
     "sub": "Desarrollo a medida para negocios que necesitan más que una página bonita: catálogos, flujos de venta, automatización.",
-    "cta": "Solicitar un plano",
-    "index": {
-      "title": "ÍNDICE DE HOJAS",
-      "current": "estás aquí",
-      "a1": "Inicio",
-      "a2": "Trabajo",
-      "a3": "Contacto"
-    },
-    "positioning": {
-      "sheetTitle": "NOTAS GENERALES",
+    "status": "lucia-adams.com",
+    "about": {
+      "windowTitle": "sobre-mi.txt",
+      "statement": [
+        { "t": "No hago webs bonitas y ya. " },
+        { "t": "Estudio tu negocio", "mark": "lime" },
+        { "t": ", encuentro dónde pierdes tiempo y " },
+        { "t": "construyo el sistema", "mark": "butter" },
+        { "t": " que lo arregla." }
+      ],
       "notes": [
         {
           "label": "Sin plantillas",
@@ -45,30 +41,34 @@
         }
       ]
     },
-    "legend": {
-      "sheetTitle": "LEYENDA · CAPACIDADES",
+    "skills": {
+      "windowTitle": "skills.cfg",
+      "status": "6 areas",
       "items": [
-        { "term": "Desarrollo web", "detail": "Next.js, React, TypeScript, Node" },
-        { "term": "E-commerce y catálogos", "detail": "Tiendas, inventario, pedidos por WhatsApp" },
-        { "term": "Automatización y datos", "detail": "Python, pandas, APIs, reportes" },
-        { "term": "Diseño UI y branding", "detail": "Sistemas de diseño, identidad, tipografía" },
-        { "term": "SEO y analítica", "detail": "Search Console, Analytics, rendimiento" },
-        { "term": "Infraestructura", "detail": "Vercel, Cloudflare, Supabase, PostgreSQL" }
+        { "term": "Desarrollo web", "detail": "Next.js · React · TypeScript" },
+        { "term": "E-commerce y catálogos", "detail": "Tiendas · inventario · pedidos" },
+        { "term": "Automatización y datos", "detail": "Python · pandas · APIs" },
+        { "term": "Diseño UI y branding", "detail": "Sistemas de diseño · identidad" },
+        { "term": "SEO y analítica", "detail": "Search Console · Analytics" },
+        { "term": "Infraestructura", "detail": "Vercel · Cloudflare · Supabase" }
       ]
     }
   },
   "work": {
-    "sheetTitle": "TRABAJO SELECCIONADO",
-    "intro": "Tres proyectos en producción. Cada plano tiene dos capas: la superficie que ves y el sistema que la mueve.",
-    "surface": "SUPERFICIE",
-    "systems": "SISTEMAS",
+    "windowTitle": "trabajo.html",
+    "heading": "Tres proyectos en producción",
+    "intro": "Cada ventana tiene dos pestañas: lo que ves, y la máquina que lo mueve.",
+    "surfaceTab": "superficie.html",
+    "systemsTab": "sistemas.html",
     "visit": "Ver sitio en vivo",
-    "sheetLabel": "PLANO",
+    "diagramNote": "Cómo funciona por dentro",
     "projects": {
       "pulpina": {
-        "name": "PULPIÑA RD",
+        "name": "pulpina.exe",
+        "label": "Pulpiña RD",
         "type": "E-commerce · moda alternativa",
         "alt": "Portada de Pulpiña RD con sus tres tiendas: Moon, Sunshine y Men",
+        "diagram": ["Un inventario", ["Moon", "Sunshine", "Men"], "Carrito", "WhatsApp"],
         "surface": [
           {
             "label": "Tres universos, una marca",
@@ -99,9 +99,15 @@
         ]
       },
       "stemise": {
-        "name": "STEMISE",
+        "name": "stemise.exe",
+        "label": "STEMise",
         "type": "Nonprofit · educación STEM",
         "alt": "Portada de STEMise con su titular, navegación y llamados a la acción",
+        "diagram": [
+          "Donación (Hack Club)",
+          ["Kits STEM", "Currículo abierto", "Talleres"],
+          "30+ países"
+        ],
         "surface": [
           {
             "label": "Marca clara y amable",
@@ -132,9 +138,11 @@
         ]
       },
       "togethersport": {
-        "name": "TOGETHER SPORTS",
+        "name": "togethersports.exe",
+        "label": "Together Sports",
         "type": "Nonprofit deportivo · multi-programa",
         "alt": "Portada de Together Sports con su lema Play Loud. Build Strong. y fotos de los programas",
+        "diagram": ["Visitante", ["Donar", "Voluntario", "Jugar"], "4 programas", "Second Serve"],
         "surface": [
           {
             "label": "Identidad que grita el lema",
@@ -167,9 +175,10 @@
     }
   },
   "contact": {
-    "sheetTitle": "CONTACTO",
+    "windowTitle": "contacto.html",
     "process": {
-      "sheetTitle": "CÓMO TRABAJO",
+      "windowTitle": "proceso.txt",
+      "heading": "Cómo trabajo",
       "steps": [
         {
           "verb": "Entender",
@@ -190,9 +199,9 @@
       ]
     },
     "panel": {
+      "windowTitle": "contacto.exe",
       "title": "Empezar un proyecto",
-      "body": "Cuéntame qué hace tu negocio y qué necesita: te propongo el plano.",
-      "cta": "Solicitar un plano",
+      "body": "Cuéntame qué hace tu negocio y qué necesita. Te respondo con una propuesta, no con una plantilla.",
       "email": "EMAIL",
       "linkedin": "LINKEDIN",
       "github": "GITHUB",
@@ -202,6 +211,6 @@
   },
   "footer": {
     "rights": "© 2026 Lucia Adams",
-    "builtBy": "Diseñado y construido a mano"
+    "builtWith": "hecho a mano con"
   }
 }

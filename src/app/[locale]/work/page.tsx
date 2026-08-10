@@ -1,40 +1,46 @@
 import { useTranslations } from "next-intl";
-import TitleBlock from "@/components/TitleBlock";
-import DrawingSheet from "@/components/DrawingSheet";
+import TabbedProject from "@/components/TabbedProject";
 import { projects } from "@/data/projects";
+import type { Stage } from "@/components/SystemDiagram";
 
-type Callout = { label: string; body: string };
+type Point = { label: string; body: string };
 
 export default function WorkPage() {
   const t = useTranslations("work");
 
-  return (
-    <section className="pb-20 pt-10 sm:pb-28 sm:pt-14">
-      <TitleBlock sheet="A-2" title={t("sheetTitle")} spine />
-      <p className="max-w-[58ch] pt-6 text-base leading-relaxed text-dim sm:text-lg">
-        {t("intro")}
-      </p>
+  const labels = {
+    surfaceTab: t("surfaceTab"),
+    systemsTab: t("systemsTab"),
+    visit: t("visit"),
+    diagramNote: t("diagramNote"),
+  };
 
-      <div className="flex flex-col gap-20 pt-14 sm:gap-28">
-        {projects.map((project, i) => (
-          <DrawingSheet
-            key={project.slug}
-            project={project}
-            index={`0${i + 1}`}
-            name={t(`projects.${project.slug}.name`)}
-            type={t(`projects.${project.slug}.type`)}
-            alt={t(`projects.${project.slug}.alt`)}
-            sheetLabel={t("sheetLabel")}
-            surfaceLabel={t("surface")}
-            systemsLabel={t("systems")}
-            visitLabel={t("visit")}
-            callouts={{
-              surface: t.raw(`projects.${project.slug}.surface`) as Callout[],
-              systems: t.raw(`projects.${project.slug}.systems`) as Callout[],
-            }}
-          />
-        ))}
-      </div>
-    </section>
+  return (
+    <div className="flex flex-col gap-10 sm:gap-14">
+      <header>
+        <h1 className="font-display text-3xl leading-tight font-extrabold sm:text-4xl">
+          {t("heading")}
+        </h1>
+        <p className="mt-2 max-w-[52ch] text-base text-ink/75">{t("intro")}</p>
+      </header>
+
+      {projects.map((project) => (
+        <TabbedProject
+          key={project.slug}
+          fileName={t(`projects.${project.slug}.name`)}
+          label={t(`projects.${project.slug}.label`)}
+          type={t(`projects.${project.slug}.type`)}
+          alt={t(`projects.${project.slug}.alt`)}
+          accent={project.accent}
+          image={project.image}
+          url={project.url}
+          stages={t.raw(`projects.${project.slug}.diagram`) as Stage[]}
+          surface={t.raw(`projects.${project.slug}.surface`) as Point[]}
+          systems={t.raw(`projects.${project.slug}.systems`) as Point[]}
+          labels={labels}
+          className={project.offset}
+        />
+      ))}
+    </div>
   );
 }

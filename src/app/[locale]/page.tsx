@@ -1,123 +1,114 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import TitleBlock from "@/components/TitleBlock";
-import Legend from "@/components/Legend";
+import Window from "@/components/Window";
 
+type Segment = { t: string; mark?: "lime" | "butter" };
 type Note = { label: string; body: string };
-type LegendItem = { term: string; detail: string };
+type Skill = { term: string; detail: string };
+
+/** Sticker pills get varied tilts and fills so the group reads as scattered. */
+const pillStyle = [
+  { bg: "bg-pink", tilt: "-rotate-2" },
+  { bg: "bg-butter", tilt: "rotate-1" },
+  { bg: "bg-blue", tilt: "rotate-2" },
+  { bg: "bg-lime", tilt: "-rotate-1" },
+  { bg: "bg-tangerine", tilt: "rotate-1" },
+  { bg: "bg-butter", tilt: "-rotate-2" },
+];
 
 export default function HomePage() {
   const t = useTranslations("home");
-  const tb = useTranslations("titleblock");
-  const notes = t.raw("positioning.notes") as Note[];
-  const legendItems = t.raw("legend.items") as LegendItem[];
+  const nav = useTranslations("nav");
+  const statement = t.raw("about.statement") as Segment[];
+  const notes = t.raw("about.notes") as Note[];
+  const skills = t.raw("skills.items") as Skill[];
 
   return (
-    <>
-      {/* Hero: the set's title sheet */}
-      <section className="pt-10 sm:pt-14">
-        <TitleBlock
-          sheet="A-1"
-          title={t("sheetTitle")}
-          meta={[
-            { k: tb("drawnBy"), v: "LUCIA ADAMS" },
-            { k: tb("date"), v: "2026" },
-            { k: tb("scale"), v: "1:1" },
-          ]}
-          spine
-        />
-
-        <div className="grid grid-cols-1 gap-10 py-14 sm:py-20 lg:grid-cols-12">
-          <div className="lg:col-span-8">
-            <h1 className="max-w-[24ch] text-4xl leading-[1.05] tracking-tight text-ink sm:text-5xl lg:text-[3.4rem] xl:text-6xl">
-              {t("headline1")}
-              <br />
-              <span className="text-cyan">{t("headline2")}</span>
-            </h1>
-            <p className="mt-6 max-w-[52ch] text-base leading-relaxed text-dim sm:text-lg">
-              {t("sub")}
-            </p>
-            <Link
-              href="/contact"
-              className="mt-8 inline-block border border-amber bg-amber px-6 py-3 font-mono text-sm tracking-[0.1em] text-deep transition-transform hover:bg-transparent hover:text-amber active:translate-y-px"
-            >
-              {t("cta")}
-            </Link>
-          </div>
-
-          {/* Sheet index: functional navigation, drawn like a drawing-set index */}
-          <div className="lg:col-span-4 lg:col-start-9">
-            <div className="border border-line font-mono">
-              <div className="border-b border-line px-4 py-2.5 text-[10px] tracking-[0.2em] text-dim">
-                {t("index.title")}
-              </div>
-              {(
-                [
-                  ["A-1", t("index.a1"), "/", true],
-                  ["A-2", t("index.a2"), "/work", false],
-                  ["A-3", t("index.a3"), "/contact", false],
-                ] as const
-              ).map(([code, label, href, current]) => (
-                <Link
-                  key={code}
-                  href={href}
-                  aria-current={current ? "page" : undefined}
-                  className="group flex items-center gap-4 border-b border-line px-4 py-3.5 last:border-b-0"
-                >
-                  <span className="text-cyan">{code}</span>
-                  <span className="flex-1 text-sm text-ink group-hover:text-cyan">
-                    {label}
-                  </span>
-                  {current && (
-                    <span className="text-[10px] tracking-[0.14em] text-amber">
-                      {t("index.current")}
-                    </span>
-                  )}
-                </Link>
-              ))}
-            </div>
-          </div>
+    <div className="flex flex-col gap-8 sm:gap-10">
+      <Window
+        title={t("windowTitle")}
+        accent="butter"
+        status={t("status")}
+        className="lg:mr-4"
+      >
+        <div className="p-6 sm:p-9">
+          <h1 className="font-display text-4xl leading-[1.05] font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+            {t("headline1")}
+            <br />
+            {t("headline2")}
+          </h1>
+          <p className="mt-5 max-w-[46ch] text-base leading-relaxed text-ink/75 sm:text-lg">
+            {t("sub")}
+          </p>
+          <Link
+            href="/contact"
+            className="press mt-7 inline-block rounded-full border-[3px] border-ink bg-tangerine px-7 py-3 text-base font-bold"
+          >
+            {nav("cta")}
+          </Link>
         </div>
-      </section>
+      </Window>
 
-      {/* General notes: the positioning pitch as drawing annotations */}
-      <section className="py-14 sm:py-20">
-        <TitleBlock sheet="A-1.1" title={t("positioning.sheetTitle")} spine />
-        <div className="grid grid-cols-1 gap-10 pt-12 md:grid-cols-12">
-          {notes.map((note, i) => (
-            <div
-              key={note.label}
-              className={
-                [
-                  "md:col-span-5",
-                  "md:col-span-4 md:mt-10",
-                  "md:col-span-3 md:mt-20",
-                ][i]
-              }
-            >
-              <div className="border-l-2 border-cyan pl-5">
-                <span className="font-mono text-[11px] tracking-[0.16em] text-dim">
-                  N-{i + 1}
+      <Window
+        title={t("about.windowTitle")}
+        accent="lime"
+        className="lg:ml-8"
+      >
+        <div className="p-6 sm:p-9">
+          <p className="font-display text-2xl leading-[1.35] font-bold sm:text-3xl sm:leading-[1.35]">
+            {statement.map((seg, i) =>
+              seg.mark ? (
+                <span
+                  key={i}
+                  className="mark"
+                  style={{ ["--mark" as string]: `var(--color-${seg.mark})` }}
+                >
+                  {seg.t}
                 </span>
-                <h2 className="mt-2 text-lg font-medium text-ink">
-                  {note.label}
-                </h2>
-                <p className="mt-2 text-sm leading-relaxed text-dim">
+              ) : (
+                <span key={i}>{seg.t}</span>
+              ),
+            )}
+          </p>
+
+          <div className="rule my-7" />
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-12">
+            {notes.map((note, i) => (
+              <div
+                key={note.label}
+                className={
+                  ["md:col-span-5", "md:col-span-4 md:mt-8", "md:col-span-3"][i]
+                }
+              >
+                <h2 className="font-display text-lg font-bold">{note.label}</h2>
+                <p className="mt-1.5 text-sm leading-relaxed text-ink/75">
                   {note.body}
                 </p>
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
+      </Window>
+
+      <Window
+        title={t("skills.windowTitle")}
+        accent="blue"
+        status={t("skills.status")}
+        className="lg:mr-10"
+      >
+        <div className="flex flex-wrap items-start gap-3 p-6 sm:p-8">
+          {skills.map((skill, i) => (
+            <span
+              key={skill.term}
+              className={`shell !shadow-[4px_4px_0_var(--color-ink)] px-4 py-2.5 ${pillStyle[i].bg} ${pillStyle[i].tilt}`}
+            >
+              <span className="block text-sm font-bold">{skill.term}</span>
+              <span className="block text-xs text-ink/70">{skill.detail}</span>
+            </span>
           ))}
         </div>
-      </section>
-
-      {/* Capabilities legend */}
-      <section className="pb-20 pt-6 sm:pb-28">
-        <TitleBlock sheet="A-1.2" title={t("legend.sheetTitle")} spine />
-        <div className="pt-10">
-          <Legend items={legendItems} />
-        </div>
-      </section>
-    </>
+      </Window>
+    </div>
   );
 }
