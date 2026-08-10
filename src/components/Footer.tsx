@@ -1,58 +1,35 @@
 import { useTranslations } from "next-intl";
 
-/** Text-only 88x31 buttons, the way the format actually started. */
-const badges = [
-  { top: "BUILT WITH", bottom: "NEXT.JS" },
-  { top: "TYPED IN", bottom: "TYPESCRIPT" },
-  { top: "SHIPPED ON", bottom: "VERCEL" },
+export const links = [
+  { label: "Email", href: "mailto:maledadams@gmail.com", text: "maledadams@gmail.com" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/lucia-m-adams/",
+    text: "lucia-m-adams",
+  },
+  { label: "GitHub", href: "https://github.com/maledadams", text: "maledadams" },
 ];
 
 export default function Footer() {
   const t = useTranslations("footer");
 
   return (
-    <footer className="mt-10">
-      <div className="rule mb-6" />
-
-      <div className="flex flex-col items-start gap-5 pb-10 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="mr-1 font-chrome text-[10px] text-paper/70">
-            {t("builtWith")}
-          </span>
-          {badges.map((badge) => (
-            <span
-              key={badge.bottom}
-              className="bevel-btn flex h-[31px] w-[88px] flex-col items-center justify-center border-2 border-ink bg-shade leading-none"
+    <footer className="mt-6 border-t border-line py-10">
+      <div className="center flex flex-wrap items-center justify-between gap-x-8 gap-y-3 font-mono text-[0.8em] text-muted">
+        <div className="flex flex-wrap gap-x-6 gap-y-2">
+          {links.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              target={link.href.startsWith("http") ? "_blank" : undefined}
+              rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              className="underline decoration-1 underline-offset-4 transition-colors hover:text-fg"
             >
-              <span className="font-chrome text-[7px] text-ink/60">
-                {badge.top}
-              </span>
-              <span className="mt-0.5 font-chrome text-[8px]">
-                {badge.bottom}
-              </span>
-            </span>
+              {link.label}
+            </a>
           ))}
         </div>
-
-        <div className="flex items-center gap-4 font-chrome text-[10px] text-paper">
-          <a
-            href="https://www.linkedin.com/in/lucia-m-adams/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline decoration-2 underline-offset-4 hover:bg-butter hover:text-ink"
-          >
-            LINKEDIN
-          </a>
-          <a
-            href="https://github.com/maledadams"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline decoration-2 underline-offset-4 hover:bg-butter hover:text-ink"
-          >
-            GITHUB
-          </a>
-          <span className="text-paper/60">{t("rights")}</span>
-        </div>
+        <p>{t("note")}</p>
       </div>
     </footer>
   );

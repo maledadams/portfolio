@@ -1,216 +1,141 @@
 {
   "meta": {
-    "title": "Lucia Adams · Custom webs and systems",
-    "description": "Custom web development for businesses: catalogs, automation and internal systems that make your website run itself."
+    "title": "Lucia Adams",
+    "description": "I design websites and build the systems that make them work. Santo Domingo, DR."
   },
   "nav": {
-    "name": "LUCIA ADAMS",
-    "role": "web + systems",
-    "home": "HOME",
-    "work": "WORK",
-    "contact": "CONTACT",
-    "cta": "Say hi"
+    "name": "lucia adams",
+    "home": "home",
+    "work": "work",
+    "contact": "contact",
+    "theme": "Switch theme",
+    "lang": "Switch language"
   },
   "home": {
-    "windowTitle": "index.html",
-    "headline1": "I design the site.",
-    "headline2": "I build the system.",
-    "sub": "Custom builds for businesses that need more than a good-looking page: catalogs, sales flows, automation.",
-    "status": "lucia-adams.com",
-    "about": {
-      "windowTitle": "about.txt",
-      "statement": [
-        { "t": "I don't just make pretty websites. " },
-        { "t": "I study your business", "mark": "lime" },
-        { "t": ", find where you lose time, and " },
-        { "t": "build the system", "mark": "butter" },
-        { "t": " that fixes it." }
-      ],
-      "notes": [
-        {
-          "label": "No templates",
-          "body": "Every project is drawn from scratch around how your business works, not the other way around."
-        },
-        {
-          "label": "Systems first",
-          "body": "Before designing screens, I map processes: what you sell, how you manage it, what can be automated."
-        },
-        {
-          "label": "Marketing built in",
-          "body": "I come from digital marketing. I know how people behave and design for that, not just for looks."
-        }
-      ]
-    },
-    "skills": {
-      "windowTitle": "skills.cfg",
-      "status": "6 areas",
-      "items": [
-        { "term": "Web development", "detail": "Next.js · React · TypeScript" },
-        { "term": "E-commerce and catalogs", "detail": "Stores · inventory · orders" },
-        { "term": "Automation and data", "detail": "Python · pandas · APIs" },
-        { "term": "UI design and branding", "detail": "Design systems · identity" },
-        { "term": "SEO and analytics", "detail": "Search Console · Analytics" },
-        { "term": "Infrastructure", "detail": "Vercel · Cloudflare · Supabase" }
-      ]
-    }
+    "hero": [
+      { "t": "Lucia Adams", "strong": true, "href": "/contact" },
+      { "t": " designs websites and builds the " },
+      { "t": "systems", "squiggle": true },
+      { "t": " that make them work, from " },
+      { "t": "Santo Domingo", "squiggle": true }
+    ],
+    "projectsTitle": "Projects",
+    "servicesTitle": "What I do",
+    "services": [
+      {
+        "label": "Sites",
+        "title": "Custom sites and stores",
+        "body": "Built from scratch in code, no templates and no page builders. You decide how it looks and how it works."
+      },
+      {
+        "label": "Systems",
+        "title": "Catalogs, orders, automation",
+        "body": "I map how your business runs, then build what it takes for the site to run itself."
+      },
+      {
+        "label": "Brand",
+        "title": "Identity and interface",
+        "body": "Type, color and components shaped around your business rather than around a template."
+      },
+      {
+        "label": "Data",
+        "title": "Reporting and analytics",
+        "body": "Python and pandas to pull data from several platforms into one place, plus Search Console and Analytics."
+      }
+    ],
+    "moreWork": "See all three projects in detail"
   },
   "work": {
-    "windowTitle": "work.html",
-    "heading": "Three projects in production",
-    "intro": "Every window has two tabs: what you see, and the machine driving it.",
-    "surfaceTab": "surface.html",
-    "systemsTab": "systems.html",
-    "visit": "View live site",
-    "diagramNote": "How it works underneath",
+    "title": "Work",
+    "intro": "Three projects in production. For each one: what you see, and the machine driving it.",
+    "visit": "Visit site",
+    "surfaceLabel": "Design",
+    "systemsLabel": "Systems",
     "projects": {
       "pulpina": {
-        "name": "pulpina.exe",
-        "label": "Pulpiña RD",
-        "type": "E-commerce · alternative fashion",
+        "name": "Pulpiña RD",
+        "category": "e-commerce",
+        "year": "2026",
         "alt": "Pulpiña RD home page with its three stores: Moon, Sunshine and Men",
-        "diagram": ["One inventory", ["Moon", "Sunshine", "Men"], "Cart", "WhatsApp"],
+        "summary": "An alternative fashion store in the Dominican Republic, with three sub-brands sharing one catalog.",
         "surface": [
-          {
-            "label": "Three universes, one brand",
-            "body": "Moon, Sunshine and Men: each line with its own palette, mascot and storefront."
-          },
-          {
-            "label": "Custom illustration and branding",
-            "body": "A full identity drawn for the store, from the logo to each universe's badges."
-          },
-          {
-            "label": "Own UI, zero template",
-            "body": "Typography, color and components built around the brand's personality."
-          }
+          "Moon, Sunshine and Men: each line with its own palette, mascot and storefront.",
+          "A full identity drawn for the store, from the logo to each universe's badges.",
+          "Type, color and components built around the brand's personality."
         ],
         "systems": [
-          {
-            "label": "Catalog by universe",
-            "body": "One inventory, three storefronts: each product is tagged once and shows up where it belongs."
-          },
-          {
-            "label": "WhatsApp ordering",
-            "body": "The cart builds the order and hands it off where people already buy: WhatsApp, with an order number."
-          },
-          {
-            "label": "Automated offers",
-            "body": "New and Sale badges plus birthday discounts driven by rules, not by hand."
-          }
+          "One inventory and three storefronts: each product is tagged once and shows up where it belongs.",
+          "The cart builds the order and hands it off over WhatsApp with an order number, where people already buy.",
+          "New and Sale badges plus birthday discounts driven by rules, not by hand."
         ]
       },
       "stemise": {
-        "name": "stemise.exe",
-        "label": "STEMise",
-        "type": "Nonprofit · STEM education",
+        "name": "STEMise",
+        "category": "nonprofit",
+        "year": "2026",
         "alt": "STEMise home page with its headline, navigation and calls to action",
-        "diagram": [
-          "Donation (Hack Club)",
-          ["STEM kits", "Open curriculum", "Workshops"],
-          "30+ countries"
-        ],
+        "summary": "The platform for a youth-led STEM education nonprofit active in more than 30 countries.",
         "surface": [
-          {
-            "label": "Clear, friendly brand",
-            "body": "A simple visual system that works the same for students across 30+ countries."
-          },
-          {
-            "label": "Goal-based navigation",
-            "body": "Kits, curriculum, volunteering and donations: every visitor finds their path in one click."
-          },
-          {
-            "label": "Actions with hierarchy",
-            "body": "Two clear calls on the home page: get kits or see the curriculum. Nothing competes with that."
-          }
+          "A simple visual system that works the same for students across 30+ countries.",
+          "Kits, curriculum, volunteering and donations: every visitor finds their path in one click.",
+          "Two clear calls on the home page: get kits or see the curriculum. Nothing competes with that."
         ],
         "systems": [
-          {
-            "label": "501(c)(3) donations",
-            "body": "A donation channel fiscally sponsored by Hack Club, ready to receive funds from day one."
-          },
-          {
-            "label": "Kit distribution",
-            "body": "The request and delivery flow behind 150+ STEM kits donated to students."
-          },
-          {
-            "label": "Open curriculum by age",
-            "body": "Content organized by primary, middle and high school, maintained as an open resource."
-          }
+          "A donation channel fiscally sponsored by Hack Club, ready to receive funds from day one.",
+          "The request and delivery flow behind 150+ STEM kits donated to students.",
+          "An open curriculum organized by primary, middle and high school."
         ]
       },
       "togethersport": {
-        "name": "togethersports.exe",
-        "label": "Together Sports",
-        "type": "Sports nonprofit · multi-program",
+        "name": "Together Sports",
+        "category": "nonprofit",
+        "year": "2026",
         "alt": "Together Sports home page with its motto Play Loud. Build Strong. and program photos",
-        "diagram": ["Visitor", ["Donate", "Volunteer", "Play"], "4 programs", "Second Serve"],
+        "summary": "A youth sports nonprofit running four programs under a single brand.",
         "surface": [
-          {
-            "label": "An identity that shouts the motto",
-            "body": "Play Loud. Build Strong. carried into giant type, color and rhythm."
-          },
-          {
-            "label": "Real photography",
-            "body": "Photos from the programs, not stock: the site feels like the practices do."
-          },
-          {
-            "label": "Color per sport",
-            "body": "Each program with its own color and graphics, held together under one brand."
-          }
+          "Play Loud. Build Strong. carried into giant type, color and rhythm.",
+          "Real photos from the programs, not stock: the site feels like the practices do.",
+          "Each sport with its own color and graphics, held together under one brand."
         ],
         "systems": [
-          {
-            "label": "Multi-program architecture",
-            "body": "Tennis, basketball, football and golf: each sport gets its own section without duplicating the site."
-          },
-          {
-            "label": "Participation paths",
-            "body": "Donate, volunteer or sign up: every visitor leaves the home page with a next step."
-          },
-          {
-            "label": "Second Serve",
-            "body": "A used-equipment donation flow with partner Rally Forward NYC, back into the community."
-          }
+          "Tennis, basketball, football and golf: each sport gets its own section without duplicating the site.",
+          "Donate, volunteer or sign up: every visitor leaves the home page with a next step.",
+          "Second Serve: a used-equipment donation flow with partner Rally Forward NYC."
         ]
       }
     }
   },
   "contact": {
-    "windowTitle": "contact.html",
-    "process": {
-      "windowTitle": "process.txt",
-      "heading": "How I work",
-      "steps": [
-        {
-          "verb": "Understand",
-          "body": "The business first: what you sell, how you work and what eats your time."
-        },
-        {
-          "verb": "Design",
-          "body": "An interface that feels like yours, not pulled from a template catalog."
-        },
-        {
-          "verb": "Build",
-          "body": "Custom code, made to grow without breaking."
-        },
-        {
-          "verb": "Refine",
-          "body": "We iterate until what you see convinces you and what you don't see runs on its own."
-        }
-      ]
-    },
-    "panel": {
-      "windowTitle": "contact.exe",
-      "title": "Start a project",
-      "body": "Tell me what your business does and what it needs. You get a proposal back, not a template.",
-      "email": "EMAIL",
-      "linkedin": "LINKEDIN",
-      "github": "GITHUB",
-      "location": "BASE",
-      "locationValue": "Santo Domingo, DR · remote"
-    }
+    "title": "Contact",
+    "intro": "Tell me what your business does and what it needs. You get a proposal back, not a template.",
+    "processTitle": "How I work",
+    "steps": [
+      {
+        "label": "01",
+        "title": "Understand",
+        "body": "The business first: what you sell, how you work and what eats your time."
+      },
+      {
+        "label": "02",
+        "title": "Design",
+        "body": "An interface that feels like yours, not pulled from a template catalog."
+      },
+      {
+        "label": "03",
+        "title": "Build",
+        "body": "Custom code, made to grow without breaking."
+      },
+      {
+        "label": "04",
+        "title": "Refine",
+        "body": "We iterate until what you see convinces you and what you don't see runs on its own."
+      }
+    ],
+    "elsewhereTitle": "Elsewhere",
+    "baseLabel": "Base",
+    "baseValue": "Santo Domingo, DR · remote"
   },
   "footer": {
-    "rights": "© 2026 Lucia Adams",
-    "builtWith": "hand-built with"
+    "note": "Designed and built by hand."
   }
 }

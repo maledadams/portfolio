@@ -1,104 +1,94 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import Window from "@/components/Window";
+import ProjectCard from "@/components/ProjectCard";
+import { projects } from "@/data/projects";
 
-type Segment = { t: string; mark?: "lime" | "butter" };
-type Note = { label: string; body: string };
-type Skill = { term: string; detail: string };
-
-/** Fills rotate so the grid has colour rhythm while staying aligned. */
-const pillBg = [
-  "bg-pink",
-  "bg-butter",
-  "bg-blue",
-  "bg-lime",
-  "bg-tangerine",
-  "bg-butter",
-];
+type Segment = { t: string; strong?: boolean; squiggle?: boolean; href?: string };
+type Service = { label: string; title: string; body: string };
 
 export default function HomePage() {
   const t = useTranslations("home");
-  const nav = useTranslations("nav");
-  const statement = t.raw("about.statement") as Segment[];
-  const notes = t.raw("about.notes") as Note[];
-  const skills = t.raw("skills.items") as Skill[];
+  const w = useTranslations("work");
+  const hero = t.raw("hero") as Segment[];
+  const services = t.raw("services") as Service[];
 
   return (
-    <div className="flex flex-col gap-7 sm:gap-9">
-      <Window title={t("windowTitle")} accent="butter" status={t("status")}>
-        <div className="p-6 sm:p-10">
-          <h1 className="font-display text-4xl leading-[1.02] font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
-            {t("headline1")}
-            <br />
-            {t("headline2")}
-          </h1>
-
-          <div className="mt-8 flex flex-col gap-5 border-t-[3px] border-ink pt-6 md:flex-row md:items-center md:justify-between md:gap-10">
-            <p className="max-w-[70ch] text-base leading-relaxed text-ink/75 sm:text-lg">
-              {t("sub")}
-            </p>
-            <Link
-              href="/contact"
-              className="press shrink-0 self-start border-[3px] border-ink bg-tangerine px-8 py-3.5 text-base font-bold md:self-auto"
-            >
-              {nav("cta")}
-            </Link>
-          </div>
-        </div>
-      </Window>
-
-      <Window title={t("about.windowTitle")} accent="lime">
-        <div className="p-6 sm:p-10">
-          <p className="font-display text-2xl leading-[1.35] font-bold sm:text-3xl sm:leading-[1.35] lg:text-4xl lg:leading-[1.3]">
-            {statement.map((seg, i) =>
-              seg.mark ? (
-                <span
+    <>
+      <section className="center pb-18">
+        <h1 className="text-[2.1rem] leading-[1.2] font-normal tracking-[-0.02em] text-balance sm:text-[2.9rem] lg:text-[3.35rem]">
+          {hero.map((seg, i) => {
+            if (seg.href) {
+              return (
+                <Link
                   key={i}
-                  className="mark"
-                  style={{ ["--mark" as string]: `var(--color-${seg.mark})` }}
+                  href={seg.href as "/contact"}
+                  className="font-semibold underline decoration-2 underline-offset-[7px] transition-colors hover:text-muted"
                 >
                   {seg.t}
+                </Link>
+              );
+            }
+            if (seg.squiggle) {
+              return (
+                <span key={i} className="squiggle">
+                  {seg.t}
                 </span>
-              ) : (
-                <span key={i}>{seg.t}</span>
-              ),
-            )}
-          </p>
+              );
+            }
+            return <span key={i}>{seg.t}</span>;
+          })}
+        </h1>
+      </section>
 
-          <div className="rule my-8" />
+      <section className="center pb-18">
+        <h2 className="mb-6 text-[1.25em] font-semibold">
+          {t("projectsTitle")}
+        </h2>
 
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-10">
-            {notes.map((note) => (
-              <div key={note.label}>
-                <h2 className="font-display text-xl font-bold">{note.label}</h2>
-                <p className="mt-2 text-sm leading-relaxed text-ink/75">
-                  {note.body}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </Window>
-
-      <Window
-        title={t("skills.windowTitle")}
-        accent="blue"
-        status={t("skills.status")}
-      >
-        <div className="grid grid-cols-1 gap-4 p-6 sm:grid-cols-2 sm:p-8 lg:grid-cols-3">
-          {skills.map((skill, i) => (
-            <div
-              key={skill.term}
-              className={`border-[3px] border-ink px-5 py-4 ${pillBg[i]}`}
-            >
-              <span className="block text-base font-bold">{skill.term}</span>
-              <span className="mt-0.5 block text-sm text-ink/70">
-                {skill.detail}
-              </span>
-            </div>
+        <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+          {projects.map((project, i) => (
+            <ProjectCard
+              key={project.slug}
+              image={project.image}
+              featured={i === 0}
+              name={w(`projects.${project.slug}.name`)}
+              category={w(`projects.${project.slug}.category`)}
+              year={w(`projects.${project.slug}.year`)}
+              alt={w(`projects.${project.slug}.alt`)}
+            />
           ))}
-        </div>
-      </Window>
-    </div>
+        </ul>
+
+        <Link
+          href="/work"
+          className="mt-6 inline-block font-mono text-[0.8em] text-muted underline decoration-1 underline-offset-4 transition-colors hover:text-fg"
+        >
+          {t("moreWork")}
+        </Link>
+      </section>
+
+      <section className="center pb-20">
+        <h2 className="mb-6 text-[1.25em] font-semibold">
+          {t("servicesTitle")}
+        </h2>
+
+        <ul className="flex flex-col gap-5">
+          {services.map((service) => (
+            <li
+              key={service.label}
+              className="grid grid-cols-1 gap-x-5 gap-y-1 sm:grid-cols-[98px_1fr]"
+            >
+              <p className="font-mono text-[0.7em] text-muted sm:pt-[0.55em]">
+                {service.label}
+              </p>
+              <div>
+                <h3>{service.title}</h3>
+                <p className="text-[0.8em] text-muted">{service.body}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </>
   );
 }

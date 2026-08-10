@@ -1,125 +1,121 @@
 @import "tailwindcss";
 
-@theme {
-  /* Ground and ink */
-  --color-desk: #3a5a78;
-  --color-paper: #fff6e9;
-  --color-shade: #f3e6d2;
-  --color-ink: #141210;
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-surface: var(--surface);
 
-  /* Candy set. Each project owns one permanently. */
-  --color-pink: #ff5fa2;
-  --color-blue: #7f9bff;
-  --color-tangerine: #ff8a3d;
-  --color-lime: #9be564;
-  --color-butter: #ffd84d;
+  --font-sans: var(--font-franklin), system-ui, sans-serif;
+  --font-mono: var(--font-space-mono), ui-monospace, monospace;
+}
 
-  --font-chrome: var(--font-silkscreen), ui-monospace, monospace;
-  --font-display: var(--font-bricolage), system-ui, sans-serif;
-  --font-body: var(--font-outfit), system-ui, sans-serif;
+:root {
+  --bg: #f9f9f9;
+  --fg: #202020;
+  --muted: #646464;
+  --line: #e2e2e2;
+  --surface: #efefef;
+}
+
+/* System preference, unless an explicit light choice overrides it. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #191919;
+    --fg: #eeeeee;
+    --muted: #b4b4b4;
+    --line: #303030;
+    --surface: #232323;
+  }
+}
+
+/* Explicit choice wins in both directions. */
+:root[data-theme="dark"] {
+  --bg: #191919;
+  --fg: #eeeeee;
+  --muted: #b4b4b4;
+  --line: #303030;
+  --surface: #232323;
+}
+
+html {
+  color-scheme: light dark;
 }
 
 body {
-  color: var(--color-ink);
-  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  /* ky runs an unusually large base: 22px at a 1.48 leading. */
+  font-size: 1.375rem;
+  line-height: 1.48;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* The centred measure both reference sites land on. */
+.center {
+  width: 100%;
+  max-width: 860px;
+  margin-inline: auto;
+  padding-inline: 36px;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 /*
- * Tiled wallpaper. Two offset dot grids read as a repeating tile without
- * needing an image asset. Light dots on blueprint blue, the way a real
- * drawing reads, kept faint so the windows on top always win.
+ * Nav links read as paths. The arrow is collapsed to zero width and only
+ * takes up space on hover or focus, so nothing shifts around it.
  */
-.desk {
-  background-color: var(--color-desk);
-  background-image:
-    radial-gradient(circle, rgb(255 255 255 / 0.1) 1.2px, transparent 1.3px),
-    radial-gradient(circle, rgb(255 255 255 / 0.2) 1.2px, transparent 1.3px);
-  background-position:
-    0 0,
-    12px 12px;
-  background-size:
-    24px 24px,
-    24px 24px;
-}
-
-/*
- * The unifying primitive: reads as a Win98 window and as a sticker at once.
- * Hard offset shadow, zero blur.
- */
-.shell {
-  border: 3px solid var(--color-ink);
-  box-shadow: 6px 6px 0 var(--color-ink);
-}
-
-/* Period-correct raised and sunken edges, drawn with hard inset shadows. */
-.bevel-up {
-  box-shadow:
-    inset 2px 2px 0 rgb(255 255 255 / 0.9),
-    inset -2px -2px 0 rgb(20 18 16 / 0.22);
-}
-
-.bevel-down {
-  box-shadow:
-    inset -2px -2px 0 rgb(255 255 255 / 0.75),
-    inset 2px 2px 0 rgb(20 18 16 / 0.28);
-}
-
-/* Raised control that sinks while held, the way old chrome behaved. */
-.bevel-btn {
-  box-shadow:
-    inset 2px 2px 0 rgb(255 255 255 / 0.9),
-    inset -2px -2px 0 rgb(20 18 16 / 0.22);
-}
-
-.bevel-btn:active {
-  box-shadow:
-    inset -2px -2px 0 rgb(255 255 255 / 0.75),
-    inset 2px 2px 0 rgb(20 18 16 / 0.28);
-}
-
-/* Chunky controls that physically press into their own shadow. */
-.press {
-  box-shadow: 3px 3px 0 var(--color-ink);
+.navlink .arrow {
+  display: inline-block;
+  width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
   transition:
-    transform 80ms steps(2),
-    box-shadow 80ms steps(2);
+    width 160ms ease,
+    opacity 160ms ease;
 }
 
-.press:active {
-  transform: translate(3px, 3px);
-  box-shadow: 0 0 0 var(--color-ink);
+.navlink:hover .arrow,
+.navlink:focus-visible .arrow {
+  width: 2.2ch;
+  opacity: 1;
+}
+
+.navlink .slash {
+  color: var(--muted);
+  transition: color 160ms ease;
+}
+
+.navlink:hover .slash,
+.navlink[aria-current="page"] .slash {
+  color: var(--fg);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .press {
+  .navlink .arrow {
     transition: none;
   }
 }
 
-/*
- * Highlighter swipe behind a phrase. `clone` re-draws the fill on every line
- * the phrase wraps onto, which inline-block would break.
- */
-.mark {
-  background-color: var(--mark, var(--color-butter));
-  padding: 0 0.15em;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-}
-
-/* Beveled horizontal rule, the old <hr> look. */
-.rule {
-  height: 6px;
-  border-top: 3px solid rgb(20 18 16 / 0.28);
-  border-bottom: 3px solid rgb(255 255 255 / 0.9);
-}
-
-:focus-visible {
-  outline: 3px solid var(--color-ink);
-  outline-offset: 2px;
-}
-
-::selection {
-  background: var(--color-butter);
-  color: var(--color-ink);
+/* Hand-drawn emphasis under a phrase, the way ky marks key words. */
+.squiggle {
+  text-decoration: underline wavy currentColor;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 6px;
 }

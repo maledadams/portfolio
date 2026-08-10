@@ -1,216 +1,141 @@
 {
   "meta": {
-    "title": "Lucia Adams · Webs y sistemas a medida",
-    "description": "Desarrollo web a medida para negocios: catálogos, automatización y sistemas internos que hacen que tu web trabaje sola."
+    "title": "Lucia Adams",
+    "description": "Diseño webs y construyo los sistemas que las hacen funcionar. Santo Domingo, RD."
   },
   "nav": {
-    "name": "LUCIA ADAMS",
-    "role": "web + sistemas",
-    "home": "INICIO",
-    "work": "TRABAJO",
-    "contact": "CONTACTO",
-    "cta": "Escríbeme"
+    "name": "lucia adams",
+    "home": "inicio",
+    "work": "trabajo",
+    "contact": "contacto",
+    "theme": "Cambiar tema",
+    "lang": "Cambiar idioma"
   },
   "home": {
-    "windowTitle": "index.html",
-    "headline1": "Diseño la web.",
-    "headline2": "Construyo el sistema.",
-    "sub": "Desarrollo a medida para negocios que necesitan más que una página bonita: catálogos, flujos de venta, automatización.",
-    "status": "lucia-adams.com",
-    "about": {
-      "windowTitle": "sobre-mi.txt",
-      "statement": [
-        { "t": "No hago webs bonitas y ya. " },
-        { "t": "Estudio tu negocio", "mark": "lime" },
-        { "t": ", encuentro dónde pierdes tiempo y " },
-        { "t": "construyo el sistema", "mark": "butter" },
-        { "t": " que lo arregla." }
-      ],
-      "notes": [
-        {
-          "label": "Sin plantillas",
-          "body": "Cada proyecto se dibuja desde cero alrededor de cómo trabaja tu negocio, no al revés."
-        },
-        {
-          "label": "Sistemas primero",
-          "body": "Antes de diseñar pantallas, mapeo procesos: qué vendes, cómo lo gestionas, qué se puede automatizar."
-        },
-        {
-          "label": "Marketing de serie",
-          "body": "Vengo del marketing digital. Sé cómo se comporta la gente y diseño para eso, no solo para que se vea bien."
-        }
-      ]
-    },
-    "skills": {
-      "windowTitle": "skills.cfg",
-      "status": "6 areas",
-      "items": [
-        { "term": "Desarrollo web", "detail": "Next.js · React · TypeScript" },
-        { "term": "E-commerce y catálogos", "detail": "Tiendas · inventario · pedidos" },
-        { "term": "Automatización y datos", "detail": "Python · pandas · APIs" },
-        { "term": "Diseño UI y branding", "detail": "Sistemas de diseño · identidad" },
-        { "term": "SEO y analítica", "detail": "Search Console · Analytics" },
-        { "term": "Infraestructura", "detail": "Vercel · Cloudflare · Supabase" }
-      ]
-    }
+    "hero": [
+      { "t": "Lucia Adams", "strong": true, "href": "/contact" },
+      { "t": " diseña webs y construye los " },
+      { "t": "sistemas", "squiggle": true },
+      { "t": " que las hacen funcionar, desde " },
+      { "t": "Santo Domingo", "squiggle": true }
+    ],
+    "projectsTitle": "Proyectos",
+    "servicesTitle": "Lo que hago",
+    "services": [
+      {
+        "label": "Webs",
+        "title": "Sitios y tiendas a medida",
+        "body": "Desarrollo desde cero en código, sin plantillas ni constructores. Tú decides cómo se ve y cómo funciona."
+      },
+      {
+        "label": "Sistemas",
+        "title": "Catálogos, pedidos, automatización",
+        "body": "Mapeo cómo trabaja tu negocio y construyo lo que hace falta para que la web trabaje sola."
+      },
+      {
+        "label": "Marca",
+        "title": "Identidad e interfaz",
+        "body": "Tipografía, color y componentes pensados alrededor de tu negocio, no de una plantilla."
+      },
+      {
+        "label": "Datos",
+        "title": "Reportes y analítica",
+        "body": "Python y pandas para consolidar datos de varias plataformas, más Search Console y Analytics."
+      }
+    ],
+    "moreWork": "Ver los tres proyectos en detalle"
   },
   "work": {
-    "windowTitle": "trabajo.html",
-    "heading": "Tres proyectos en producción",
-    "intro": "Cada ventana tiene dos pestañas: lo que ves, y la máquina que lo mueve.",
-    "surfaceTab": "superficie.html",
-    "systemsTab": "sistemas.html",
-    "visit": "Ver sitio en vivo",
-    "diagramNote": "Cómo funciona por dentro",
+    "title": "Trabajo",
+    "intro": "Tres proyectos en producción. Para cada uno: lo que ves, y la máquina que lo mueve.",
+    "visit": "Ver sitio",
+    "surfaceLabel": "Diseño",
+    "systemsLabel": "Sistemas",
     "projects": {
       "pulpina": {
-        "name": "pulpina.exe",
-        "label": "Pulpiña RD",
-        "type": "E-commerce · moda alternativa",
+        "name": "Pulpiña RD",
+        "category": "e-commerce",
+        "year": "2026",
         "alt": "Portada de Pulpiña RD con sus tres tiendas: Moon, Sunshine y Men",
-        "diagram": ["Un inventario", ["Moon", "Sunshine", "Men"], "Carrito", "WhatsApp"],
+        "summary": "Tienda de moda alternativa en República Dominicana, con tres sub-marcas conviviendo en un solo catálogo.",
         "surface": [
-          {
-            "label": "Tres universos, una marca",
-            "body": "Moon, Sunshine y Men: cada línea con su paleta, su mascota y su propia vitrina."
-          },
-          {
-            "label": "Ilustración y marca a medida",
-            "body": "Identidad completa dibujada para la tienda, del logo a las insignias de cada universo."
-          },
-          {
-            "label": "UI propia, cero plantilla",
-            "body": "Tipografía, color y componentes construidos alrededor de la personalidad de la marca."
-          }
+          "Moon, Sunshine y Men: cada línea con su paleta, su mascota y su propia vitrina.",
+          "Identidad completa dibujada para la tienda, del logo a las insignias de cada universo.",
+          "Tipografía, color y componentes construidos alrededor de la personalidad de la marca."
         ],
         "systems": [
-          {
-            "label": "Catálogo por universos",
-            "body": "Un solo inventario, tres vitrinas: cada producto se etiqueta una vez y aparece donde le toca."
-          },
-          {
-            "label": "Pedidos por WhatsApp",
-            "body": "El carrito arma el pedido y lo entrega donde la gente ya compra: WhatsApp, con número de orden."
-          },
-          {
-            "label": "Ofertas automatizadas",
-            "body": "Insignias de Nuevo y Oferta y descuentos de cumpleaños definidos por reglas, no a mano."
-          }
+          "Un solo inventario y tres vitrinas: cada producto se etiqueta una vez y aparece donde le toca.",
+          "El carrito arma el pedido y lo entrega por WhatsApp con número de orden, donde la gente ya compra.",
+          "Insignias de Nuevo y Oferta y descuentos de cumpleaños definidos por reglas, no a mano."
         ]
       },
       "stemise": {
-        "name": "stemise.exe",
-        "label": "STEMise",
-        "type": "Nonprofit · educación STEM",
+        "name": "STEMise",
+        "category": "nonprofit",
+        "year": "2026",
         "alt": "Portada de STEMise con su titular, navegación y llamados a la acción",
-        "diagram": [
-          "Donación (Hack Club)",
-          ["Kits STEM", "Currículo abierto", "Talleres"],
-          "30+ países"
-        ],
+        "summary": "Plataforma de una organización juvenil de educación STEM presente en más de 30 países.",
         "surface": [
-          {
-            "label": "Marca clara y amable",
-            "body": "Un sistema visual simple que funciona igual para estudiantes de 30+ países."
-          },
-          {
-            "label": "Navegación por objetivos",
-            "body": "Kits, currículo, voluntariado y donación: cada visitante encuentra su ruta en un clic."
-          },
-          {
-            "label": "Acciones con jerarquía",
-            "body": "Dos llamados claros en portada: pedir kits o ver el currículo. Nada compite con eso."
-          }
+          "Un sistema visual simple que funciona igual para estudiantes de 30+ países.",
+          "Kits, currículo, voluntariado y donación: cada visitante encuentra su ruta en un clic.",
+          "Dos llamados claros en portada: pedir kits o ver el currículo. Nada compite con eso."
         ],
         "systems": [
-          {
-            "label": "Donaciones 501(c)(3)",
-            "body": "Canal de donación con patrocinio fiscal de Hack Club, listo para recibir fondos desde el día uno."
-          },
-          {
-            "label": "Distribución de kits",
-            "body": "Flujo de solicitud y entrega detrás de 150+ kits STEM donados a estudiantes."
-          },
-          {
-            "label": "Currículo abierto por edades",
-            "body": "Contenido organizado por primaria, media y secundaria, mantenido como recurso abierto."
-          }
+          "Canal de donación con patrocinio fiscal de Hack Club, listo para recibir fondos desde el día uno.",
+          "Flujo de solicitud y entrega detrás de 150+ kits STEM donados a estudiantes.",
+          "Currículo abierto organizado por primaria, media y secundaria."
         ]
       },
       "togethersport": {
-        "name": "togethersports.exe",
-        "label": "Together Sports",
-        "type": "Nonprofit deportivo · multi-programa",
+        "name": "Together Sports",
+        "category": "nonprofit",
+        "year": "2026",
         "alt": "Portada de Together Sports con su lema Play Loud. Build Strong. y fotos de los programas",
-        "diagram": ["Visitante", ["Donar", "Voluntario", "Jugar"], "4 programas", "Second Serve"],
+        "summary": "Organización deportiva juvenil con cuatro programas bajo una sola marca.",
         "surface": [
-          {
-            "label": "Identidad que grita el lema",
-            "body": "Play Loud. Build Strong. llevado a tipografía gigante, color y ritmo."
-          },
-          {
-            "label": "Fotografía real",
-            "body": "Fotos de los programas, no stock: el sitio se siente como los entrenamientos."
-          },
-          {
-            "label": "Color por deporte",
-            "body": "Cada programa con su color y su gráfica, unidos bajo una sola marca."
-          }
+          "Play Loud. Build Strong. llevado a tipografía gigante, color y ritmo.",
+          "Fotos reales de los programas, no stock: el sitio se siente como los entrenamientos.",
+          "Cada deporte con su color y su gráfica, unidos bajo una sola marca."
         ],
         "systems": [
-          {
-            "label": "Arquitectura multi-programa",
-            "body": "Tenis, básquet, fútbol y golf: cada deporte con su sección sin duplicar el sitio."
-          },
-          {
-            "label": "Rutas de participación",
-            "body": "Donar, ser voluntario o inscribirse: cada visitante sale de la portada con un siguiente paso."
-          },
-          {
-            "label": "Second Serve",
-            "body": "Flujo de donación de equipo usado junto al partner Rally Forward NYC, de vuelta a la comunidad."
-          }
+          "Tenis, básquet, fútbol y golf: cada deporte con su sección sin duplicar el sitio.",
+          "Donar, ser voluntario o inscribirse: cada visitante sale de la portada con un siguiente paso.",
+          "Second Serve: flujo de donación de equipo usado junto al partner Rally Forward NYC."
         ]
       }
     }
   },
   "contact": {
-    "windowTitle": "contacto.html",
-    "process": {
-      "windowTitle": "proceso.txt",
-      "heading": "Cómo trabajo",
-      "steps": [
-        {
-          "verb": "Entender",
-          "body": "Primero el negocio: qué vendes, cómo trabajas y qué te quita tiempo."
-        },
-        {
-          "verb": "Diseñar",
-          "body": "Una interfaz que se siente tuya, no sacada de un catálogo de plantillas."
-        },
-        {
-          "verb": "Construir",
-          "body": "Código a medida, pensado para crecer sin romperse."
-        },
-        {
-          "verb": "Afinar",
-          "body": "Iteramos hasta que lo que ves te convence y lo que no ves trabaja solo."
-        }
-      ]
-    },
-    "panel": {
-      "windowTitle": "contacto.exe",
-      "title": "Empezar un proyecto",
-      "body": "Cuéntame qué hace tu negocio y qué necesita. Te respondo con una propuesta, no con una plantilla.",
-      "email": "EMAIL",
-      "linkedin": "LINKEDIN",
-      "github": "GITHUB",
-      "location": "BASE",
-      "locationValue": "Santo Domingo, RD · remoto"
-    }
+    "title": "Contacto",
+    "intro": "Cuéntame qué hace tu negocio y qué necesita. Te respondo con una propuesta, no con una plantilla.",
+    "processTitle": "Cómo trabajo",
+    "steps": [
+      {
+        "label": "01",
+        "title": "Entender",
+        "body": "Primero el negocio: qué vendes, cómo trabajas y qué te quita tiempo."
+      },
+      {
+        "label": "02",
+        "title": "Diseñar",
+        "body": "Una interfaz que se siente tuya, no sacada de un catálogo de plantillas."
+      },
+      {
+        "label": "03",
+        "title": "Construir",
+        "body": "Código a medida, pensado para crecer sin romperse."
+      },
+      {
+        "label": "04",
+        "title": "Afinar",
+        "body": "Iteramos hasta que lo que ves te convence y lo que no ves trabaja solo."
+      }
+    ],
+    "elsewhereTitle": "En otros sitios",
+    "baseLabel": "Base",
+    "baseValue": "Santo Domingo, RD · remoto"
   },
   "footer": {
-    "rights": "© 2026 Lucia Adams",
-    "builtWith": "hecho a mano con"
+    "note": "Diseñado y construido a mano."
   }
 }
