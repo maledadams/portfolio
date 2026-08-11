@@ -13,22 +13,18 @@
   "home": {
     "hero": [
       {
-        "t": "Lucia Adams",
+        "t": "Hi, I'm "
+      },
+      {
+        "t": "L. Adams",
         "strong": true,
         "href": "/contact"
       },
       {
-        "t": " designs websites and builds the "
+        "t": ", a creative technologist and computer engineering student building "
       },
       {
-        "t": "systems",
-        "squiggle": true
-      },
-      {
-        "t": " that make them work, from "
-      },
-      {
-        "t": "Santo Domingo",
+        "t": "digital products, systems, and experiences.",
         "squiggle": true
       }
     ],

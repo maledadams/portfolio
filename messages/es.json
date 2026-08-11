@@ -13,22 +13,18 @@
   "home": {
     "hero": [
       {
-        "t": "Lucia Adams",
+        "t": "Hola, soy "
+      },
+      {
+        "t": "L. Adams",
         "strong": true,
         "href": "/contact"
       },
       {
-        "t": " diseña webs y construye los "
+        "t": ", estudiante de ingeniería en computación que combina tecnología y creatividad para construir "
       },
       {
-        "t": "sistemas",
-        "squiggle": true
-      },
-      {
-        "t": " que las hacen funcionar, desde "
-      },
-      {
-        "t": "Santo Domingo",
+        "t": "productos digitales, sistemas y experiencias.",
         "squiggle": true
       }
     ],

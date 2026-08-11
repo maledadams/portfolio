@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { ArrowRightIcon, TranslateIcon } from "@phosphor-icons/react";
+import { ArrowRightIcon } from "@phosphor-icons/react";
 import { Link, usePathname } from "@/i18n/navigation";
 
 const items = [
@@ -47,9 +47,8 @@ export default function Nav() {
           href={pathname}
           locale={other}
           aria-label={t("lang")}
-          className="flex items-center gap-1.5 text-muted transition-colors hover:text-fg"
+          className="text-muted transition-colors hover:text-fg"
         >
-          <TranslateIcon size="1.15em" weight="regular" aria-hidden />
           {other.toUpperCase()}
         </Link>
       </div>

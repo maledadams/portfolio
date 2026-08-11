@@ -15,47 +15,46 @@ export default function HomePage() {
 
   return (
     <>
-      <section className="center relative pb-18">
-        <h1 className="max-w-[720px] text-[2.1rem] leading-[1.2] font-normal tracking-[-0.02em] text-balance sm:text-[2.9rem] lg:text-[3.35rem]">
-          {hero.map((seg, i) => {
-            if (seg.href) {
-              return (
-                <Link
-                  key={i}
-                  href={seg.href as "/contact"}
-                  className="font-semibold underline decoration-2 underline-offset-[7px] transition-colors hover:text-muted"
-                >
-                  {seg.t}
-                </Link>
-              );
-            }
-            if (seg.squiggle) {
-              return (
-                <span key={i} className="squiggle">
-                  {seg.t}
-                </span>
-              );
-            }
-            return <span key={i}>{seg.t}</span>;
-          })}
-        </h1>
-
-        {/*
-          Only shown once there is real room beside the text (the space this
-          replaces in the reference layout). Height always matches the
-          headline's own box; width follows from the image's aspect ratio,
-          capped so it can never push past the viewport edge.
-        */}
-        <div className="hero-portrait hidden min-[1480px]:block" aria-hidden="true">
-          {/* eslint-disable-next-line @next/next/no-img-element -- a
-              fluid, CSS-driven height (matching the headline box) doesn't
-              fit next/image's fixed width/height model, and this is a
-              local decorative SVG rather than a photo needing srcset. */}
+      <section className="pb-18">
+        <div className="mx-auto flex max-w-[1400px] flex-col items-start gap-8 px-9 lg:flex-row lg:items-center lg:justify-center lg:gap-14">
+          {/*
+            Shown once there's room for it beside the text. Full image, never
+            cropped: width is fixed, height follows the SVG's own aspect
+            ratio via object-contain. Centered as a pair with the headline
+            rather than stretched to match its height.
+          */}
+          {/* eslint-disable-next-line @next/next/no-img-element -- a local
+              decorative SVG, not a photo that needs next/image's srcset. */}
           <img
             src="/lucia-portrait.svg"
             alt=""
-            className="object-cover"
+            aria-hidden="true"
+            className="hidden w-[340px] shrink-0 object-contain lg:block xl:w-[440px]"
           />
+
+          <h1 className="max-w-[720px] text-[2.1rem] leading-[1.2] font-normal tracking-[-0.02em] text-balance sm:text-[2.9rem] lg:text-[3.35rem]">
+            {hero.map((seg, i) => {
+              if (seg.href) {
+                return (
+                  <Link
+                    key={i}
+                    href={seg.href as "/contact"}
+                    className="font-semibold underline decoration-2 underline-offset-[7px] transition-colors hover:text-muted"
+                  >
+                    {seg.t}
+                  </Link>
+                );
+              }
+              if (seg.squiggle) {
+                return (
+                  <span key={i} className="squiggle">
+                    {seg.t}
+                  </span>
+                );
+              }
+              return <span key={i}>{seg.t}</span>;
+            })}
+          </h1>
         </div>
       </section>
 

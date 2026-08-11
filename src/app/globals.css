@@ -125,36 +125,6 @@ a {
   }
 }
 
-/*
- * Hero portrait. Anchored to the headline's own box (the section's only
- * other content), so its height always equals the headline's rendered
- * height with no JS measurement. Escapes the 860px measure into the
- * margin space beside it; the section clips it so it can never force a
- * horizontal scrollbar on an in-between viewport width.
- */
-.hero-portrait {
-  position: absolute;
-  inset-block: 0;
-  left: 100%;
-  margin-left: 2.5rem;
-  /*
-   * An explicit width, not max-width: with `left: 100%` the containing
-   * block ends exactly where this box begins, so shrink-to-fit has zero
-   * "available width" to size against and silently collapses to 0. Width
-   * is capped at the margin actually available beside the 860px text
-   * column, so the box itself can't force a horizontal scrollbar; 380px
-   * is just an upper ceiling on huge screens.
-   */
-  width: min(calc((100vw - 860px) / 2 - 2.5rem), 380px);
-  overflow: hidden;
-}
-
-.hero-portrait img {
-  display: block;
-  height: 100%;
-  width: 100%;
-}
-
 /* Hand-drawn emphasis under a phrase, the way ky marks key words. */
 .squiggle {
   text-decoration: underline wavy currentColor;
