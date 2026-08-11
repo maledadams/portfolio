@@ -1,22 +1,9 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
-export const EMAIL = "maledadams@gmail.com";
-
-export const links = [
-  { label: "Email", href: `mailto:${EMAIL}`, text: EMAIL },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/lucia-m-adams/",
-    text: "lucia-m-adams",
-  },
-  { label: "GitHub", href: "https://github.com/maledadams", text: "maledadams" },
-];
-
 const external = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/lucia-m-adams/" },
   { label: "GitHub", href: "https://github.com/maledadams" },
-  { label: "Email", href: `mailto:${EMAIL}` },
 ];
 
 export default function Footer() {
@@ -45,10 +32,8 @@ export default function Footer() {
             <a
               key={item.label}
               href={item.href}
-              target={item.href.startsWith("http") ? "_blank" : undefined}
-              rel={
-                item.href.startsWith("http") ? "noopener noreferrer" : undefined
-              }
+              target="_blank"
+              rel="noopener noreferrer"
               className="link"
             >
               {item.label}
@@ -59,12 +44,12 @@ export default function Footer() {
         <div className="col-span-2 sm:col-span-1 sm:max-w-[320px] sm:justify-self-end">
           <h2 className="font-semibold">{t("ctaTitle")}</h2>
           <p className="mt-1 text-[0.8em] text-muted">{t("ctaBody")}</p>
-          <a
-            href={`mailto:${EMAIL}`}
+          <Link
+            href="/contact"
             className="mt-4 inline-block border border-line bg-surface px-5 py-2.5 text-[0.8em] transition-colors hover:border-fg"
           >
             {t("ctaButton")}
-          </a>
+          </Link>
         </div>
       </div>
 

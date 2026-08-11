@@ -1,11 +1,45 @@
-import { useTranslations } from "next-intl";
-import { links } from "@/components/Footer";
+import { getTranslations } from "next-intl/server";
+import {
+  GithubLogoIcon,
+  LinkedinLogoIcon,
+} from "@phosphor-icons/react/dist/ssr";
+import ContactForm from "@/components/ContactForm";
+import { LIMITS } from "@/lib/contact";
+import { getTurnstileSiteKey } from "@/lib/turnstile";
 
 type Step = { label: string; title: string; body: string };
 
-export default function ContactPage() {
-  const t = useTranslations("contact");
+const social = [
+  {
+    key: "linkedin",
+    href: "https://www.linkedin.com/in/lucia-m-adams/",
+    Icon: LinkedinLogoIcon,
+  },
+  {
+    key: "github",
+    href: "https://github.com/maledadams",
+    Icon: GithubLogoIcon,
+  },
+] as const;
+
+export default async function ContactPage() {
+  const t = await getTranslations("contact");
   const steps = t.raw("steps") as Step[];
+  const turnstileSiteKey = await getTurnstileSiteKey();
+
+  const formLabels = {
+    name: t("formName"),
+    email: t("formEmail"),
+    message: t("formMessage"),
+    submit: t("formSubmit"),
+    sending: t("formSending"),
+    done: t("formDone"),
+    errorInvalid: t("errorInvalid"),
+    errorTurnstile: t("errorTurnstile"),
+    errorRate: t("errorRate"),
+    errorOffline: t("errorOffline"),
+    errorGeneric: t("errorGeneric"),
+  };
 
   return (
     <>
@@ -15,36 +49,32 @@ export default function ContactPage() {
         </h1>
         <p className="mt-3 max-w-[46ch] text-muted">{t("intro")}</p>
 
-        <ul className="mt-8 flex flex-col gap-3">
-          {links.map((link) => (
-            <li
-              key={link.label}
-              className="grid grid-cols-1 gap-x-5 sm:grid-cols-[98px_1fr]"
-            >
-              <p className="font-mono text-[0.7em] text-muted sm:pt-[0.55em]">
-                {link.label}
-              </p>
+        <div className="mt-8 flex flex-wrap items-center gap-6">
+          <h2 className="font-mono text-[0.7em] text-muted">
+            {t("elsewhereTitle")}
+          </h2>
+          <div className="flex items-center gap-4">
+            {social.map(({ key, href, Icon }) => (
               <a
-                href={link.href}
-                target={link.href.startsWith("http") ? "_blank" : undefined}
-                rel={
-                  link.href.startsWith("http")
-                    ? "noopener noreferrer"
-                    : undefined
-                }
-                className="underline decoration-1 underline-offset-4 transition-colors hover:text-muted"
+                key={key}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t(`social.${key}`)}
+                className="text-fg transition-colors hover:text-muted"
               >
-                {link.text}
+                <Icon size={22} weight="regular" />
               </a>
-            </li>
-          ))}
-          <li className="grid grid-cols-1 gap-x-5 sm:grid-cols-[98px_1fr]">
-            <p className="font-mono text-[0.7em] text-muted sm:pt-[0.55em]">
-              {t("baseLabel")}
-            </p>
-            <p>{t("baseValue")}</p>
-          </li>
-        </ul>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-6 grid grid-cols-1 gap-x-5 sm:grid-cols-[98px_1fr]">
+          <p className="font-mono text-[0.7em] text-muted sm:pt-[0.55em]">
+            {t("baseLabel")}
+          </p>
+          <p>{t("baseValue")}</p>
+        </div>
       </section>
 
       <section className="center border-t border-line py-14">
@@ -68,6 +98,23 @@ export default function ContactPage() {
             </li>
           ))}
         </ul>
+      </section>
+
+      <section className="center border-t border-line py-14">
+        <h2 className="mb-2 text-[1.25em] font-semibold">
+          {t("formTitle")}
+        </h2>
+        <p className="max-w-[46ch] text-[0.8em] text-muted">
+          {t("formBody")}
+        </p>
+
+        <ContactForm
+          labels={formLabels}
+          maxName={LIMITS.name}
+          maxEmail={LIMITS.email}
+          maxMessage={LIMITS.message}
+          turnstileSiteKey={turnstileSiteKey}
+        />
       </section>
     </>
   );

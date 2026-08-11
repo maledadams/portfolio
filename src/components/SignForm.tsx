@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "@/i18n/navigation";
+import TurnstileWidget, { type TurnstileHandle } from "./TurnstileWidget";
 
 type Status = "idle" | "sending" | "done" | "error";
 
@@ -12,6 +13,7 @@ type Labels = {
   sending: string;
   done: string;
   errorInvalid: string;
+  errorTurnstile: string;
   errorRate: string;
   errorOffline: string;
   errorGeneric: string;
@@ -21,15 +23,18 @@ export default function SignForm({
   labels,
   maxName,
   maxMessage,
+  turnstileSiteKey,
 }: {
   labels: Labels;
   maxName: number;
   maxMessage: number;
+  turnstileSiteKey: string | null;
 }) {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string>("");
   const [message, setMessage] = useState("");
   const router = useRouter();
+  const turnstileRef = useRef<TurnstileHandle>(null);
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -47,8 +52,11 @@ export default function SignForm({
           name: data.get("name"),
           message: data.get("message"),
           website: data.get("website"),
+          token: data.get("cf-turnstile-response"),
         }),
       });
+
+      turnstileRef.current?.reset();
 
       if (response.ok) {
         form.reset();
@@ -65,14 +73,17 @@ export default function SignForm({
       setError(
         reason === "invalid"
           ? labels.errorInvalid
-          : reason === "rate-limited"
-            ? labels.errorRate
-            : reason === "unconfigured"
-              ? labels.errorOffline
-              : labels.errorGeneric,
+          : reason === "turnstile"
+            ? labels.errorTurnstile
+            : reason === "rate-limited"
+              ? labels.errorRate
+              : reason === "unconfigured"
+                ? labels.errorOffline
+                : labels.errorGeneric,
       );
       setStatus("error");
     } catch {
+      turnstileRef.current?.reset();
       setError(labels.errorGeneric);
       setStatus("error");
     }
@@ -129,6 +140,14 @@ export default function SignForm({
         <label htmlFor="gb-website">Website</label>
         <input id="gb-website" name="website" tabIndex={-1} autoComplete="off" />
       </div>
+
+      {turnstileSiteKey && (
+        <TurnstileWidget
+          ref={turnstileRef}
+          siteKey={turnstileSiteKey}
+          action="guestbook"
+        />
+      )}
 
       <div className="flex items-center gap-4">
         <button

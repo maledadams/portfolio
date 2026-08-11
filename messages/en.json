@@ -146,8 +146,25 @@
       }
     ],
     "elsewhereTitle": "Elsewhere",
+    "social": {
+      "linkedin": "LinkedIn profile",
+      "github": "GitHub profile"
+    },
     "baseLabel": "Base",
-    "baseValue": "Santo Domingo, DR · remote"
+    "baseValue": "Santo Domingo, DR · remote",
+    "formTitle": "Send a message",
+    "formBody": "I read every message myself and get back to you within a day or two.",
+    "formName": "Your name",
+    "formEmail": "Your email",
+    "formMessage": "Your message",
+    "formSubmit": "Send",
+    "formSending": "Sending...",
+    "formDone": "Done, thanks. I will get back to you soon.",
+    "errorInvalid": "Check the fields and try again.",
+    "errorTurnstile": "Could not verify you're human. Try again.",
+    "errorRate": "You already sent a message recently. Try again tomorrow.",
+    "errorOffline": "The contact form is not available right now.",
+    "errorGeneric": "Something went wrong. Try again."
   },
   "footer": {
     "ctaTitle": "Available for projects",
@@ -175,6 +192,7 @@
     "formSending": "Sending...",
     "formDone": "Done, thanks for signing. Your note is on the wall.",
     "errorInvalid": "Check the name and the message.",
+    "errorTurnstile": "Could not verify you're human. Try again.",
     "errorRate": "You signed recently. Try again tomorrow.",
     "errorOffline": "The guestbook is not available right now.",
     "errorGeneric": "Something went wrong. Try again."

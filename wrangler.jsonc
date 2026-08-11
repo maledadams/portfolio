@@ -14,6 +14,11 @@
       "service": "lucia-adams-portfolio"
     }
   ],
+  // Turnstile site key (public, safe to commit). The matching secret key is
+  // never here: `wrangler secret put TURNSTILE_SECRET`. See README.
+  "vars": {
+    "TURNSTILE_SITE_KEY": "REPLACE_WITH_SITE_KEY_FROM_DASHBOARD"
+  },
   // Guestbook storage.
   // `database_id` is filled in by: wrangler d1 create lucia-adams-guestbook
   "d1_databases": [

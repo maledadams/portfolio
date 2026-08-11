@@ -1,6 +1,7 @@
 import { getFormatter, getTranslations } from "next-intl/server";
 import SignForm from "@/components/SignForm";
 import { listEntries, LIMITS } from "@/lib/guestbook";
+import { getTurnstileSiteKey } from "@/lib/turnstile";
 
 /** Paper tints and tilts, cycled so the rail does not look mechanical. */
 const tints = ["#fdf6e3", "#f2f6ee", "#fbeff1", "#eef3f8"];
@@ -10,6 +11,7 @@ export default async function Guestbook() {
   const t = await getTranslations("guestbook");
   const format = await getFormatter();
   const entries = await listEntries();
+  const turnstileSiteKey = await getTurnstileSiteKey();
 
   const labels = {
     name: t("formName"),
@@ -18,6 +20,7 @@ export default async function Guestbook() {
     sending: t("formSending"),
     done: t("formDone"),
     errorInvalid: t("errorInvalid"),
+    errorTurnstile: t("errorTurnstile"),
     errorRate: t("errorRate"),
     errorOffline: t("errorOffline"),
     errorGeneric: t("errorGeneric"),
@@ -78,6 +81,7 @@ export default async function Guestbook() {
           labels={labels}
           maxName={LIMITS.name}
           maxMessage={LIMITS.message}
+          turnstileSiteKey={turnstileSiteKey}
         />
       </div>
     </section>

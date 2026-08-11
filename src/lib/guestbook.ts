@@ -1,4 +1,5 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
+import { verifyTurnstile } from "./turnstile";
 
 export type GuestbookEntry = {
   id: number;
@@ -62,12 +63,16 @@ async function hashAuthor(ip: string): Promise<string> {
 
 export type SignResult =
   | { ok: true }
-  | { ok: false; reason: "unconfigured" | "invalid" | "rate-limited" | "error" };
+  | {
+      ok: false;
+      reason: "unconfigured" | "invalid" | "turnstile" | "rate-limited" | "error";
+    };
 
 export async function signGuestbook(input: {
   name: string;
   message: string;
   ip: string;
+  turnstileToken: unknown;
 }): Promise<SignResult> {
   const name = input.name.trim();
   const message = input.message.trim();
@@ -80,6 +85,9 @@ export async function signGuestbook(input: {
   ) {
     return { ok: false, reason: "invalid" };
   }
+
+  const verified = await verifyTurnstile(input.turnstileToken, input.ip, "guestbook");
+  if (!verified.ok) return { ok: false, reason: "turnstile" };
 
   const db = await getDb();
   if (!db) return { ok: false, reason: "unconfigured" };

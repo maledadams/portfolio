@@ -146,8 +146,25 @@
       }
     ],
     "elsewhereTitle": "En otros sitios",
+    "social": {
+      "linkedin": "Perfil de LinkedIn",
+      "github": "Perfil de GitHub"
+    },
     "baseLabel": "Base",
-    "baseValue": "Santo Domingo, RD · remoto"
+    "baseValue": "Santo Domingo, RD · remoto",
+    "formTitle": "Enviar un mensaje",
+    "formBody": "Leo cada mensaje en persona y te respondo en uno o dos días.",
+    "formName": "Tu nombre",
+    "formEmail": "Tu email",
+    "formMessage": "Tu mensaje",
+    "formSubmit": "Enviar",
+    "formSending": "Enviando...",
+    "formDone": "Listo, gracias. Te respondo pronto.",
+    "errorInvalid": "Revisa los campos e intenta de nuevo.",
+    "errorTurnstile": "No pudimos verificar que eres humano. Intenta de nuevo.",
+    "errorRate": "Ya enviaste un mensaje hace poco. Intenta de nuevo mañana.",
+    "errorOffline": "El formulario de contacto no está disponible ahora mismo.",
+    "errorGeneric": "Algo falló. Intenta de nuevo."
   },
   "footer": {
     "ctaTitle": "Disponible para proyectos",
@@ -175,6 +192,7 @@
     "formSending": "Enviando...",
     "formDone": "Listo, gracias por firmar. Tu nota ya está en la pared.",
     "errorInvalid": "Revisa el nombre y el mensaje.",
+    "errorTurnstile": "No pudimos verificar que eres humano. Intenta de nuevo.",
     "errorRate": "Ya firmaste hace poco. Intenta de nuevo mañana.",
     "errorOffline": "El libro de visitas no está disponible ahora mismo.",
     "errorGeneric": "Algo falló. Intenta de nuevo."

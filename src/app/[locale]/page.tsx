@@ -15,8 +15,8 @@ export default function HomePage() {
 
   return (
     <>
-      <section className="center pb-18">
-        <h1 className="text-[2.1rem] leading-[1.2] font-normal tracking-[-0.02em] text-balance sm:text-[2.9rem] lg:text-[3.35rem]">
+      <section className="center relative pb-18">
+        <h1 className="max-w-[720px] text-[2.1rem] leading-[1.2] font-normal tracking-[-0.02em] text-balance sm:text-[2.9rem] lg:text-[3.35rem]">
           {hero.map((seg, i) => {
             if (seg.href) {
               return (
@@ -39,6 +39,24 @@ export default function HomePage() {
             return <span key={i}>{seg.t}</span>;
           })}
         </h1>
+
+        {/*
+          Only shown once there is real room beside the text (the space this
+          replaces in the reference layout). Height always matches the
+          headline's own box; width follows from the image's aspect ratio,
+          capped so it can never push past the viewport edge.
+        */}
+        <div className="hero-portrait hidden min-[1480px]:block" aria-hidden="true">
+          {/* eslint-disable-next-line @next/next/no-img-element -- a
+              fluid, CSS-driven height (matching the headline box) doesn't
+              fit next/image's fixed width/height model, and this is a
+              local decorative SVG rather than a photo needing srcset. */}
+          <img
+            src="/lucia-portrait.svg"
+            alt=""
+            className="object-cover"
+          />
+        </div>
       </section>
 
       <section className="reveal center pb-18">
