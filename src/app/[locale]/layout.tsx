@@ -22,11 +22,10 @@ const spaceMono = Space_Mono({
 });
 
 /**
- * Applies the stored theme before first paint so there is no flash, and marks
- * the document as scripted so the reveal animation may hide content. Without
- * this script running, every section stays visible.
+ * Marks the document as scripted so the reveal animation may hide content.
+ * Without this running, every section stays visible (the safe default).
  */
-const bootScript = `document.documentElement.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}`;
+const bootScript = `document.documentElement.classList.add('js');`;
 
 export async function generateMetadata({
   params,
