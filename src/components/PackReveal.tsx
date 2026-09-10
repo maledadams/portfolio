@@ -26,7 +26,6 @@ export type PackCard = {
 
 type Labels = {
   packName: string;
-  packSub: string;
   open: string;
   skip: string;
   next: string;
@@ -68,7 +67,6 @@ export default function PackReveal({
   labels: Labels;
 }) {
   const [phase, setPhase] = useState<Phase>("sealed");
-  const [index, setIndex] = useState(0);
   const overlayRef = useRef<HTMLDivElement>(null);
   const advanceRef = useRef<HTMLButtonElement>(null);
   const mounted = !usePrefersReducedMotion();
@@ -114,21 +112,13 @@ export default function PackReveal({
   // Keep focus on the primary control as phases change.
   useEffect(() => {
     if (phase === "reveal") advanceRef.current?.focus();
-  }, [phase, index]);
+  }, [phase]);
 
   if (!mounted || phase === "closed") return null;
-
-  const card = cards[index];
-  const last = index === cards.length - 1;
 
   const tear = () => {
     setPhase("tearing");
     window.setTimeout(() => setPhase("reveal"), 620);
-  };
-
-  const advance = () => {
-    if (last) close();
-    else setIndex((i) => i + 1);
   };
 
   // Portaled to <body>: the page-transition wrapper carries a transform while
@@ -144,7 +134,7 @@ export default function PackReveal({
     >
       <div
         className="rays"
-        data-rarity={phase === "reveal" ? card.rarity : undefined}
+        data-rarity={phase === "reveal" ? cards[0]?.rarity : undefined}
         aria-hidden
       />
 
@@ -167,12 +157,12 @@ export default function PackReveal({
           >
             <span className="pack-crimp" aria-hidden />
             <span className="pack-body">
-              <span className="relative font-mono text-[0.7em] tracking-wide text-white/60">
-                {labels.packName}
-              </span>
-              <span className="relative font-semibold text-[1.3em] leading-tight">
-                {labels.packSub}
-              </span>
+              <img
+                src="/lucia-portrait.svg"
+                alt=""
+                aria-hidden="true"
+                className="relative w-[110px]"
+              />
               <span className="relative font-mono text-[0.7em] text-white/60">
                 {labels.open}
               </span>
@@ -182,56 +172,64 @@ export default function PackReveal({
         </TiltCard>
       ) : (
         <>
-          <div key={card.slug} className="card-enter relative">
-            <TiltCard maxTilt={12} className="rounded-[16px]">
-              <div className="pcard" data-rarity={card.rarity}>
-                <div className="pcard-inner">
-                  <div className="flex items-baseline justify-between gap-3">
-                    <h3 className="font-semibold text-[0.95em] leading-tight">
-                      {card.name}
-                    </h3>
-                    <span className="font-mono text-[0.6em] text-[#191713]/60">
-                      {card.year}
-                    </span>
+          {/* Every project revealed together, side by side — scales to
+              however many cards `cards` holds, wrapping to a new row
+              rather than needing a fixed layout for a fixed count. */}
+          <div className="pcard-grid relative">
+            {cards.map((card, i) => (
+              <div
+                key={card.slug}
+                className="card-enter"
+                style={{ animationDelay: `${i * 110}ms` }}
+              >
+                <TiltCard maxTilt={12} className="rounded-[16px]">
+                  <div className="pcard" data-rarity={card.rarity}>
+                    <div className="pcard-inner">
+                      <div className="flex items-baseline justify-between gap-3">
+                        <h3 className="font-semibold text-[0.95em] leading-tight">
+                          {card.name}
+                        </h3>
+                        <span className="font-mono text-[0.6em] text-[#191713]/60">
+                          {card.year}
+                        </span>
+                      </div>
+
+                      <div className="overflow-hidden rounded-[4px] border border-[#191713]/25">
+                        <Image
+                          src={card.image}
+                          alt={card.alt}
+                          width={1440}
+                          height={900}
+                          className="block aspect-[1.15] h-auto w-full object-cover object-top"
+                          sizes="240px"
+                          priority={i < 3}
+                        />
+                      </div>
+
+                      <p className="font-mono text-[0.6em] text-[#191713]/70">
+                        {card.rarity === "legendary" ? "★" : "◆"} {card.rarityLabel}
+                        {" · "}
+                        {card.category}
+                      </p>
+
+                      <p className="mt-auto text-[0.68em] leading-snug italic">
+                        {card.summary}
+                      </p>
+                    </div>
                   </div>
-
-                  <div className="overflow-hidden rounded-[4px] border border-[#191713]/25">
-                    <Image
-                      src={card.image}
-                      alt={card.alt}
-                      width={1440}
-                      height={900}
-                      className="block aspect-[1.15] h-auto w-full object-cover object-top"
-                      sizes="330px"
-                      priority
-                    />
-                  </div>
-
-                  <p className="font-mono text-[0.6em] text-[#191713]/70">
-                    {card.rarity === "legendary" ? "★" : "◆"} {card.rarityLabel}
-                    {" · "}
-                    {card.category}
-                  </p>
-
-                  <p className="mt-auto text-[0.68em] leading-snug italic">
-                    {card.summary}
-                  </p>
-                </div>
+                </TiltCard>
               </div>
-            </TiltCard>
+            ))}
           </div>
 
-          <div className="relative flex items-center gap-6">
-            <span className="font-mono text-[0.75em] text-white/60">
-              {index + 1} / {cards.length}
-            </span>
+          <div className="relative">
             <button
               ref={advanceRef}
               type="button"
-              onClick={advance}
+              onClick={close}
               className="border border-white/30 px-5 py-2 font-mono text-[0.8em] text-white transition-colors hover:border-white"
             >
-              {last ? labels.done : labels.next}
+              {labels.done}
             </button>
           </div>
         </>

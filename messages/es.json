@@ -6,8 +6,9 @@
   "nav": {
     "name": "lucia adams",
     "home": "inicio",
-    "work": "trabajo",
+    "work": "trabajos",
     "contact": "contacto",
+    "guestbook": "firmas",
     "lang": "Cambiar idioma"
   },
   "home": {
@@ -21,103 +22,87 @@
         "href": "/contact"
       },
       {
-        "t": ", estudiante de ingeniería en computación que combina tecnología y creatividad para construir "
+        "t": ". Diseño y desarrollo "
       },
       {
-        "t": "productos digitales, sistemas y experiencias.",
-        "squiggle": true
+        "t": "productos digitales, sistemas y "
+      },
+      {
+        "t": "experiencias."
       }
     ],
-    "projectsTitle": "Proyectos",
-    "servicesTitle": "Lo que hago",
+    "projectsTitle": "Trabajos Seleccionados",
+    "servicesTitle": "Lo Que Hago",
     "services": [
-      {
-        "label": "Webs",
-        "title": "Sitios y tiendas a medida",
-        "body": "Desarrollo desde cero en código, sin plantillas ni constructores. Tú decides cómo se ve y cómo funciona."
-      },
-      {
-        "label": "Sistemas",
-        "title": "Catálogos, pedidos, automatización",
-        "body": "Mapeo cómo trabaja tu negocio y construyo lo que hace falta para que la web trabaje sola."
-      },
-      {
-        "label": "Marca",
-        "title": "Identidad e interfaz",
-        "body": "Tipografía, color y componentes pensados alrededor de tu negocio, no de una plantilla."
-      },
-      {
-        "label": "Datos",
-        "title": "Reportes y analítica",
-        "body": "Python y pandas para consolidar datos de varias plataformas, más Search Console y Analytics."
-      }
+      "Infraestructura",
+      "Marketing automatizado",
+      "Consultoría técnica",
+      "Flujos asistidos por IA",
+      "Desarrollo web full-stack",
+      "Analítica y reportes",
+      "Identidad de marca y logo",
+      "Backend y bases de datos"
     ],
-    "moreWork": "Ver los tres proyectos en detalle"
+    "moreWork": "Ver los tres proyectos en detalle",
+    "ctaTitle": "¿Tienes Un Proyecto En Mente?",
+    "ctaBody": "Cuéntame qué hace tu negocio y qué necesita. Te respondo con una propuesta.",
+    "ctaButton": "Escríbeme"
   },
   "work": {
-    "title": "Trabajo",
+    "title": "Trabajos",
     "intro": "Tres proyectos en producción. Para cada uno: lo que ves, y la máquina que lo mueve.",
     "visit": "Ver sitio",
-    "surfaceLabel": "Diseño",
-    "systemsLabel": "Sistemas",
+    "problemLabel": "El Problema",
+    "roleLabel": "Mi Rol",
+    "processLabel": "El Proceso",
+    "resultsLabel": "Los Resultados",
+    "prevPage": "Página anterior",
+    "nextPage": "Página siguiente",
+    "page": "Página {n}",
     "projects": {
       "pulpina": {
         "name": "Pulpiña RD",
         "category": "e-commerce",
-        "year": "2026",
+        "year": "ago 2026",
         "alt": "Portada de Pulpiña RD con sus tres tiendas: Moon, Sunshine y Men",
-        "summary": "Tienda de moda alternativa en República Dominicana, con tres sub-marcas conviviendo en un solo catálogo.",
-        "surface": [
-          "Moon, Sunshine y Men: cada línea con su paleta, su mascota y su propia vitrina.",
-          "Identidad completa dibujada para la tienda, del logo a las insignias de cada universo.",
-          "Tipografía, color y componentes construidos alrededor de la personalidad de la marca."
-        ],
-        "systems": [
-          "Un solo inventario y tres vitrinas: cada producto se etiqueta una vez y aparece donde le toca.",
-          "El carrito arma el pedido y lo entrega por WhatsApp con número de orden, donde la gente ya compra.",
-          "Insignias de Nuevo y Oferta y descuentos de cumpleaños definidos por reglas, no a mano."
-        ]
+        "summary": "Tienda de moda alternativa en República Dominicana, tres sub-marcas convertidas en un catálogo.",
+        "problem": "Pulpina llevaba casi toda su venta por Instagram, notas a mano y memoria — sin catálogo centralizado, sin registro confiable, y sin forma de buscar productos o analizar el negocio. Revisar ventas y preparar reportes tomaba casi un día completo.",
+        "role": "Diseñé y desarrollé la plataforma de e-commerce de Pulpina y su sistema de operaciones internas: la tienda y las herramientas administrativas detrás. A diferencia de STEMise y Together Sports, sigo gestionando el sistema yo misma.",
+        "process": "Mapeé el flujo de trabajo existente y lo reconstruí alrededor de un sistema centralizado: la tienda y las herramientas de administración para productos, pedidos, inventario y ventas — construidas alrededor de su proceso real por orden de llegada.",
+        "results": "Centralicé un catálogo de 300 a 500 productos, reemplazando Instagram como catálogo principal. Agregué búsqueda de productos, gestión de pedidos e inventario, y automaticé el trabajo recurrente de ventas. El negocio ahora es mucho más fácil de manejar.",
+        "impact": "Lanzado en agosto de 2026 — todavía es muy pronto para tener números sólidos. Los datos de impacto llegarán con más tiempo en producción."
       },
       "stemise": {
         "name": "STEMise",
-        "category": "nonprofit",
-        "year": "2026",
+        "category": "ONG",
+        "year": "abr 2026",
         "alt": "Portada de STEMise con su titular, navegación y llamados a la acción",
         "summary": "Plataforma de una organización juvenil de educación STEM presente en más de 30 países.",
-        "surface": [
-          "Un sistema visual simple que funciona igual para estudiantes de 30+ países.",
-          "Kits, currículo, voluntariado y donación: cada visitante encuentra su ruta en un clic.",
-          "Dos llamados claros en portada: pedir kits o ver el currículo. Nada compite con eso."
-        ],
-        "systems": [
-          "Canal de donación con patrocinio fiscal de Hack Club, listo para recibir fondos desde el día uno.",
-          "Flujo de solicitud y entrega detrás de 150+ kits STEM donados a estudiantes.",
-          "Currículo abierto organizado por primaria, media y secundaria."
-        ]
+        "problem": "STEMise ya tenía un sitio, pero no hacía lo que la organización necesitaba. La gente no podía donar, ser voluntaria, asociarse con STEMise, ni acceder a sus kits STEM y rutas de aprendizaje — y faltaban muchos de los sistemas digitales necesarios.",
+        "role": "Rediseñé y reconstruí por completo la presencia digital de STEMise desde cero: marca, identidad visual, UX, contenido, frontend, backend, CMS y formularios. El equipo de STEMise lleva el día a día del sitio — lo construí para que funcionara sin mí.",
+        "process": "En vez de rediseñar el sitio página por página, reconstruí la experiencia alrededor de cómo la gente interactúa con STEMise: donar, ser voluntaria, asociarse y acceder a recursos STEM. Diseñé la arquitectura y un CMS que le da al equipo control total.",
+        "results": "Reemplacé por completo el sitio y la experiencia digital anterior. Construí un CMS para el contenido, agregué formularios de donación, voluntariado y alianzas, y creé una plataforma para los kits STEM y rutas de aprendizaje. El sitio está en uso activo.",
+        "impact": "$35K+ recaudados, 159K+ personas alcanzadas, 2,000+ estudiantes empoderados, 100+ miembros, 102 países representados, y 200K+ impresiones."
       },
       "togethersport": {
         "name": "Together Sports",
-        "category": "nonprofit",
-        "year": "2026",
+        "category": "ONG",
+        "year": "mar 2026",
         "alt": "Portada de Together Sports con su lema Play Loud. Build Strong. y fotos de los programas",
         "summary": "Organización deportiva juvenil con cuatro programas bajo una sola marca.",
-        "surface": [
-          "Play Loud. Build Strong. llevado a tipografía gigante, color y ritmo.",
-          "Fotos reales de los programas, no stock: el sitio se siente como los entrenamientos.",
-          "Cada deporte con su color y su gráfica, unidos bajo una sola marca."
-        ],
-        "systems": [
-          "Tenis, básquet, fútbol y golf: cada deporte con su sección sin duplicar el sitio.",
-          "Donar, ser voluntario o inscribirse: cada visitante sale de la portada con un siguiente paso.",
-          "Second Serve: flujo de donación de equipo usado junto al partner Rally Forward NYC."
-        ]
+        "problem": "Together Sports existía completamente fuera de línea. No había sitio web, ni marca digital, ni un lugar central para entender la organización, descubrir sus programas o encontrar clases — su única presencia era una página de reservas de USTA.",
+        "role": "Construí la presencia digital de Together Sports desde cero: el logo, la identidad de marca, el sistema visual, el sitio, la base de datos, el CMS, el blog y la infraestructura detrás. Entregué el proyecto tras el lanzamiento — lo manejan por su cuenta.",
+        "process": "Empecé por la marca y la identidad visual, y diseñé el sitio alrededor de cómo la gente interactúa con Together Sports: programas, historia, impacto, blog y disponibilidad de clases, todo en un mismo lugar, conectado en vivo a los datos de USTA.",
+        "results": "Creé la primera presencia digital completa de Together Sports y establecí su identidad visual y sistema de marca. Construí un sitio a medida, base de datos, CMS y blog, e integré la disponibilidad de clases de USTA en vivo. Hoy es parte activa de su crecimiento.",
+        "impact": "1,600+ jóvenes entrenados, 20 comunidades atendidas, 2,000+ horas de voluntariado, 26 entrenadores capacitados, 10 organizaciones aliadas, y 950 piezas de equipo donadas."
       }
-    }
+    },
+    "impactLabel": "Impacto Actual"
   },
   "contact": {
     "title": "Contacto",
     "intro": "Cuéntame qué hace tu negocio y qué necesita. Te respondo con una propuesta, no con una plantilla.",
-    "processTitle": "Cómo trabajo",
+    "processTitle": "Cómo Trabajo",
     "steps": [
       {
         "label": "01",
@@ -140,14 +125,14 @@
         "body": "Iteramos hasta que lo que ves te convence y lo que no ves trabaja solo."
       }
     ],
-    "elsewhereTitle": "En otros sitios",
+    "elsewhereTitle": "En Otros Sitios",
     "social": {
       "linkedin": "Perfil de LinkedIn",
       "github": "Perfil de GitHub"
     },
     "baseLabel": "Base",
     "baseValue": "Santo Domingo, RD · remoto",
-    "formTitle": "Enviar un mensaje",
+    "formTitle": "Enviar Un Mensaje",
     "formBody": "Leo cada mensaje en persona y te respondo en uno o dos días.",
     "formName": "Tu nombre",
     "formEmail": "Tu email",
@@ -161,31 +146,29 @@
     "errorOffline": "El formulario de contacto no está disponible ahora mismo.",
     "errorGeneric": "Algo falló. Intenta de nuevo."
   },
-  "footer": {
-    "ctaTitle": "Disponible para proyectos",
-    "ctaBody": "Cuéntame qué hace tu negocio y qué necesita. Te respondo con una propuesta.",
-    "ctaButton": "Escríbeme",
-    "note": "Diseñado y construido a mano."
-  },
   "pack": {
     "packName": "lucia-adams.com",
-    "packSub": "3 proyectos dentro",
     "open": "Ábrelo",
     "skip": "Saltar",
     "next": "Siguiente",
     "done": "Ver los proyectos",
-    "legendary": "Legendaria",
-    "rare": "Rara"
+    "legendary": "Épica",
+    "rare": "Rara",
+    "togetherSportsShort": "Together S."
   },
   "guestbook": {
-    "title": "Libro de visitas",
+    "title": "Libro De Visitas",
+    "intro": "Déjame unas líneas si trabajamos juntos o algo de aquí te sirvió.",
     "emptyNote": "Todavía no hay firmas.\n\nSi trabajamos juntos o algo\nde aquí te sirvió, déjame\nunas líneas.",
     "emptyCredit": "la primera puede ser tuya",
     "formName": "Tu nombre",
     "formMessage": "Tu mensaje",
     "formSubmit": "Firmar",
     "formSending": "Enviando...",
-    "formDone": "Listo, gracias por firmar. Tu nota ya está en la pared.",
+    "formDone": "¡Listo, gracias por firmar! Tu nota ya está en la pared.",
+    "previewTitle": "Vista Previa",
+    "previewEmptyName": "Tu nombre",
+    "previewEmptyMessage": "Tu nota aparece aquí mientras la escribes.",
     "errorInvalid": "Revisa el nombre y el mensaje.",
     "errorTurnstile": "No pudimos verificar que eres humano. Intenta de nuevo.",
     "errorRate": "Ya firmaste hace poco. Intenta de nuevo mañana.",

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import {
   GithubLogoIcon,
@@ -6,6 +7,7 @@ import {
 import ContactForm from "@/components/ContactForm";
 import { LIMITS } from "@/lib/contact";
 import { getTurnstileSiteKey } from "@/lib/turnstile";
+import { localizedUrl, languageAlternates } from "@/lib/seo";
 
 type Step = { label: string; title: string; body: string };
 
@@ -21,6 +23,23 @@ const social = [
     Icon: GithubLogoIcon,
   },
 ] as const;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "contact" });
+  return {
+    title: t("title"),
+    description: t("intro"),
+    alternates: {
+      canonical: localizedUrl(locale as "es" | "en", "/contact"),
+      languages: languageAlternates("/contact"),
+    },
+  };
+}
 
 export default async function ContactPage() {
   const t = await getTranslations("contact");

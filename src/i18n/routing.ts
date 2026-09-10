@@ -1,7 +1,7 @@
 import { defineRouting } from "next-intl/routing";
 
 /**
- * Paths are localized because the nav renders them literally (`/trabajo`,
+ * Paths are localized because the nav renders them literally (`/trabajos`,
  * `/contacto`), so the label and the URL have to agree.
  */
 export const routing = defineRouting({
@@ -11,7 +11,8 @@ export const routing = defineRouting({
   localeDetection: false,
   pathnames: {
     "/": "/",
-    "/work": { es: "/trabajo", en: "/work" },
+    "/work": { es: "/trabajos", en: "/work" },
     "/contact": { es: "/contacto", en: "/contact" },
+    "/guestbook": { es: "/libro-de-visitas", en: "/guestbook" },
   },
 });

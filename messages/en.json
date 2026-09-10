@@ -8,6 +8,7 @@
     "home": "home",
     "work": "work",
     "contact": "contact",
+    "guestbook": "guestbook",
     "lang": "Switch language"
   },
   "home": {
@@ -21,98 +22,82 @@
         "href": "/contact"
       },
       {
-        "t": ", a creative technologist and computer engineering student building "
+        "t": ". I design and develop "
       },
       {
-        "t": "digital products, systems, and experiences.",
-        "squiggle": true
+        "t": "digital products, systems, and "
+      },
+      {
+        "t": "experiences."
       }
     ],
-    "projectsTitle": "Projects",
+    "projectsTitle": "Selected Works",
     "servicesTitle": "What I do",
     "services": [
-      {
-        "label": "Sites",
-        "title": "Custom sites and stores",
-        "body": "Built from scratch in code, no templates and no page builders. You decide how it looks and how it works."
-      },
-      {
-        "label": "Systems",
-        "title": "Catalogs, orders, automation",
-        "body": "I map how your business runs, then build what it takes for the site to run itself."
-      },
-      {
-        "label": "Brand",
-        "title": "Identity and interface",
-        "body": "Type, color and components shaped around your business rather than around a template."
-      },
-      {
-        "label": "Data",
-        "title": "Reporting and analytics",
-        "body": "Python and pandas to pull data from several platforms into one place, plus Search Console and Analytics."
-      }
+      "Infrastructure",
+      "Marketing automation",
+      "Technical consulting",
+      "AI-augmented workflows",
+      "Full-stack web development",
+      "Analytics & reporting",
+      "Brand identity & logo design",
+      "Backend & databases"
     ],
-    "moreWork": "See all three projects in detail"
+    "moreWork": "See all three projects in detail",
+    "ctaTitle": "Got a project in mind?",
+    "ctaBody": "Tell me what your business does and what it needs. You'll get a proposal back.",
+    "ctaButton": "Let's talk"
   },
   "work": {
     "title": "Work",
     "intro": "Three projects in production. For each one: what you see, and the machine driving it.",
     "visit": "Visit site",
-    "surfaceLabel": "Design",
-    "systemsLabel": "Systems",
+    "problemLabel": "The problem",
+    "roleLabel": "My role",
+    "processLabel": "The process",
+    "resultsLabel": "The results",
+    "prevPage": "Previous page",
+    "nextPage": "Next page",
+    "page": "Page {n}",
     "projects": {
       "pulpina": {
         "name": "Pulpiña RD",
         "category": "e-commerce",
-        "year": "2026",
+        "year": "Aug 2026",
         "alt": "Pulpiña RD home page with its three stores: Moon, Sunshine and Men",
         "summary": "An alternative fashion store in the Dominican Republic, with three sub-brands sharing one catalog.",
-        "surface": [
-          "Moon, Sunshine and Men: each line with its own palette, mascot and storefront.",
-          "A full identity drawn for the store, from the logo to each universe's badges.",
-          "Type, color and components built around the brand's personality."
-        ],
-        "systems": [
-          "One inventory and three storefronts: each product is tagged once and shows up where it belongs.",
-          "The cart builds the order and hands it off over WhatsApp with an order number, where people already buy.",
-          "New and Sale badges plus birthday discounts driven by rules, not by hand."
-        ]
+        "problem": "Pulpina ran its sales almost entirely through Instagram, handwritten notes, and memory — no centralized catalog, no reliable tracking, and no way to search products or analyze the business. Checking sales and preparing reports could take most of a workday.",
+        "role": "I designed and developed Pulpina's e-commerce platform and internal operations system: the storefront and the admin tools behind it. Unlike STEMise and Together Sports, I also continue to manage and maintain it myself.",
+        "process": "I mapped the existing workflow and rebuilt it around one centralized system: a customer-facing store plus admin tools for products, orders, inventory, and sales — built around their real first-come-first-served order process, not a generic e-commerce setup.",
+        "results": "Centralized a catalog of roughly 300-500 products, replacing Instagram. Added searchable products, order management, and inventory tools, and automated recurring sales work. The business now runs significantly easier, with more purchases since launch.",
+        "impact": "Launched August 2026 — still too early for solid numbers. Impact data will follow as the store builds a track record."
       },
       "stemise": {
         "name": "STEMise",
         "category": "nonprofit",
-        "year": "2026",
+        "year": "Apr 2026",
         "alt": "STEMise home page with its headline, navigation and calls to action",
         "summary": "The platform for a youth-led STEM education nonprofit active in more than 30 countries.",
-        "surface": [
-          "A simple visual system that works the same for students across 30+ countries.",
-          "Kits, curriculum, volunteering and donations: every visitor finds their path in one click.",
-          "Two clear calls on the home page: get kits or see the curriculum. Nothing competes with that."
-        ],
-        "systems": [
-          "A donation channel fiscally sponsored by Hack Club, ready to receive funds from day one.",
-          "The request and delivery flow behind 150+ STEM kits donated to students.",
-          "An open curriculum organized by primary, middle and high school."
-        ]
+        "problem": "STEMise already had a website, but it wasn't doing what the organization needed. People couldn't easily donate, volunteer, partner with STEMise, or access its STEM kits and learning paths — and the organization lacked the digital systems to support those interactions.",
+        "role": "I completely redesigned and rebuilt STEMise's digital presence from the ground up: branding, visual identity, UX, content, frontend, backend, CMS, and forms. Since launch, the STEMise team runs the site day to day — I built it to work without me.",
+        "process": "Rather than redesigning the site page by page, I rebuilt the experience around how people interact with STEMise — learning about it, donating, volunteering, and partnering. I built the architecture and a CMS giving the team full control over changes.",
+        "results": "Completely replaced the previous website and digital experience. Built a CMS for the site's content, added donation, volunteer, and partnership forms, and created a platform for STEM kits and learning paths. The site is live and actively used.",
+        "impact": "$35K+ raised, 159K+ people reached, 2,000+ students empowered, 100+ members, 102 countries represented, and 200K+ impressions."
       },
       "togethersport": {
         "name": "Together Sports",
         "category": "nonprofit",
-        "year": "2026",
+        "year": "Mar 2026",
         "alt": "Together Sports home page with its motto Play Loud. Build Strong. and program photos",
         "summary": "A youth sports nonprofit running four programs under a single brand.",
-        "surface": [
-          "Play Loud. Build Strong. carried into giant type, color and rhythm.",
-          "Real photos from the programs, not stock: the site feels like the practices do.",
-          "Each sport with its own color and graphics, held together under one brand."
-        ],
-        "systems": [
-          "Tennis, basketball, football and golf: each sport gets its own section without duplicating the site.",
-          "Donate, volunteer or sign up: every visitor leaves the home page with a next step.",
-          "Second Serve: a used-equipment donation flow with partner Rally Forward NYC."
-        ]
+        "problem": "Together Sports existed entirely offline. There was no website, no digital brand, and no central place to understand the organization, discover its programs, or find class information — their only online presence was a USTA booking page for free classes.",
+        "role": "I built Together Sports' digital presence from zero: the logo, brand identity, visual system, website, database, CMS, blog, and the infrastructure behind it. As with STEMise, I handed it off after launch — the organization runs it on their own from here.",
+        "process": "I started with the brand and visual identity, then designed the site around how people interact with Together Sports — program info, story, impact, blog content, and class availability, all in one hub, connected live to their USTA data.",
+        "results": "Created Together Sports' first complete digital presence and established its visual identity and brand system. Built a custom website, database, CMS, and blog, integrating live USTA class data. The site is now active in the organization's growth.",
+        "impact": "1,600+ youth coached, 20 communities served, 2,000+ volunteer hours, 26 coaches trained, 10 partner organizations, and 950 pieces of equipment donated."
       }
-    }
+    },
+    "impactLabel": "Current impact"
   },
   "contact": {
     "title": "Contact",
@@ -161,31 +146,29 @@
     "errorOffline": "The contact form is not available right now.",
     "errorGeneric": "Something went wrong. Try again."
   },
-  "footer": {
-    "ctaTitle": "Available for projects",
-    "ctaBody": "Tell me what your business does and what it needs. You get a proposal back.",
-    "ctaButton": "Say hi",
-    "note": "Designed and built by hand."
-  },
   "pack": {
     "packName": "lucia-adams.com",
-    "packSub": "3 projects inside",
     "open": "Open it",
     "skip": "Skip",
     "next": "Next",
     "done": "See the projects",
-    "legendary": "Legendary",
-    "rare": "Rare"
+    "legendary": "Epic",
+    "rare": "Rare",
+    "togetherSportsShort": "Together S."
   },
   "guestbook": {
     "title": "Guestbook",
+    "intro": "Leave a note if we worked together or something here helped you out.",
     "emptyNote": "No signatures yet.\n\nIf we worked together or\nsomething here helped, leave\nme a few lines.",
     "emptyCredit": "the first one could be yours",
     "formName": "Your name",
     "formMessage": "Your message",
     "formSubmit": "Sign",
     "formSending": "Sending...",
-    "formDone": "Done, thanks for signing. Your note is on the wall.",
+    "formDone": "Done, thanks for signing! Your note is on the wall.",
+    "previewTitle": "Preview",
+    "previewEmptyName": "Your name",
+    "previewEmptyMessage": "Your note shows up here as you type it.",
     "errorInvalid": "Check the name and the message.",
     "errorTurnstile": "Could not verify you're human. Try again.",
     "errorRate": "You signed recently. Try again tomorrow.",

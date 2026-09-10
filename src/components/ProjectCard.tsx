@@ -1,6 +1,6 @@
-import Image from "next/image";
-import { Link } from "@/i18n/navigation";
 import TiltCard from "./TiltCard";
+import ScrollingScreenshot from "./ScrollingScreenshot";
+import CyclingScreenshot from "./CyclingScreenshot";
 
 type Props = {
   name: string;
@@ -8,6 +8,8 @@ type Props = {
   year: string;
   alt: string;
   image: string;
+  images?: string[];
+  url: string;
   featured?: boolean;
 };
 
@@ -21,27 +23,27 @@ export default function ProjectCard({
   year,
   alt,
   image,
+  images,
+  url,
   featured = false,
 }: Props) {
   return (
     <li className={featured ? "sm:col-span-2" : undefined}>
-      <Link href="/work" className="group block">
+      <a href={url} target="_blank" rel="noopener noreferrer" className="group block">
         <TiltCard maxTilt={6}>
           {/* Cropped to a banner so a featured card cannot tower over the grid. */}
-          <div className="aspect-[1.9] overflow-hidden border border-line bg-surface">
-            <Image
+          {images && images.length > 1 ? (
+            <CyclingScreenshot
+              images={images.map((src) => ({ src, alt }))}
+              className="aspect-[1.9] border border-line bg-surface"
+            />
+          ) : (
+            <ScrollingScreenshot
               src={image}
               alt={alt}
-              width={1440}
-              height={900}
-              className="block h-full w-full object-cover object-top"
-              sizes={
-                featured
-                  ? "(min-width: 640px) 788px, 100vw"
-                  : "(min-width: 640px) 382px, 100vw"
-              }
+              className="aspect-[1.9] border border-line bg-surface"
             />
-          </div>
+          )}
         </TiltCard>
         <div className="mt-3 flex items-baseline justify-between gap-4">
           <h3 className="group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4">
@@ -51,7 +53,7 @@ export default function ProjectCard({
             {category} {year}
           </p>
         </div>
-      </Link>
+      </a>
     </li>
   );
 }

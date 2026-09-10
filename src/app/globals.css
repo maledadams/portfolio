@@ -125,11 +125,130 @@ a {
   }
 }
 
+/* A cute little wiggle on hover, like the portrait is ticklish. */
+@keyframes face-shake {
+  0%,
+  100% {
+    transform: rotate(0deg) translateX(0);
+  }
+  15% {
+    transform: rotate(-8deg) translateX(-2px);
+  }
+  30% {
+    transform: rotate(7deg) translateX(2px);
+  }
+  45% {
+    transform: rotate(-6deg) translateX(-2px);
+  }
+  60% {
+    transform: rotate(5deg) translateX(1px);
+  }
+  75% {
+    transform: rotate(-3deg) translateX(-1px);
+  }
+  90% {
+    transform: rotate(2deg);
+  }
+}
+
+/* Triggered via a JS class (not :hover) so the shake always plays to its
+   natural end even if the cursor leaves mid-animation, instead of the
+   CSS animation cutting off the instant :hover stops matching. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-face.is-shaking {
+    animation: face-shake 1100ms ease-in-out;
+  }
+}
+
 /* Hand-drawn emphasis under a phrase, the way ky marks key words. */
 .squiggle {
-  text-decoration: underline wavy currentColor;
+  text-decoration: underline wavy var(--squiggle-color, currentColor);
   text-decoration-thickness: 1.5px;
   text-underline-offset: 6px;
+}
+
+/* Stacks the typed line over a full-length invisible copy in the same grid
+   cell, so the final line count (and therefore height) is reserved from
+   the first frame — the page around it never drags up or down as the
+   visible text grows during typing. */
+.typewriter-stack {
+  display: grid;
+  width: 100%;
+}
+
+.typewriter-stack > * {
+  grid-area: 1 / 1;
+}
+
+.typewriter-ghost {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* The typewriter's blinking caret, riding right after the last typed letter. */
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 0.9em;
+  margin-left: 1px;
+  background: currentColor;
+  vertical-align: -0.1em;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .typewriter-cursor {
+    animation: typewriter-blink 900ms steps(1) infinite;
+  }
+}
+
+@keyframes typewriter-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* A soft glow that breathes in from inside the language toggle's own
+   border on hover, rather than an abrupt color snap. */
+.lang-toggle {
+  transition:
+    border-color 250ms ease,
+    color 250ms ease,
+    box-shadow 450ms ease;
+}
+
+.lang-toggle:hover {
+  box-shadow: inset 0 0 16px 2px rgb(255 255 255 / 16%);
+}
+
+/* Each letter of the L.A. mark jumps in a quick little wave on hover, then
+   rests until the next pass. The stagger between letters (--letter-delay)
+   is what makes it read as a wave instead of a single bounce; because the
+   whole cycle repeats identically, the wave always breaks the same way. */
+.la-letter {
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .la-logo:hover .la-letter {
+    animation: letter-jump 2600ms ease-in-out infinite;
+    animation-delay: var(--letter-delay, 0ms);
+  }
+}
+
+@keyframes letter-jump {
+  0%,
+  20%,
+  100% {
+    transform: translateY(0);
+  }
+  8% {
+    transform: translateY(-8px);
+  }
 }
 
 /* Route change: content lifts in. Keyed on pathname so it replays per page. */
@@ -176,6 +295,40 @@ a {
     opacity: 1 !important;
     transform: none !important;
   }
+}
+
+/* ------------------------------------------------------------------ */
+/* Sparkle stars — the "what I do" bullets and the contact CTA         */
+/* ------------------------------------------------------------------ */
+
+@keyframes twinkle {
+  0%,
+  100% {
+    transform: scale(0.85) rotate(0deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.05) rotate(10deg);
+    opacity: 1;
+  }
+}
+
+.sparkle-twinkle {
+  animation: twinkle 3.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sparkle-twinkle {
+    animation: none;
+  }
+}
+
+.cta-button .cta-arrow {
+  transition: transform 200ms ease;
+}
+
+.cta-button:hover .cta-arrow {
+  transform: translateX(4px);
 }
 
 /* ------------------------------------------------------------------ */
@@ -261,7 +414,10 @@ body[data-pack-open] {
   width: 160vmax;
   height: 160vmax;
   border-radius: 50%;
+  /* Mirrored 180deg so the burst reads from the top-left instead of the
+     bottom-right — same size, same spin, opposite side. */
   background: repeating-conic-gradient(
+    from 180deg,
     var(--ray) 0deg 9deg,
     transparent 9deg 24deg
   );
@@ -418,6 +574,24 @@ body[data-pack-open] {
 /* The trading card                                                   */
 /* ------------------------------------------------------------------ */
 
+/* Every project card revealed at once, wrapping as more are added —
+   scales to any count instead of assuming a fixed number of projects. */
+.pcard-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.25rem;
+  max-width: min(1000px, 92vw);
+  max-height: 72vh;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.pcard-grid .pcard {
+  width: min(240px, 62vw);
+}
+
 .pcard {
   width: min(330px, 78vw);
   aspect-ratio: 63 / 88;
@@ -500,6 +674,138 @@ body[data-pack-open] {
     transition: none;
     transform: none;
   }
+}
+
+/* ------------------------------------------------------------------ */
+/* Scrolling screenshot preview                                       */
+/* ------------------------------------------------------------------ */
+
+.scroll-shot {
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+
+/* Hold at top, glide down, hold at bottom, glide back up (the "reset"). */
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-shot.can-scroll img {
+    animation: scroll-shot-loop var(--scroll-duration, 26s) ease-in-out infinite;
+  }
+}
+
+@keyframes scroll-shot-loop {
+  0%,
+  8% {
+    transform: translateY(0);
+  }
+  46%,
+  54% {
+    transform: translateY(var(--scroll-distance, 0));
+  }
+  92%,
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* A card that crossfades between several screenshots. Two faces sit
+   stacked; only the back one's opacity ever changes, so its src can be
+   swapped while it's still invisible, never a visible pop. */
+.fade-shot {
+  position: relative;
+}
+
+.fade-shot-face {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1800ms ease-in-out;
+}
+
+.fade-shot-face.is-front {
+  opacity: 1;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-shot-face {
+    transition: none;
+  }
+}
+
+/* Work-page pagination: prev/next float at the vertical middle of the
+   viewport, pinned to their own side rather than sitting together, so they
+   read as page-turn controls rather than a centered toolbar. Page dots sit
+   in-flow at the bottom of the list instead. */
+.page-nav {
+  position: fixed;
+  top: 50%;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--muted);
+  transform: translateY(-50%);
+  transition:
+    color 200ms ease,
+    border-color 200ms ease,
+    transform 200ms ease;
+}
+
+.page-nav:hover {
+  color: var(--fg);
+  border-color: var(--fg);
+}
+
+.page-nav-prev {
+  left: 20px;
+}
+
+.page-nav-prev:hover {
+  transform: translateY(-50%) translateX(-2px);
+}
+
+.page-nav-next {
+  right: 20px;
+}
+
+.page-nav-next:hover {
+  transform: translateY(-50%) translateX(2px);
+}
+
+@media (max-width: 900px) {
+  .page-nav {
+    display: none;
+  }
+}
+
+.page-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--line);
+  transition:
+    background 200ms ease,
+    transform 200ms ease;
+}
+
+.page-dot:hover {
+  background: var(--muted);
+}
+
+.page-dot[aria-current="page"] {
+  background: var(--fg);
+  transform: scale(1.35);
 }
 
 /* Horizontal rail that bleeds past the measure, like the reference carousel. */
