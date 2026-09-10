@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
-/node_modules
+# dependencies (any level — local tooling keeps its own)
+node_modules/
 /.pnp
 .pnp.*
 .yarn/*
@@ -47,3 +47,14 @@ cloudflare-env.d.ts
 
 # cloudflare local secrets
 .dev.vars
+
+# local-only tooling and its output — the showcase recorder that captures the
+# project screenshots. Not part of the site, not needed to build or deploy.
+/tools/
+
+# asset-generation masters (icons, opengraph) — inputs to the committed
+# icon/opengraph files, not needed by the build
+/.icon-src/
+
+# browser-automation scratch output
+/.playwright-mcp/
