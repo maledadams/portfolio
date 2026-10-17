@@ -4,6 +4,11 @@
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-08-10",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  // Served on the apex only; SITE_URL in src/lib/seo.ts matches it. No
+  // *.workers.dev address or preview URLs, so there's one public surface.
+  "routes": [{ "pattern": "lucia-adams.com", "custom_domain": true }],
+  "workers_dev": false,
+  "preview_urls": false,
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
@@ -16,16 +21,19 @@
   ],
   // Turnstile site key (public, safe to commit). The matching secret key is
   // never here: `wrangler secret put TURNSTILE_SECRET`. See README.
+  // TURNSTILE_HOSTNAMES: frontend hosts a token may come from. Production
+  // only, so never localhost.
   "vars": {
-    "TURNSTILE_SITE_KEY": "REPLACE_WITH_SITE_KEY_FROM_DASHBOARD"
+    "TURNSTILE_SITE_KEY": "0x4AAAAAAFZZPtOz206_Ppcx",
+    "TURNSTILE_HOSTNAMES": "lucia-adams.com"
   },
-  // Guestbook storage.
-  // `database_id` is filled in by: wrangler d1 create lucia-adams-guestbook
+  // Contact form storage.
+  // `database_id` is filled in by: wrangler d1 create lucia-adams-portfolio
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "lucia-adams-guestbook",
-      "database_id": "REPLACE_WITH_ID_FROM_WRANGLER_D1_CREATE",
+      "database_name": "lucia-adams-portfolio",
+      "database_id": "485776a4-b14a-4d20-ab20-d7cae16409bb",
       "migrations_dir": "migrations"
     }
   ]

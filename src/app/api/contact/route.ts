@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { sendContactMessage } from "@/lib/contact";
+import { parseAnswers, sendContactMessage } from "@/lib/contact";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -20,10 +20,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ reason: "invalid" }, { status: 400 });
   }
 
-  const { name, email, message, website, token } = (body ?? {}) as Record<
-    string,
-    unknown
-  >;
+  const fields = (body && typeof body === "object" ? body : {}) as Record<string, unknown>;
+  const { website, token } = fields;
 
   // Honeypot: a real person never fills a field they cannot see. Answer 200
   // so a bot has no signal that it was caught.
@@ -31,11 +29,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  if (
-    typeof name !== "string" ||
-    typeof email !== "string" ||
-    typeof message !== "string"
-  ) {
+  const answers = parseAnswers(fields);
+  if (!answers) {
     return NextResponse.json({ reason: "invalid" }, { status: 400 });
   }
 
@@ -45,9 +40,7 @@ export async function POST(request: Request) {
     "unknown";
 
   const result = await sendContactMessage({
-    name,
-    email,
-    message,
+    answers,
     ip,
     turnstileToken: token,
   });

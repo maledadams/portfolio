@@ -34,12 +34,21 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* The centred measure both reference sites land on. */
+/* Phones: 22px is a lot of type for a 375px screen. Everything is sized in
+   em, so dropping the base scales the whole page down with it. */
+@media (max-width: 639px) {
+  body {
+    font-size: 1.1875rem;
+  }
+}
+
+/* The centred measure both reference sites land on. The gutter shrinks on
+   small phones so content isn't squeezed into a narrow column. */
 .center {
   width: 100%;
   max-width: 860px;
   margin-inline: auto;
-  padding-inline: 36px;
+  padding-inline: clamp(20px, 5vw, 36px);
 }
 
 a {
@@ -77,36 +86,12 @@ a {
   border-radius: 2px;
 }
 
-/*
- * Nav links read as paths. The arrow is collapsed to zero width and only
- * takes up space on hover or focus, so nothing shifts around it.
- */
+/* The padding gives the short mono links a comfortable tap height on touch
+   screens without changing how they look. */
 .navlink {
   display: inline-flex;
   align-items: center;
-}
-
-.navlink .arrow {
-  display: inline-flex;
-  align-items: center;
-  width: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition:
-    width 160ms ease,
-    opacity 160ms ease;
-}
-
-.navlink:hover .arrow,
-.navlink:focus-visible .arrow {
-  width: 1.15em;
-  opacity: 1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .navlink .arrow {
-    transition: none;
-  }
+  padding-block: 6px;
 }
 
 .navlink .slash {
@@ -117,12 +102,6 @@ a {
 .navlink:hover .slash,
 .navlink[aria-current="page"] .slash {
   color: var(--fg);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .navlink .arrow {
-    transition: none;
-  }
 }
 
 /* A cute little wiggle on hover, like the portrait is ticklish. */
@@ -214,17 +193,6 @@ a {
 
 /* A soft glow that breathes in from inside the language toggle's own
    border on hover, rather than an abrupt color snap. */
-.lang-toggle {
-  transition:
-    border-color 250ms ease,
-    color 250ms ease,
-    box-shadow 450ms ease;
-}
-
-.lang-toggle:hover {
-  box-shadow: inset 0 0 16px 2px rgb(255 255 255 / 16%);
-}
-
 /* Each letter of the L.A. mark jumps in a quick little wave on hover, then
    rests until the next pass. The stagger between letters (--letter-delay)
    is what makes it read as a wave instead of a single bounce; because the
@@ -649,33 +617,6 @@ body[data-pack-open] {
   }
 }
 
-/* Guestbook note: a slightly rotated card of tinted paper. */
-.notecard {
-  aspect-ratio: 4 / 3;
-  transform: rotate(var(--rotation, 0deg));
-  background-color: var(--note-tint, var(--surface));
-  background-image:
-    radial-gradient(
-      circle at 15% 12%,
-      rgb(255 255 255 / 0.55),
-      transparent 55%
-    ),
-    radial-gradient(circle at 85% 90%, rgb(0 0 0 / 0.05), transparent 60%);
-  transition: transform 220ms ease-out;
-}
-
-.notecard:hover {
-  transform: rotate(0deg) translateY(-4px);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .notecard,
-  .notecard:hover {
-    transition: none;
-    transform: none;
-  }
-}
-
 /* ------------------------------------------------------------------ */
 /* Scrolling screenshot preview                                       */
 /* ------------------------------------------------------------------ */
@@ -751,36 +692,35 @@ body[data-pack-open] {
   place-items: center;
   width: 44px;
   height: 44px;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background: var(--bg);
+  /* Same fill, rounding and lift as .btn-card, written out here because
+     these also need translateY(-50%) to sit at the viewport's middle. */
+  border-radius: 0.375rem;
+  background: rgb(255 255 255 / 0.1);
   color: var(--muted);
   transform: translateY(-50%);
   transition:
     color 200ms ease,
-    border-color 200ms ease,
+    background-color 200ms ease,
     transform 200ms ease;
 }
 
 .page-nav:hover {
   color: var(--fg);
-  border-color: var(--fg);
+  background: rgb(255 255 255 / 0.15);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .page-nav:hover {
+    transform: translateY(calc(-50% - 3px));
+  }
 }
 
 .page-nav-prev {
   left: 20px;
 }
 
-.page-nav-prev:hover {
-  transform: translateY(-50%) translateX(-2px);
-}
-
 .page-nav-next {
   right: 20px;
-}
-
-.page-nav-next:hover {
-  transform: translateY(-50%) translateX(2px);
 }
 
 @media (max-width: 900px) {
@@ -790,6 +730,7 @@ body[data-pack-open] {
 }
 
 .page-dot {
+  position: relative;
   width: 8px;
   height: 8px;
   border-radius: 999px;
@@ -799,6 +740,13 @@ body[data-pack-open] {
     transform 200ms ease;
 }
 
+/* An invisible 32px hit area around the 8px dot, so it's tappable. */
+.page-dot::after {
+  content: "";
+  position: absolute;
+  inset: -12px;
+}
+
 .page-dot:hover {
   background: var(--muted);
 }
@@ -806,6 +754,107 @@ body[data-pack-open] {
 .page-dot[aria-current="page"] {
   background: var(--fg);
   transform: scale(1.35);
+}
+
+/* The four problem/role/process/results blocks on each project: flat
+   translucent white cards, no shadow, that lift a couple of pixels on hover. */
+.info-card {
+  background: rgb(255 255 255 / 0.1);
+  color: var(--fg);
+  transition: transform 200ms ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .info-card:hover {
+    transform: translateY(-3px);
+  }
+}
+
+/* Buttons share the info cards' look: same translucent fill and rounding,
+   no outline, same small lift on hover. */
+.btn-card {
+  border-radius: 0.375rem;
+  background: rgb(255 255 255 / 0.1);
+  transition:
+    transform 200ms ease,
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+.btn-card:hover {
+  background: rgb(255 255 255 / 0.15);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .btn-card:hover {
+    transform: translateY(-3px);
+  }
+}
+
+/* For a button sitting on a card: page-background fill instead of the
+   translucent one, so it stands out from the card behind it. */
+.btn-card-solid,
+.btn-card-solid:hover {
+  background: var(--bg);
+}
+
+/* ------------------------------------------------------------------ */
+/* Contact flow: one question per step                                */
+/* ------------------------------------------------------------------ */
+
+/* Same fill and rounding as .info-card, without the hover lift: a form
+   that moves while you type in it feels unstable. */
+.flow-card {
+  position: relative;
+  background: rgb(255 255 255 / 0.1);
+}
+
+/* Answer tags sit on the card, so they take the page background (like
+   .btn-card-solid) and flip to solid white once picked. */
+.flow-tag {
+  background: var(--bg);
+  color: var(--fg);
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.flow-tag:hover {
+  background: #232323;
+}
+
+.flow-tag.is-selected {
+  background: #ffffff;
+  color: var(--bg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .flow-tag:active {
+    transform: scale(0.97);
+  }
+
+  .flow-step[data-dir="1"] {
+    animation: flow-in-next 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .flow-step[data-dir="-1"] {
+    animation: flow-in-back 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes flow-in-next {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+}
+
+@keyframes flow-in-back {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
 }
 
 /* Horizontal rail that bleeds past the measure, like the reference carousel. */

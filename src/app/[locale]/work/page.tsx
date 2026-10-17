@@ -65,7 +65,7 @@ export default function WorkPage() {
       <PackReveal cards={orderedPackCards} labels={packLabels} />
 
       <section className="center pb-14 text-center">
-        <h1 className="text-[1.9rem] leading-[1.2] font-normal tracking-[-0.02em] sm:text-[2.4rem]">
+        <h1 className="font-mono text-[1.9rem] leading-[1.2] font-bold tracking-[-0.02em] sm:text-[2.4rem]">
           {t("title")}
         </h1>
       </section>

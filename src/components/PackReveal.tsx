@@ -53,6 +53,13 @@ function usePrefersReducedMotion() {
   );
 }
 
+/*
+ * Module scope survives client-side navigation but not a reload, so the pack
+ * plays once per visit: coming back to /work from the nav skips it, while a
+ * refresh or a fresh open of the site shows it again.
+ */
+let packShown = false;
+
 /**
  * The /work entrance: projects arrive as a sealed pack over a darkened,
  * locked page. Opening it reveals one card at a time, with the backdrop
@@ -66,12 +73,16 @@ export default function PackReveal({
   cards: PackCard[];
   labels: Labels;
 }) {
-  const [phase, setPhase] = useState<Phase>("sealed");
+  const [phase, setPhase] = useState<Phase>(() => (packShown ? "closed" : "sealed"));
   const overlayRef = useRef<HTMLDivElement>(null);
   const advanceRef = useRef<HTMLButtonElement>(null);
   const mounted = !usePrefersReducedMotion();
 
   const close = useCallback(() => setPhase("closed"), []);
+
+  useEffect(() => {
+    if (mounted) packShown = true;
+  }, [mounted]);
 
   // Scroll lock while open.
   useEffect(() => {
@@ -227,7 +238,7 @@ export default function PackReveal({
               ref={advanceRef}
               type="button"
               onClick={close}
-              className="border border-white/30 px-5 py-2 font-mono text-[0.8em] text-white transition-colors hover:border-white"
+              className="btn-card px-5 py-2 font-mono text-[0.8em] text-white"
             >
               {labels.done}
             </button>

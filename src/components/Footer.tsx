@@ -2,8 +2,8 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
 const external = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/lucia-m-adams/" },
-  { label: "GitHub", href: "https://github.com/maledadams" },
+  { label: "linkedin", href: "https://www.linkedin.com/in/lucia-m-adams/" },
+  { label: "github", href: "https://github.com/maledadams" },
 ];
 
 export default function Footer() {

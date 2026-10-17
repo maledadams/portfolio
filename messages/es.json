@@ -8,7 +8,6 @@
     "home": "inicio",
     "work": "trabajos",
     "contact": "contacto",
-    "guestbook": "firmas",
     "lang": "Cambiar idioma"
   },
   "home": {
@@ -31,17 +30,16 @@
         "t": "experiencias."
       }
     ],
-    "projectsTitle": "Trabajos Seleccionados",
     "servicesTitle": "Lo Que Hago",
     "services": [
       "Infraestructura",
-      "Marketing automatizado",
-      "Consultoría técnica",
+      "Backend y bases de datos",
       "Flujos asistidos por IA",
       "Desarrollo web full-stack",
-      "Analítica y reportes",
       "Identidad de marca y logo",
-      "Backend y bases de datos"
+      "Consultoría técnica",
+      "Analítica y reportes",
+      "Marketing automatizado"
     ],
     "moreWork": "Ver los tres proyectos en detalle",
     "ctaTitle": "¿Tienes Un Proyecto En Mente?",
@@ -52,6 +50,8 @@
     "title": "Trabajos",
     "intro": "Tres proyectos en producción. Para cada uno: lo que ves, y la máquina que lo mueve.",
     "visit": "Ver sitio",
+    "visitStable": "Ver sitio original (lo que entregué)",
+    "visitLive": "Ver sitio (no gestionado por mí)",
     "problemLabel": "El Problema",
     "roleLabel": "Mi Rol",
     "processLabel": "El Proceso",
@@ -70,7 +70,7 @@
         "role": "Diseñé y desarrollé la plataforma de e-commerce de Pulpina y su sistema de operaciones internas: la tienda y las herramientas administrativas detrás. A diferencia de STEMise y Together Sports, sigo gestionando el sistema yo misma.",
         "process": "Mapeé el flujo de trabajo existente y lo reconstruí alrededor de un sistema centralizado: la tienda y las herramientas de administración para productos, pedidos, inventario y ventas — construidas alrededor de su proceso real por orden de llegada.",
         "results": "Centralicé un catálogo de 300 a 500 productos, reemplazando Instagram como catálogo principal. Agregué búsqueda de productos, gestión de pedidos e inventario, y automaticé el trabajo recurrente de ventas. El negocio ahora es mucho más fácil de manejar.",
-        "impact": "Lanzado en agosto de 2026 — todavía es muy pronto para tener números sólidos. Los datos de impacto llegarán con más tiempo en producción."
+        "impact": "Solo en septiembre de 2026: 347 usuarios (+91% vs. agosto), 498 sesiones, 4,188 vistas de página, 764 productos vistos, y 133 añadidos al carrito (+565%)."
       },
       "stemise": {
         "name": "STEMise",
@@ -94,7 +94,7 @@
         "role": "Construí la presencia digital de Together Sports desde cero: el logo, la identidad de marca, el sistema visual, el sitio, la base de datos, el CMS, el blog y la infraestructura detrás. Entregué el proyecto tras el lanzamiento — lo manejan por su cuenta.",
         "process": "Empecé por la marca y la identidad visual, y diseñé el sitio alrededor de cómo la gente interactúa con Together Sports: programas, historia, impacto, blog y disponibilidad de clases, todo en un mismo lugar, conectado en vivo a los datos de USTA.",
         "results": "Creé la primera presencia digital completa de Together Sports y establecí su identidad visual y sistema de marca. Construí un sitio a medida, base de datos, CMS y blog, e integré la disponibilidad de clases de USTA en vivo. Hoy es parte activa de su crecimiento.",
-        "impact": "1,600+ jóvenes entrenados, 20 comunidades atendidas, 2,000+ horas de voluntariado, 26 entrenadores capacitados, 10 organizaciones aliadas, y 950 piezas de equipo donadas."
+        "impact": "2,000+ jóvenes entrenados, 20 comunidades atendidas, 3,300+ horas de voluntariado, 40 entrenadores capacitados, 10 organizaciones aliadas, y 1,500+ piezas de equipo donadas."
       }
     },
     "impactLabel": "Impacto Actual"
@@ -125,26 +125,91 @@
         "body": "Iteramos hasta que lo que ves te convence y lo que no ves trabaja solo."
       }
     ],
-    "elsewhereTitle": "En Otros Sitios",
-    "social": {
-      "linkedin": "Perfil de LinkedIn",
-      "github": "Perfil de GitHub"
-    },
-    "baseLabel": "Base",
-    "baseValue": "Santo Domingo, RD · remoto",
-    "formTitle": "Enviar Un Mensaje",
-    "formBody": "Leo cada mensaje en persona y te respondo en uno o dos días.",
-    "formName": "Tu nombre",
-    "formEmail": "Tu email",
-    "formMessage": "Tu mensaje",
-    "formSubmit": "Enviar",
-    "formSending": "Enviando...",
-    "formDone": "Listo, gracias. Te respondo pronto.",
     "errorInvalid": "Revisa los campos e intenta de nuevo.",
     "errorTurnstile": "No pudimos verificar que eres humano. Intenta de nuevo.",
     "errorRate": "Ya enviaste un mensaje hace poco. Intenta de nuevo mañana.",
     "errorOffline": "El formulario de contacto no está disponible ahora mismo.",
-    "errorGeneric": "Algo falló. Intenta de nuevo."
+    "errorGeneric": "Algo falló. Intenta de nuevo.",
+    "flow": {
+      "progress": "{n} / {total}",
+      "next": "Siguiente",
+      "back": "Atrás",
+      "submit": "Enviar",
+      "sending": "Enviando...",
+      "optional": "opcional",
+      "done": "¡Gracias, {name}! Te respondo en uno o dos días.",
+      "doneBody": "Leo cada mensaje en persona, así que pronto sabrás de mí.",
+      "steps": {
+        "name": {
+          "question": "¿Cómo te llamas?",
+          "hint": "Para saber a quién le escribo.",
+          "placeholder": "Tu nombre"
+        },
+        "services": {
+          "question": "¿En qué te puedo ayudar?",
+          "hint": "Elige todo lo que aplique."
+        },
+        "org": {
+          "question": "¿Qué describe mejor tu proyecto?",
+          "hint": "Así entiendo mejor tu contexto."
+        },
+        "site": {
+          "question": "¿Ya tienes sitio web?",
+          "hint": "No pasa nada si todavía no."
+        },
+        "budget": {
+          "question": "¿Con qué presupuesto cuentas?",
+          "hint": "Es solo para orientarme, no un compromiso."
+        },
+        "timeline": {
+          "question": "¿Para cuándo lo necesitas?",
+          "hint": "Aproximado está perfecto."
+        },
+        "email": {
+          "question": "¿A qué email te respondo?",
+          "hint": "Solo lo uso para responderte.",
+          "placeholder": "tu@email.com"
+        },
+        "message": {
+          "question": "¿Algo más que quieras contarme?",
+          "hint": "Puedes dejarlo en blanco y enviar así.",
+          "placeholder": "Ideas, enlaces, lo que se te ocurra..."
+        }
+      },
+      "options": {
+        "services": {
+          "web": "Sitio web o tienda",
+          "brand": "Marca y logo",
+          "automation": "Automatización o IA",
+          "system": "Sistema a medida",
+          "consulting": "Consultoría",
+          "other": "Otra cosa"
+        },
+        "org": {
+          "business": "Negocio o tienda",
+          "nonprofit": "ONG",
+          "startup": "Startup",
+          "personal": "Personal u otro"
+        },
+        "site": {
+          "yes": "Sí",
+          "redo": "Sí, pero hay que rehacerlo",
+          "no": "No"
+        },
+        "budget": {
+          "lt500": "Menos de $500",
+          "500-1500": "$500–1.5K",
+          "1500-5000": "$1.5K–5K",
+          "5000+": "$5K+"
+        },
+        "timeline": {
+          "asap": "Lo antes posible",
+          "1-3m": "En 1–3 meses",
+          "3m+": "En 3 meses o más",
+          "exploring": "Solo estoy explorando"
+        }
+      }
+    }
   },
   "pack": {
     "packName": "lucia-adams.com",
@@ -155,24 +220,5 @@
     "legendary": "Épica",
     "rare": "Rara",
     "togetherSportsShort": "Together S."
-  },
-  "guestbook": {
-    "title": "Libro De Visitas",
-    "intro": "Déjame unas líneas si trabajamos juntos o algo de aquí te sirvió.",
-    "emptyNote": "Todavía no hay firmas.\n\nSi trabajamos juntos o algo\nde aquí te sirvió, déjame\nunas líneas.",
-    "emptyCredit": "la primera puede ser tuya",
-    "formName": "Tu nombre",
-    "formMessage": "Tu mensaje",
-    "formSubmit": "Firmar",
-    "formSending": "Enviando...",
-    "formDone": "¡Listo, gracias por firmar! Tu nota ya está en la pared.",
-    "previewTitle": "Vista Previa",
-    "previewEmptyName": "Tu nombre",
-    "previewEmptyMessage": "Tu nota aparece aquí mientras la escribes.",
-    "errorInvalid": "Revisa el nombre y el mensaje.",
-    "errorTurnstile": "No pudimos verificar que eres humano. Intenta de nuevo.",
-    "errorRate": "Ya firmaste hace poco. Intenta de nuevo mañana.",
-    "errorOffline": "El libro de visitas no está disponible ahora mismo.",
-    "errorGeneric": "Algo falló. Intenta de nuevo."
   }
 }

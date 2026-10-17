@@ -8,7 +8,6 @@
     "home": "home",
     "work": "work",
     "contact": "contact",
-    "guestbook": "guestbook",
     "lang": "Switch language"
   },
   "home": {
@@ -31,17 +30,16 @@
         "t": "experiences."
       }
     ],
-    "projectsTitle": "Selected Works",
     "servicesTitle": "What I do",
     "services": [
       "Infrastructure",
-      "Marketing automation",
-      "Technical consulting",
+      "Backend & databases",
       "AI-augmented workflows",
       "Full-stack web development",
-      "Analytics & reporting",
       "Brand identity & logo design",
-      "Backend & databases"
+      "Technical consulting",
+      "Analytics & reporting",
+      "Marketing automation"
     ],
     "moreWork": "See all three projects in detail",
     "ctaTitle": "Got a project in mind?",
@@ -52,6 +50,8 @@
     "title": "Work",
     "intro": "Three projects in production. For each one: what you see, and the machine driving it.",
     "visit": "Visit site",
+    "visitStable": "Visit original site (what I delivered)",
+    "visitLive": "Visit site (not managed by me)",
     "problemLabel": "The problem",
     "roleLabel": "My role",
     "processLabel": "The process",
@@ -70,7 +70,7 @@
         "role": "I designed and developed Pulpina's e-commerce platform and internal operations system: the storefront and the admin tools behind it. Unlike STEMise and Together Sports, I also continue to manage and maintain it myself.",
         "process": "I mapped the existing workflow and rebuilt it around one centralized system: a customer-facing store plus admin tools for products, orders, inventory, and sales — built around their real first-come-first-served order process, not a generic e-commerce setup.",
         "results": "Centralized a catalog of roughly 300-500 products, replacing Instagram. Added searchable products, order management, and inventory tools, and automated recurring sales work. The business now runs significantly easier, with more purchases since launch.",
-        "impact": "Launched August 2026 — still too early for solid numbers. Impact data will follow as the store builds a track record."
+        "impact": "In September 2026 alone: 347 users (+91% vs. August), 498 sessions, 4,188 page views, 764 products viewed, and 133 add-to-carts (+565%)."
       },
       "stemise": {
         "name": "STEMise",
@@ -94,7 +94,7 @@
         "role": "I built Together Sports' digital presence from zero: the logo, brand identity, visual system, website, database, CMS, blog, and the infrastructure behind it. As with STEMise, I handed it off after launch — the organization runs it on their own from here.",
         "process": "I started with the brand and visual identity, then designed the site around how people interact with Together Sports — program info, story, impact, blog content, and class availability, all in one hub, connected live to their USTA data.",
         "results": "Created Together Sports' first complete digital presence and established its visual identity and brand system. Built a custom website, database, CMS, and blog, integrating live USTA class data. The site is now active in the organization's growth.",
-        "impact": "1,600+ youth coached, 20 communities served, 2,000+ volunteer hours, 26 coaches trained, 10 partner organizations, and 950 pieces of equipment donated."
+        "impact": "2,000+ youth coached, 20 communities served, 3,300+ volunteer hours, 40 coaches trained, 10 partner organizations, and 1,500+ pieces of equipment donated."
       }
     },
     "impactLabel": "Current impact"
@@ -125,26 +125,91 @@
         "body": "We iterate until what you see convinces you and what you don't see runs on its own."
       }
     ],
-    "elsewhereTitle": "Elsewhere",
-    "social": {
-      "linkedin": "LinkedIn profile",
-      "github": "GitHub profile"
-    },
-    "baseLabel": "Base",
-    "baseValue": "Santo Domingo, DR · remote",
-    "formTitle": "Send a message",
-    "formBody": "I read every message myself and get back to you within a day or two.",
-    "formName": "Your name",
-    "formEmail": "Your email",
-    "formMessage": "Your message",
-    "formSubmit": "Send",
-    "formSending": "Sending...",
-    "formDone": "Done, thanks. I will get back to you soon.",
     "errorInvalid": "Check the fields and try again.",
     "errorTurnstile": "Could not verify you're human. Try again.",
     "errorRate": "You already sent a message recently. Try again tomorrow.",
     "errorOffline": "The contact form is not available right now.",
-    "errorGeneric": "Something went wrong. Try again."
+    "errorGeneric": "Something went wrong. Try again.",
+    "flow": {
+      "progress": "{n} / {total}",
+      "next": "Next",
+      "back": "Back",
+      "submit": "Send",
+      "sending": "Sending...",
+      "optional": "optional",
+      "done": "Thank you, {name}! I'll get back to you in a day or two.",
+      "doneBody": "I read every message myself, so you'll hear from me soon.",
+      "steps": {
+        "name": {
+          "question": "What's your name?",
+          "hint": "So I know who I'm writing to.",
+          "placeholder": "Your name"
+        },
+        "services": {
+          "question": "What can I help with?",
+          "hint": "Pick everything that applies."
+        },
+        "org": {
+          "question": "What best describes your project?",
+          "hint": "Helps me understand your context."
+        },
+        "site": {
+          "question": "Do you already have a website?",
+          "hint": "Totally fine if not yet."
+        },
+        "budget": {
+          "question": "What budget do you have in mind?",
+          "hint": "Just to get my bearings, not a commitment."
+        },
+        "timeline": {
+          "question": "When do you need it?",
+          "hint": "A rough idea is perfect."
+        },
+        "email": {
+          "question": "Where should I reply?",
+          "hint": "I only use it to get back to you.",
+          "placeholder": "you@email.com"
+        },
+        "message": {
+          "question": "Anything else you'd like to tell me?",
+          "hint": "You can leave it blank and send as is.",
+          "placeholder": "Ideas, links, anything that comes to mind..."
+        }
+      },
+      "options": {
+        "services": {
+          "web": "Website or store",
+          "brand": "Brand & logo",
+          "automation": "Automation or AI",
+          "system": "Custom system",
+          "consulting": "Consulting",
+          "other": "Something else"
+        },
+        "org": {
+          "business": "Business or store",
+          "nonprofit": "Nonprofit",
+          "startup": "Startup",
+          "personal": "Personal or other"
+        },
+        "site": {
+          "yes": "Yes",
+          "redo": "Yes, but it needs a redo",
+          "no": "No"
+        },
+        "budget": {
+          "lt500": "Under $500",
+          "500-1500": "$500–1.5K",
+          "1500-5000": "$1.5K–5K",
+          "5000+": "$5K+"
+        },
+        "timeline": {
+          "asap": "As soon as possible",
+          "1-3m": "In 1–3 months",
+          "3m+": "3+ months out",
+          "exploring": "Just exploring"
+        }
+      }
+    }
   },
   "pack": {
     "packName": "lucia-adams.com",
@@ -155,24 +220,5 @@
     "legendary": "Epic",
     "rare": "Rare",
     "togetherSportsShort": "Together S."
-  },
-  "guestbook": {
-    "title": "Guestbook",
-    "intro": "Leave a note if we worked together or something here helped you out.",
-    "emptyNote": "No signatures yet.\n\nIf we worked together or\nsomething here helped, leave\nme a few lines.",
-    "emptyCredit": "the first one could be yours",
-    "formName": "Your name",
-    "formMessage": "Your message",
-    "formSubmit": "Sign",
-    "formSending": "Sending...",
-    "formDone": "Done, thanks for signing! Your note is on the wall.",
-    "previewTitle": "Preview",
-    "previewEmptyName": "Your name",
-    "previewEmptyMessage": "Your note shows up here as you type it.",
-    "errorInvalid": "Check the name and the message.",
-    "errorTurnstile": "Could not verify you're human. Try again.",
-    "errorRate": "You signed recently. Try again tomorrow.",
-    "errorOffline": "The guestbook is not available right now.",
-    "errorGeneric": "Something went wrong. Try again."
   }
 }

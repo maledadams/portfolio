@@ -1,15 +1,16 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 
-export type VerifyResult = { ok: true } | { ok: false; reason: "turnstile" };
+export type VerifyResult =
+  | { ok: true }
+  | { ok: false; reason: "turnstile" | "unconfigured" };
 
 /**
  * Verifies a Turnstile token against Cloudflare's siteverify endpoint.
  *
- * Skip-open when TURNSTILE_SECRET isn't configured yet: the widget has to be
- * created by hand in the dashboard (see README), so until that happens the
- * forms still work on honeypot + rate limiting alone. The moment the secret
- * is set with `wrangler secret put TURNSTILE_SECRET`, every submission is
- * checked automatically with no further code changes.
+ * Fail-closed: in production a missing TURNSTILE_SECRET rejects every
+ * submission instead of waving it through, so a forgotten secret can never
+ * leave the form open to bots. Only `next dev` skips the check, so local work
+ * doesn't need a widget. Set it with `wrangler secret put TURNSTILE_SECRET`.
  */
 export async function verifyTurnstile(
   token: unknown,
@@ -17,14 +18,30 @@ export async function verifyTurnstile(
   expectedAction: string,
 ): Promise<VerifyResult> {
   let secret: string | undefined;
+  let hostnames = new Set<string>();
   try {
     const { env } = await getCloudflareContext({ async: true });
-    secret = (env as { TURNSTILE_SECRET?: string }).TURNSTILE_SECRET;
+    const e = env as { TURNSTILE_SECRET?: string; TURNSTILE_HOSTNAMES?: string };
+    secret = e.TURNSTILE_SECRET;
+    // The frontend hostnames a token may come from, per deployment. The
+    // production value in wrangler.jsonc never includes localhost.
+    hostnames = new Set(
+      (e.TURNSTILE_HOSTNAMES ?? "")
+        .split(",")
+        .map((h) => h.trim())
+        .filter(Boolean),
+    );
   } catch {
     secret = undefined;
   }
 
-  if (!secret) return { ok: true };
+  if (!secret) {
+    return process.env.NODE_ENV === "development"
+      ? { ok: true }
+      : { ok: false, reason: "unconfigured" };
+  }
+
+  if (hostnames.size === 0) return { ok: false, reason: "unconfigured" };
 
   if (typeof token !== "string" || token.length === 0 || token.length > 2048) {
     return { ok: false, reason: "turnstile" };
@@ -45,9 +62,16 @@ export async function verifyTurnstile(
     const result = (await response.json()) as {
       success?: boolean;
       action?: string;
+      hostname?: string;
     };
-    if (!result.success) return { ok: false, reason: "turnstile" };
-    if (result.action && result.action !== expectedAction) {
+    // All three must hold: a token minted for another form (action) or on
+    // another site (hostname) is rejected even if Cloudflare says success.
+    if (
+      result.success !== true ||
+      result.action !== expectedAction ||
+      !result.hostname ||
+      !hostnames.has(result.hostname)
+    ) {
       return { ok: false, reason: "turnstile" };
     }
     return { ok: true };

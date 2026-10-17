@@ -1,8 +1,8 @@
 # lucia-adams.com
 
 Portfolio for Lucia Adams. Next.js on Cloudflare Workers, Spanish by default
-with an English toggle, a guestbook and a contact form both backed by D1, and
-Turnstile guarding both once it's set up.
+with an English toggle, and a contact form backed by D1, guarded by Turnstile,
+that emails a copy of each message through Resend.
 
 ## Running it
 
@@ -11,7 +11,7 @@ pnpm install
 pnpm dev            # http://localhost:3000
 ```
 
-The guestbook and contact form need a local database once:
+The contact form needs a local database once:
 
 ```bash
 pnpm db:migrate:local
@@ -21,115 +21,99 @@ Everything written locally lives in `.wrangler/state` and is not shared.
 
 ## Going live on Cloudflare
 
-The site is not deployed yet. Three steps, in order.
-
-**1. Create the database.** This prints a `database_id`.
-
-```bash
-npx wrangler d1 create lucia-adams-guestbook
-```
-
-**2. Paste that id into `wrangler.jsonc`**, replacing
-`REPLACE_WITH_ID_FROM_WRANGLER_D1_CREATE`. Nothing works until this is real.
-
-**3. Create the tables on the remote database, then deploy.**
+The D1 database `lucia-adams-portfolio` already exists and has its tables;
+its id is in `wrangler.jsonc`. The Worker is served on `lucia-adams.com`
+(the `routes` entry in `wrangler.jsonc`).
 
 ```bash
-pnpm db:migrate     # applies migrations/ to the real D1
+pnpm db:migrate     # applies any new migrations/ to the real D1
 pnpm deploy         # builds with OpenNext and uploads the Worker
 ```
 
 `pnpm preview` runs the built Worker locally, which is closer to production
 than `pnpm dev` and worth using before a deploy.
 
+**Building on Windows** needs Developer Mode on (Settings → System → For
+developers), because the OpenNext build creates symlinks. Without it the build
+fails with `EPERM ... symlink`. Building inside WSL works too.
+
+`src/middleware.ts` is deliberately not renamed to `proxy.ts`: Next 16 runs
+`proxy.ts` on the Node.js runtime, which OpenNext for Cloudflare can't deploy.
+
 ## Turnstile (bot protection)
 
-Both forms work without this, held up by a honeypot field and rate limiting
-alone. Adding Turnstile is optional but recommended before the site is public.
-It has to be created by hand: the CLI token available in this environment is
-missing the `challenge-widgets.write` scope, so the dashboard is the only way.
+**Required in production.** `src/lib/turnstile.ts` fails closed: if
+`TURNSTILE_SECRET` is missing, every submission is rejected with a "not
+available" message instead of slipping through. Only `pnpm dev` skips the
+check. The widget has to be created by hand: the CLI token is missing the
+`challenge-widgets.write` scope, so the dashboard is the only way.
 
 **1. Create the widget.** [dash.cloudflare.com](https://dash.cloudflare.com) →
 Turnstile → Add widget.
-- Domains: `localhost`, `127.0.0.1`, and `lucia-adams.com` once that's live.
+- Domains: `lucia-adams.com`, plus `localhost` if you want to test it locally.
 - Widget mode: **Invisible**. No checkbox, no visible UI at all.
 
-**2. Site key** (public, safe to commit) goes in `wrangler.jsonc`, replacing
-`REPLACE_WITH_SITE_KEY_FROM_DASHBOARD` under `vars.TURNSTILE_SITE_KEY`.
+**2. Site key** (public, already in `wrangler.jsonc` as
+`vars.TURNSTILE_SITE_KEY`). `vars.TURNSTILE_HOSTNAMES` lists the frontend
+hosts a token may come from (`lucia-adams.com` only, never localhost); the
+server rejects tokens whose hostname or action (`contact`) don't match.
 
-**3. Secret key** (never commit this) goes in two places:
+**3. Secret key** (never commit this, never paste it into a chat):
 
 ```bash
-# Production
 npx wrangler secret put TURNSTILE_SECRET
-
-# Local dev — create .dev.vars (already gitignored) with:
-echo 'TURNSTILE_SECRET=your-secret-here' >> .dev.vars
 ```
-
-That's it. `src/lib/turnstile.ts` reads `TURNSTILE_SECRET` at request time and
-starts verifying every submission the moment it's set. No code changes, no
-redeploy needed beyond picking up the new secret.
-
-## Guestbook
-
-Signatures publish immediately, because a guestbook that holds every note for
-review does not feel like a guestbook. Protecting it:
-
-- Name capped at 40 characters, message at 220.
-- A honeypot field no human can see. Bots that fill it get a cheerful `200`
-  and nothing is written.
-- Three signatures per author per 24 hours. The author is identified by a
-  SHA-256 hash of their IP salted with the current date, so it cannot be used
-  to follow anyone across days.
-- Turnstile, once set up (see above).
-
-To take a note down:
-
-```bash
-npx wrangler d1 execute lucia-adams-guestbook --remote \
-  --command="UPDATE guestbook SET approved = 0 WHERE id = 12"
-```
-
-Only rows with `approved = 1` are shown. To review everything before it goes
-public instead, change the column default in a new migration and flip rows to
-`1` as you approve them.
 
 ## Contact form
 
 Deliberately not a `mailto:` link and the email address is not printed
-anywhere on the site. Submissions go straight into D1's `messages` table
-instead, guarded the same way the guestbook is (length caps, honeypot, rate
-limit, Turnstile). Nothing here emails anyone yet; read new messages with:
+anywhere on the site or in the repo. Submissions go into D1's `messages`
+table, guarded by length caps, a honeypot, a rate limit (3 per author per
+24 h, keyed on a day-salted IP hash) and Turnstile.
+
+**Email on every new message (Resend).** After a message is saved, a copy is
+sent through [Resend](https://resend.com): an HTML email styled like the site
+on white (`src/lib/contact-email.ts`, everything the visitor typed is escaped)
+plus a plain-text part, with Reply-To set to the sender. It's best-effort: if Resend is down or unconfigured the message is
+still saved. To turn it on:
+
+1. Create a Resend account and add the domain `lucia-adams.com`. Resend can
+   add its DNS records to Cloudflare for you. They live on `send.` and
+   `resend._domainkey.`, so the Zoho MX records are untouched.
+2. Create an API key with **Sending access** only, limited to that domain.
+3. Store both values as secrets:
 
 ```bash
-npx wrangler d1 execute lucia-adams-guestbook --remote \
-  --command="SELECT id, name, email, message, created_at FROM messages WHERE read = 0 ORDER BY created_at DESC"
+npx wrangler secret put RESEND_API_KEY
+npx wrangler secret put NOTIFY_EMAIL     # the inbox that gets the copies
+```
+
+Mail is sent from `contacto@lucia-adams.com` (see `notify()` in
+`src/lib/contact.ts`).
+
+Read messages straight from D1:
+
+```bash
+npx wrangler d1 execute lucia-adams-portfolio --remote   --command="SELECT id, name, email, message, created_at FROM messages WHERE read = 0 ORDER BY created_at DESC"
 ```
 
 Mark one as handled:
 
 ```bash
-npx wrangler d1 execute lucia-adams-guestbook --remote \
-  --command="UPDATE messages SET read = 1 WHERE id = 12"
+npx wrangler d1 execute lucia-adams-portfolio --remote   --command="UPDATE messages SET read = 1 WHERE id = 12"
 ```
-
-If checking D1 by hand gets old, the natural next step is an email
-notification on insert (Cloudflare Email Workers, or a provider like Resend)
-so a new message actually pings somewhere. Out of scope for now.
 
 ## Layout of the code
 
 | Path | What lives there |
 | --- | --- |
 | `src/app/[locale]/` | The three pages: home, work, contact |
-| `src/components/` | Nav, footer, guestbook, contact form, project card, Turnstile widget |
-| `src/lib/guestbook.ts` | Guestbook D1 access, validation, Turnstile check |
+| `src/components/` | Nav, footer, contact form, project card, Turnstile widget |
 | `src/lib/contact.ts` | Contact form D1 access, validation, Turnstile check |
-| `src/lib/turnstile.ts` | The siteverify call, shared by both |
-| `src/app/api/guestbook/`, `src/app/api/contact/` | The endpoints each form posts to |
+| `src/lib/turnstile.ts` | The siteverify call |
+| `src/app/api/contact/` | The endpoint the contact form posts to |
 | `messages/` | Every visible string, Spanish and English |
-| `migrations/` | D1 schema (guestbook, then messages) |
+| `migrations/` | D1 schema (`0001` is the retired guestbook table, `0002` is messages) |
 
 Routes are localized: `/trabajo` and `/contacto` in Spanish, `/work` and
 `/contact` in English, because the nav renders paths literally and the label

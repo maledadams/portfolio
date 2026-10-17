@@ -1,5 +1,5 @@
 -- Contact form submissions. Private: never rendered on the site, only read
--- via `wrangler d1 execute lucia-adams-guestbook --remote --command=...`.
+-- via `wrangler d1 execute lucia-adams-portfolio --remote --command=...`.
 --
 -- Mark one as read once handled:
 --   UPDATE messages SET read = 1 WHERE id = 12;

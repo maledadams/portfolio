@@ -4,3 +4,7 @@ allowBuilds:
   esbuild: true
   unrs-resolver: true
   workerd: true
+
+# Patched transitive deps flagged by `pnpm audit` (GHSA source-map-js DoS).
+overrides:
+  source-map-js: ">=1.2.2"

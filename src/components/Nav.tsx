@@ -1,16 +1,15 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { ArrowRightIcon, TranslateIcon } from "@phosphor-icons/react";
+import { TranslateIcon } from "@phosphor-icons/react";
 import { Link, usePathname } from "@/i18n/navigation";
 
 const items = [
   { href: "/work", key: "work" as const },
-  { href: "/guestbook", key: "guestbook" as const },
   { href: "/contact", key: "contact" as const },
 ] satisfies {
-  href: "/work" | "/guestbook" | "/contact";
-  key: "work" | "guestbook" | "contact";
+  href: "/work" | "/contact";
+  key: "work" | "contact";
 }[];
 
 const langLabel = { es: "ESP", en: "ENG" } satisfies Record<"es" | "en", string>;
@@ -23,12 +22,14 @@ export default function Nav() {
   const locale = useLocale();
   const other = locale === "es" ? "en" : "es";
 
+  // Phones: logo and language on one row, the nav centered under them.
+  // From sm up: a three-column grid with the nav in the middle.
   return (
-    <header className="center grid grid-cols-[1fr_auto_1fr] items-center gap-x-4 gap-y-4 pt-8 pb-14 sm:pt-10">
+    <header className="center flex flex-wrap items-center justify-between gap-y-3 pt-6 pb-10 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:gap-x-4 sm:pt-10 sm:pb-14">
       <Link
         href="/"
         aria-label={t("name")}
-        className="la-logo justify-self-start text-[1.15em] font-bold tracking-tight"
+        className="la-logo justify-self-start text-[1.15em] font-bold tracking-tight whitespace-nowrap"
       >
         {laLetters.map((ch, i) => (
           <span
@@ -41,7 +42,7 @@ export default function Nav() {
         ))}
       </Link>
 
-      <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 font-mono text-[0.8em] sm:gap-x-7">
+      <nav className="order-last flex w-full flex-wrap items-center justify-center gap-x-5 gap-y-2 font-mono text-[0.8em] sm:order-none sm:w-auto sm:gap-x-7">
         {items.map(({ href, key }) => (
           <Link
             key={key}
@@ -49,9 +50,6 @@ export default function Nav() {
             aria-current={pathname === href ? "page" : undefined}
             className="navlink text-muted transition-colors hover:text-fg aria-[current=page]:text-fg"
           >
-            <span className="arrow" aria-hidden>
-              <ArrowRightIcon size="1em" weight="bold" />
-            </span>
             <span className="slash">/</span>
             {t(key)}
           </Link>
@@ -63,7 +61,7 @@ export default function Nav() {
           href={pathname}
           locale={other}
           aria-label={t("lang")}
-          className="lang-toggle flex items-center gap-1.5 border border-line px-2.5 py-1 font-mono text-[0.75em] text-muted transition-colors hover:border-white hover:text-fg"
+          className="lang-toggle btn-card flex items-center gap-1.5 px-2.5 py-1 font-mono text-[0.75em] text-muted hover:text-fg"
         >
           <TranslateIcon size="1em" weight="bold" aria-hidden />
           {langLabel[other]}
