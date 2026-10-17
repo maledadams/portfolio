@@ -155,7 +155,7 @@ export default function PaginatedProjects({ projects }: { projects: Project[] })
                   className="link inline-block font-mono text-[0.8em]"
                 >
                   <GlobeIcon size="1.15em" aria-hidden className="mr-[0.5em] inline-block align-[-0.2em]" />
-                  {t("visit")}
+                  {t("visitManaged")}
                 </a>
               )}
             </div>

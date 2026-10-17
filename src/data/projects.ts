@@ -17,7 +17,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "pulpina",
-    url: "https://pulpina.lucia-adams.com",
+    url: "https://pulpinastore.com",
     image: "/work/scroll/pulpina-home.webp",
     images: [
       "/work/scroll/pulpina-home.webp",

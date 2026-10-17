@@ -50,6 +50,7 @@
     "title": "Trabajos",
     "intro": "Tres proyectos en producción. Para cada uno: lo que ves, y la máquina que lo mueve.",
     "visit": "Ver sitio",
+    "visitManaged": "Ver sitio (manejado por mí)",
     "visitStable": "Ver sitio original (lo que entregué)",
     "visitLive": "Ver sitio (no gestionado por mí)",
     "problemLabel": "El Problema",
