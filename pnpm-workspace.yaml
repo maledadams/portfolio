@@ -6,5 +6,8 @@ allowBuilds:
   workerd: true
 
 # Patched transitive deps flagged by `pnpm audit` (GHSA source-map-js DoS).
+# next>sharp: sharp is optional for next and can't run on Cloudflare Workers;
+# installed, it makes OpenNext try (and fail) to bundle its native binary.
 overrides:
   source-map-js: ">=1.2.2"
+  next>sharp: "-"

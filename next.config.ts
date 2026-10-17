@@ -16,6 +16,9 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Workers can't run sharp, so /_next/image would fail there. The images
+  // are already-optimized .webp/.svg files, served as is.
+  images: { unoptimized: true },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
